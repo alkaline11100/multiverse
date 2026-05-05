@@ -249,7 +249,7 @@ var UNIVS = {
     desc:'A complete reference for all MorphoVerse characters, realms and world canon.',
     botdLabel:'✨ Character spotlight',
     charLabel:'Characters', placeLabel:'Realms',
-    showHeights:false, showBotd:true,
+    showHeights:true, showBotd:true,
     disclaimers:[
       'Males only — no female characters exist in the MorphoVerse.',
       'Max stops aging at approximately 21 upon arrival. Immortality applies.',
@@ -273,7 +273,8 @@ var UNIVS = {
       'The AnyVerse is a loose collection of separate characters and sub-universes.',
       'Characters span from anthro botanicals to void entities to chemiverse residents.',
       'All characters are male.',
-      'The AnyVerse operates under its own rules per sub-universe.',
+      'No permanent death applies across all AnyVerse sub-universes unless stated otherwise.',
+      'The AnyVerse operates under its own rules per sub-universe — lore entries specify exceptions.',
     ],
     species:['Anthro Plant','Anthro Object','Void Entity','Chemiverse — Compound','Other'],
     spGroups:{},
@@ -383,9 +384,9 @@ async function loadAll(){
   for(var u of ['ento','morpho','any']){
     for(var t of ['chars','lores','places']){
       try{
-        var snap=await db.collection('multiverse').doc(u+'_'+t).get();
+        var snap=await db.collection('multiverse2').doc(u+'_'+t).get();
         DATA[u][t]=snap.exists?snap.data().value:DEFAULTS[u][t];
-        if(!snap.exists) await db.collection('multiverse').doc(u+'_'+t).set({value:DEFAULTS[u][t]});
+        if(!snap.exists) await db.collection('multiverse2').doc(u+'_'+t).set({value:DEFAULTS[u][t]});
       }catch(e){DATA[u][t]=DEFAULTS[u][t];}
     }
   }
