@@ -7,8 +7,8 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='19' r='12' fill='%23f7cc30'/><circle cx='16' cy='19' r='9' fill='%23fde047'/><path d='M11 11 Q9 5 7 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='6.5' cy='1.5' r='2.5' fill='%23f7cc30'/><path d='M21 11 Q23 5 25 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='25.5' cy='1.5' r='2.5' fill='%23f7cc30'/><circle cx='12' cy='18' r='3' fill='%231a0e00'/><circle cx='20' cy='18' r='3' fill='%231a0e00'/><circle cx='11' cy='16.5' r='1.2' fill='white' opacity='0.9'/><circle cx='19' cy='16.5' r='1.2' fill='white' opacity='0.9'/><ellipse cx='9' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><ellipse cx='23' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><path d='M11 25 Q16 29 21 25' fill='none' stroke='%231a0e00' stroke-width='2' stroke-linecap='round'/></svg>"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;--card3:#21212f;--border:#23232f;--border2:#2e2e3e;--txt:#eeedf8;--txt2:#8887a2;--txt3:#454560;--accent:#f7cc30;--accent-dim:#1e1a08;--radius:14px;--radius-sm:10px;--radius-xs:8px}
-body.light{--bg:#f5f4f0;--nav:#ffffff;--card:#ffffff;--card2:#f0eff9;--card3:#e8e7f0;--border:#e0dfd8;--border2:#d0cfc8;--txt:#111111;--txt2:#666666;--txt3:#aaaaaa;--accent-dim:#fffbeb}
+:root{--bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;--border:#23232f;--border2:#2e2e3e;--txt:#eeedf8;--txt2:#8887a2;--txt3:#454560;--accent:#f7cc30;--accent-dim:#1e1a08;--radius:14px;--radius-sm:10px;--radius-xs:8px}
+body.light{--bg:#f5f4f0;--nav:#ffffff;--card:#ffffff;--card2:#f0eff9;--border:#e0dfd8;--border2:#d0cfc8;--txt:#111111;--txt2:#666666;--txt3:#aaaaaa;--accent-dim:#fffbeb}
 body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;line-height:1.5;transition:background .2s,color .2s}
 input,select,textarea{background:var(--card2);border:1px solid var(--border);color:var(--txt);border-radius:var(--radius-xs);padding:9px 13px;font-size:14px;font-family:inherit;outline:none;width:100%;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
@@ -24,7 +24,7 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
 .nav-brand span{font-weight:800;font-size:15px;color:var(--txt);letter-spacing:-.3px}
 .nav-tab{background:none;border:none;color:var(--txt2);padding:.85rem .75rem;font-size:13px;font-weight:400;border-bottom:2px solid transparent;white-space:nowrap}
 .nav-tab.active{color:var(--txt);font-weight:700;border-bottom:2px solid var(--accent)}
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .nav-count{font-size:11px;color:var(--txt3)}
 .page{display:none;padding:2rem 1.5rem 5rem;max-width:1400px;margin:0 auto}
 .page.active{display:block}
@@ -34,7 +34,7 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
 .home-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;background:var(--accent-dim);padding:4px 12px;border-radius:99px;margin-bottom:14px}
 .home-hero h1{font-size:46px;font-weight:900;letter-spacing:-2px;color:var(--txt);line-height:1;margin-bottom:12px}
 .home-hero p{font-size:16px;color:var(--txt2);line-height:1.8;max-width:520px;margin-bottom:2.5rem}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:3rem}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:2rem}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1rem;cursor:pointer;transition:border-color .2s,background .2s}
 .stat-card:hover{background:var(--card2)}
 .stat-val{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:4px}
@@ -45,16 +45,8 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
 .boi-card{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
 .boi-card:hover{background:var(--card2)}
 .boi-avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;letter-spacing:-.5px}
-.boi-name{font-weight:800;font-size:15px;color:var(--txt);letter-spacing:-.2px}
-.boi-sub{font-size:12px;color:var(--txt2);margin-top:1px}
-.boi-sci{font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
-.boi-desc{font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tags{display:flex;flex-wrap:wrap;gap:4px}
-.tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:600}
 .lore-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;transition:background .15s;margin-bottom:8px}
 .lore-card:hover{background:var(--card2)}
-.lore-title{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px;letter-spacing:-.2px}
-.lore-preview{font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .region-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
 .region-card:hover{background:var(--card2)}
@@ -62,6 +54,8 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
 .pill-food{background:#fef9c3;color:#92400e}
 .pill-hdi{background:#d1fae5;color:#065f46}
 .pill-gdp{background:#dbeafe;color:#1e40af}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:600}
 .overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem;backdrop-filter:blur(4px)}
 .overlay-box{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:2rem;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.6)}
 .overlay-box.wide{max-width:680px}
@@ -71,13 +65,17 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
 #pw-screen{position:fixed;inset:0;background:#080809;display:flex;align-items:center;justify-content:center;z-index:9999}
 .pw-box{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:2.5rem 2rem;max-width:360px;width:90%;text-align:center}
 .pw-box p{font-size:13px;color:#444;margin-bottom:1.5rem;letter-spacing:.04em}
-.pw-input{background:#1a1a1a;border:1px solid #252525;color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;outline:none;width:100%;text-align:center;margin-bottom:8px;font-family:inherit;transition:border-color .15s}
+.pw-input{background:#1a1a1a;border:1px solid #252525;color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;outline:none;width:100%;text-align:center;margin-bottom:8px;font-family:inherit}
 .pw-input.err{border-color:#ef4444}
 .pw-err{font-size:12px;color:#ef4444;margin-bottom:8px;display:none}
 .pw-btn{background:#fff;border:none;color:#000;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
 .empty{text-align:center;padding:5rem;color:var(--txt3);font-size:15px}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+.botd-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;cursor:pointer;display:flex;gap:14px;align-items:flex-start;margin-bottom:2.5rem;transition:background .15s}
+.botd-card:hover{background:var(--card2)}
+.height-bar{display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer}
+.height-bar:hover .height-bar-inner{opacity:.8}
 </style>
 </head>
 <body>
@@ -122,7 +120,7 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
   </div>
   <div class="stat-grid" id="stat-grid"></div>
   <div class="section-label" style="margin-bottom:10px">🌟 Boi of the day</div>
-  <div id="botd" style="margin-bottom:2.5rem"></div>
+  <div id="botd" style="margin-bottom:2rem"></div>
   <div class="section-label">Disclaimers</div>
   <div id="disclaimers-list" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
@@ -136,21 +134,7 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
     <input placeholder="Search name or region..." id="f-q" oninput="renderBois()" style="flex:1 1 150px;min-width:130px"/>
     <input placeholder="Scientific name..." id="f-sci" oninput="renderBois()" style="flex:1 1 140px;min-width:120px"/>
     <input placeholder="Personality..." id="f-per" oninput="renderBois()" style="flex:1 1 120px;min-width:100px"/>
-    <select id="f-sp" onchange="renderBois()" style="flex:1 1 110px;min-width:100px">
-      <option value="All">All species</option>
-      <optgroup label="─────────────"></optgroup>
-      <option value="🐝 Bees &amp; Wasps">🐝 Bees &amp; Wasps</option>
-      <option value="🕷️ Spiders">🕷️ Spiders</option>
-      <option value="🦂 Scorpions">🦂 Scorpions</option>
-      <option value="🐛 Crawlers">🐛 Crawlers</option>
-      <option value="🦋 Winged">🦋 Winged</option>
-      <option value="🐜 Ants &amp; Beetles">🐜 Ants &amp; Beetles</option>
-      <option value="🦗 Chirpers">🦗 Chirpers</option>
-      <option value="🪲 Other Bugs">🪲 Other Bugs</option>
-      <option value="❓ Other">❓ Other</option>
-      <optgroup label="─────────────"></optgroup>
-      <option value="__specific__" disabled>── Specific ──</option>
-    </select>
+    <select id="f-sp" onchange="renderBois()" style="flex:1 1 130px;min-width:110px"></select>
     <select id="f-reg" onchange="renderBois()" style="flex:1 1 130px;min-width:110px"></select>
     <button class="btn-ghost" onclick="clearFilters()" id="clear-btn" style="display:none">Clear</button>
   </div>
@@ -185,34 +169,23 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
   <div id="height-chart"></div>
 </div>
 
- style="display:none" onclick="closeOverlay(event)">
+<div id="overlay" class="overlay-bg" style="display:none" onclick="closeOverlay(event)">
   <div class="overlay-box" id="overlay-box" onclick="event.stopPropagation()"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
+var SITE_PW = "xK9#mQ2$vL7@nP4&wJ6!rT8^yH3*uF5%bC1~eA0";
+var DELETE_CODE = "HIVE2025";
+var SPECIES = ["Bee","Butterfly","Scorpion","Ant","Spider","Beetle","Moth","Mantis","Cricket","Wasp","Hornet","Cicada","Stick Insect","Mosquito","Cockroach","Fly","Flea","Silverfish","Ladybug","Caterpillar","Worm","Other"];
+var SPECIES_GROUPS = {"🐝 Bees & Wasps":["Bee","Wasp","Hornet"],"🕷️ Spiders":["Spider"],"🦂 Scorpions":["Scorpion"],"🐛 Crawlers":["Caterpillar","Worm","Stick Insect","Flea","Silverfish"],"🦋 Winged":["Butterfly","Moth"],"🐜 Ants & Beetles":["Ant","Beetle","Ladybug"],"🦗 Chirpers":["Cricket","Cicada"],"🪲 Other Bugs":["Cockroach","Fly","Mosquito","Mantis"],"❓ Other":["Other"]};
+var REGIONS = ["The Hive","Grimewatch","The Fracture","Desert Nations","Nocturnal Lands","Ant Territories","Spiderian Province","Scorpion Lands","Beetle Owned Republic","Republic of Nocturna","Na'varuun","Butterfly Island","milli-centia","Saldidaen Province","Central Ento-Daptera","Ashker Island","Stenotaniapede Island","Cenimedae Isle"];
+var CATEGORIES = ["History","Conflict","Culture","Geography","Politics","Mythology","Technology","Economy","Biology","Other"];
+var CAT_COL = {History:"#3b82f6",Conflict:"#ef4444",Culture:"#22c55e",Geography:"#8b5cf6",Politics:"#ec4899",Mythology:"#f59e0b",Technology:"#06b6d4",Economy:"#f97316",Biology:"#84cc16",Other:"#94a3b8"};
+var DISCLAIMERS = ["All EntomoVerse characters and lore are original fictional creations. Any resemblance to real insects is purely taxonomic.","The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor of any kind.","There are NO female characters in the EntomoVerse. This is canon and not subject to change.","No permanent death exists in the EntomoVerse. Characters regenerate fully from any injury. Pain and trauma persist psychologically.","All entoboys stop aging physically at 25. The user stops aging at approximately 21 upon arrival."];
 
-const SITE_PW = "xK9#mQ2$vL7@nP4&wJ6!rT8^yH3*uF5%bC1~eA0";
-const DELETE_CODE = "HIVE2025";
-const SPECIES = ["Bee","Butterfly","Scorpion","Ant","Spider","Beetle","Moth","Mantis","Cricket","Wasp","Hornet","Cicada","Stick Insect","Mosquito","Cockroach","Fly","Flea","Silverfish","Ladybug","Caterpillar","Worm","Other"];
-const SPECIES_GROUPS = {
-  "🐝 Bees & Wasps": ["Bee","Wasp","Hornet"],
-  "🕷️ Spiders": ["Spider"],
-  "🦂 Scorpions": ["Scorpion"],
-  "🐛 Crawlers": ["Caterpillar","Worm","Stick Insect","Flea","Silverfish"],
-  "🦋 Winged": ["Butterfly","Moth","Dragonfly"],
-  "🐜 Ants & Beetles": ["Ant","Beetle","Ladybug"],
-  "🦗 Chirpers": ["Cricket","Cicada","Grasshopper"],
-  "🪲 Other Bugs": ["Cockroach","Fly","Mosquito","Mantis"],
-  "❓ Other": ["Other"]
-};
-const REGIONS = ["The Hive","Grimewatch","The Fracture","Desert Nations","Nocturnal Lands","Ant Territories","Spiderian Province","Scorpion Lands","Beetle Owned Republic","Republic of Nocturna","Na'varuun","Butterfly Island","milli-centia","Saldidaen Province","Central Ento-Daptera","Ashker Island","Stenotaniapede Island","Cenimedae Isle"];
-const CATEGORIES = ["History","Conflict","Culture","Geography","Politics","Mythology","Technology","Economy","Biology","Other"];
-const CAT_COL = {History:"#3b82f6",Conflict:"#ef4444",Culture:"#22c55e",Geography:"#8b5cf6",Politics:"#ec4899",Mythology:"#f59e0b",Technology:"#06b6d4",Economy:"#f97316",Biology:"#84cc16",Other:"#94a3b8"};
-const DISCLAIMERS = ["All EntomoVerse characters and lore are original fictional creations. Any resemblance to real insects is purely taxonomic.","The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor of any kind.","There are NO female characters in the EntomoVerse. This is canon and not subject to change.","No permanent death exists in the EntomoVerse. Characters regenerate fully from any injury. Pain and trauma persist psychologically.","All entoboys stop aging physically at 25. The user stops aging at approximately 21 upon arrival."];
-
-const REGIONS_DATA = [
+var REGIONS_DATA = [
   {id:"hive",name:"The Hive",emoji:"🍯",pop:"1.8M",gov:"Benevolent monarchy",food:"9.1/10",hdi:"0.887",gdp:null,color:"#f7cc30",desc:"The bee homeland and cultural heart of the EntomoVerse. Famous for its golden architecture, honey markets and warm community. Signature dish: Vaelcomb Stew."},
   {id:"grimewatch",name:"Grimewatch",emoji:"🏙️",pop:"2M",gov:"Grassroots urban democracy",food:"7.6/10",hdi:"0.801",gdp:null,color:"#22c55e",desc:"Dense urban district, community-run, rough but deeply loyal. Found family culture pervades every corner."},
   {id:"beetle",name:"Beetle Owned Republic",emoji:"🛡️",pop:"1.6M",gov:"Structured democracy",food:"8.8/10",hdi:"0.941",gdp:null,color:"#0d9488",desc:"The highest HDI in the EntomoVerse at 0.941. Well-governed, stable, and prosperous."},
@@ -229,19 +202,19 @@ const REGIONS_DATA = [
   {id:"steno",name:"Stenotaniapede Island",emoji:"🪱",pop:"3K",gov:"Single settlement",food:"9.0/10",hdi:"0.877",gdp:null,color:"#0d9488",desc:"Extraordinary infrastructure. Home to a stew running continuously for 200 years. Capital: Vorreth Kaal."},
   {id:"cenimedae",name:"Cenimedae Isle",emoji:"🪸",pop:"2K",gov:"Community-run",food:"8.7/10",hdi:"0.762",gdp:null,color:"#94a3b8",desc:"Caddisfly entoboys, chaotic handbuilt but beautiful. One boat to mainland twice a month. Capital: Senuvel."},
   {id:"fracture",name:"The Fracture",emoji:"⚡",pop:"0",gov:"No governance",food:null,hdi:null,gdp:null,color:"#64748b",desc:"A dimensional tear in reality. Sealed completely after use — the user arrived through here and it closed behind them permanently."},
-  {id:"desert",name:"Desert Nations",emoji:"🏜️",pop:"unknown",gov:"Merit-based sovereignty",food:"7.0/10",hdi:"0.731",gdp:null,color:"#d97706",desc:"Harsh, strength-based hierarchy. Touch carries significant weight and is never offered carelessly. Home to scorpion lineages and desert cockroach communities."},
+  {id:"desert",name:"Desert Nations",emoji:"🏜️",pop:"unknown",gov:"Merit-based sovereignty",food:"7.0/10",hdi:"0.731",gdp:null,color:"#d97706",desc:"Harsh, strength-based hierarchy. Touch carries significant weight. Home to scorpion lineages and desert cockroach communities."},
 ];
 
-const DEFAULT_BOIS = [
+var DEFAULT_BOIS = [
   {id:1,name:"Pemm Pembli",species:"Bee",scientificName:"Apis mellifera",region:"The Hive",personality:"Chaotic,Physically affectionate,Emotionally perceptive,Loyal,Zero self-preservation instincts",colour:"#f7cc30",description:"A male honeybee standing at 4'9\" with golden fuzz and darker patches. Age 19, no official job — just vibes. Has an almost supernatural ability to sense how people are feeling. First bee to poke the user upon arrival. Has seventeen notification sounds on his phone and responds to none."},
   {id:2,name:"Melion Brixley",species:"Bee",scientificName:"Apis mellifera",region:"The Hive",personality:"Warm,Nurturing,Gentle,Attentive,Affectionate",colour:"#f59e0b",description:"A male honeybee standing at 5'8\". The warm gravitational centre of E2. A serious honey connoisseur who can identify region, season and flower type by taste alone."},
-  {id:3,name:"Soren",species:"Bee",scientificName:"Bombus terrestris",region:"The Hive",personality:"Deadpan,Dry wit,Deeply loyal,Intellectually passionate,Secretly soft",colour:"#6b7280",description:"A male bumblebee at 6'0\" with darker fuzz that is almost brown. Age 31, stopped aging at 25. Currently writing volume 8 of his encyclopaedia, subject: the user. Phone: default Chitin, no skin."},
+  {id:3,name:"Soren",species:"Bee",scientificName:"Bombus terrestris",region:"The Hive",personality:"Deadpan,Dry wit,Deeply loyal,Intellectually passionate,Secretly soft",colour:"#6b7280",description:"A male bumblebee at 6'0\" with darker fuzz that is almost brown. Age 31, stopped aging at 25. Currently writing volume 8 of his encyclopaedia, subject: the user."},
   {id:4,name:"Vex Solari",species:"Scorpion",scientificName:"Pandinus imperator",region:"Scorpion Lands",personality:"Proud,Protective,Few words,Secretly soft,Intimidating",colour:"#34d399",description:"A male scorpion at 6'4\". Proud, carries himself with quiet authority. When he shows softness it hits hard precisely because it is so rare."},
   {id:5,name:"Jex",species:"Cockroach",scientificName:"Periplaneta americana",region:"Grimewatch",personality:"Anxious,Scrappy,Hoarder,Clingy when loved,Self-deprecating,Suddenly very sincere",colour:"#a78bfa",description:"A male cockroach at 5'6\" living in a messy but cozy Grimewatch apartment. Becomes clingy and devoted once he trusts someone."},
-  {id:6,name:"Niv",species:"Mosquito",scientificName:"Culex pipiens",region:"The Hive",personality:"Smooth,Teasing,Deeply possessive when bonded",colour:"#f43f5e",description:"A male mosquito at 6'2\". Every word measured, every glance intentional. The possessiveness only emerges once genuinely bonded — quiet and total."},
+  {id:6,name:"Niv",species:"Mosquito",scientificName:"Culex pipiens",region:"The Hive",personality:"Smooth,Teasing,Deeply possessive when bonded",colour:"#f43f5e",description:"A male mosquito at 6'2\". Every word measured, every glance intentional. The possessiveness only emerges once genuinely bonded."},
   {id:7,name:"Ryn",species:"Moth",scientificName:"Actias luna",region:"Nocturnal Lands",personality:"Dreamy,Gentle,Quietly romantic",colour:"#c084fc",description:"A male moth at 5'10\" from the Nocturnal Lands. Soft and unhurried. Quietly romantic — sincere, deliberate, never loud about it."},
   {id:8,name:"Tavven Vellure",species:"Spider",scientificName:"Phidippus audax",region:"The Hive",personality:"Flirty,Playful,Energetic,Chaotic",colour:"#38bdf8",description:"A male jumping spider at 5'2\", goes by Twitch. Impossible to be bored around."},
-  {id:9,name:"Drryx Warmwick",species:"Bee",scientificName:"Sceliphron caementarium",region:"The Hive",personality:"Sunny,Warm,Loves his job,Remembers everyone",colour:"#fbbf24",description:"A male mud dauber at 5'8\". Runs a honey sweet stand in The Hive market. Always outside, always humming. Pemm is his most chaotic regular."},
+  {id:9,name:"Drryx Warmwick",species:"Bee",scientificName:"Sceliphron caementarium",region:"The Hive",personality:"Sunny,Warm,Loves his job,Remembers everyone",colour:"#fbbf24",description:"A male mud dauber at 5'8\". Runs a honey sweet stand in The Hive market. Always outside, always humming."},
   {id:10,name:"Riven Aelomere",species:"Bee",scientificName:"Osmia bicornis",region:"The Hive",personality:"Shy,Professional,Gets flustered easily,Gentle,Thoughtful",colour:"#6ee7b7",description:"A male mason bee at 5'7\" with warm brown fuzz and iridescent blue wing sheen. Works at the Chitin phone store. Soren has opened a new page for him."},
   {id:11,name:"Foss Miravel",species:"Bee",scientificName:"Episyrphus balteatus",region:"The Hive",personality:"Bubbly,Chatty,Warm,Talks when nervous",colour:"#facc15",description:"A male hoverfly at 5'5\". Works the counter at Hexbite. Always smells faintly of honeyfries. Is going to text first. Tonight."},
   {id:12,name:"Azul Vexari",species:"Scorpion",scientificName:"Centruroides sculpturatus",region:"The Hive",personality:"Confident,Teasing,Calm,Warm,Devoted",colour:"#3b82f6",description:"A male blue scorpion at 6'3\", bartender. The user's boyfriend. His affection is understated and consistent — just always there."},
@@ -254,12 +227,12 @@ const DEFAULT_BOIS = [
   {id:19,name:"Syris Kaelthorn",species:"Hornet",scientificName:"Vespa crabro",region:"Scorpion Lands",personality:"Fiery,Bold,Craves tenderness underneath",colour:"#fb923c",description:"A male hornet at 6'2\". Leads with fire. Underneath the bluster craves tenderness with real intensity."},
   {id:20,name:"Veliss Aracine",species:"Spider",scientificName:"Latrodectus mactans",region:"Spiderian Province",personality:"Seductive,Dangerous,Fiercely loyal once bonded",colour:"#818cf8",description:"A male black widow spider at 5'11\". Everything is calculated. Once bonded the loyalty becomes fierce and total."},
   {id:21,name:"Inspector Veyric Clast",species:"Fly",scientificName:"Musca domestica",region:"Grimewatch",personality:"Fast-talking,Twitchy,Observant,Police officer",colour:"#64748b",description:"A male housefly at 5'10\". Police inspector from Grimewatch — fast-talking, perpetually twitchy."},
-  {id:22,name:"Eryx Veilwhisper",species:"Mantis",scientificName:"Idolomantis diabolica",region:"Spiderian Province",personality:"Ghost-like,Ethical hacker,Elusive,Precise",colour:"#a3e635",description:"A male ghost mantis at 6'1\", The Ghost in the Canopy. Ethical hacker. Moves through systems invisibly."},
+  {id:22,name:"Eryx Veilwhisper",species:"Mantis",scientificName:"Idolomantis diabolica",region:"Spiderian Province",personality:"Ghost-like,Ethical hacker,Elusive,Precise",colour:"#a3e635",description:"A male ghost mantis at 6'1\". Ethical hacker. Moves through systems invisibly."},
   {id:23,name:"Ithryn Veilstep",species:"Spider",scientificName:"Phalangium opilio",region:"The Fracture",personality:"Introspective,Monogamously devoted,Quiet,Archivist",colour:"#d8b4fe",description:"A male harvestman at 5'9\". Archivist near The Fracture. Once devoted, completely monogamous."},
   {id:24,name:"Berric Coalwing",species:"Bee",scientificName:"Andrena fulva",region:"The Hive",personality:"Domestic,Caring,Warm,Organised",colour:"#fde68a",description:"A male mining bee at 5'8\", Berri. Domestic caretaker. Genuinely good at taking care of spaces and people."},
   {id:25,name:"Merrik Duzzle",species:"Beetle",scientificName:"Anthrenus verbasci",region:"The Hive",personality:"Clingy,Needy,Cuddly,Love-drunk",colour:"#c4b5fd",description:"A male carpet beetle at 5'6\". Extremely clingy and cuddly. Love-drunk by nature."},
   {id:26,name:"Rovek Duneveil",species:"Cockroach",scientificName:"Arenivaga investigata",region:"Desert Nations",personality:"Grounding,Calm,Affectionate,Easygoing",colour:"#a8a29e",description:"A male desert cockroach at 5'11\", Rove. Profoundly grounding to be around."},
-  {id:27,name:"Thyros Vant",species:"Ant",scientificName:"Camponotus saundersi",region:"Ant Territories",personality:"Disciplined,Loyal,Team-oriented",colour:"#f97316",description:"A male ant at 5'9\". Disciplined with genuine conviction. Has more warmth than the territory's reputation suggests."},
+  {id:27,name:"Thyros Vant",species:"Ant",scientificName:"Camponotus saundersi",region:"Ant Territories",personality:"Disciplined,Loyal,Team-oriented",colour:"#f97316",description:"A male ant at 5'9\". Disciplined with genuine conviction."},
   {id:28,name:"Gorrin Duskweld",species:"Beetle",scientificName:"Dynastes hercules",region:"Beetle Owned Republic",personality:"Strong,Calm,Protective",colour:"#a8a29e",description:"A male beetle at 6'1\" from the BOR. Strong and calm — simply there when needed."},
   {id:29,name:"Lioran Mirth",species:"Worm",scientificName:"Lumbricus terrestris",region:"The Hive",personality:"Gentle,Grounded,Dependable",colour:"#a16207",description:"A male worm at 5'5\". Gentle and grounded — dependable in the most genuine sense."},
   {id:30,name:"Pib",species:"Beetle",scientificName:"Chrysomela populi",region:"The Hive",personality:"Tiny,Shy,Affectionate,Happy clicking noises",colour:"#84cc16",description:"A male leaf beetle at 4'11\". Tiny, shy, deeply affectionate. Makes happy clicking noises when content."},
@@ -270,170 +243,212 @@ const DEFAULT_BOIS = [
   {id:35,name:"Vaerynth Sylphael",species:"Caterpillar",scientificName:"Saturnia pavonia",region:"The Hive",personality:"Soft,Perpetually caterpillar,Gentle",colour:"#bbf7d0",description:"A male caterpillar roughly 2'6\" long, Siggly Boi. Permanently remains in caterpillar form."},
   {id:36,name:"Ryllin Quickstep",species:"Cricket",scientificName:"Gryllus bimaculatus",region:"The Hive",personality:"Affectionate,Nervous,Has Tourette's",colour:"#6ee7b7",description:"A male field cricket at 5'6\", Ryll. Affectionate and nervous in equal measure. Has Tourette's syndrome."},
   {id:37,name:"Kharvex Ironweb",species:"Spider",scientificName:"Hogna carolinensis",region:"Spiderian Province",personality:"Extremely muscular,Loud,Supportive,Gymbro",colour:"#fbbf24",description:"A male spider at 6'5\", gym champion. Extremely muscular, extremely loud, absolute hype man."},
-  {id:38,name:"Skitter Vellix",species:"Flea",scientificName:"Pulex irritans",region:"Grimewatch",personality:"Chaotic anxiety,Panic-prone,Deeply affectionate",colour:"#f0abfc",description:"A male flea at 4'6\", Skip. Runs on chaotic anxiety energy. The affection is just as deep."},
+  {id:38,name:"Skitter Vellix",species:"Flea",scientificName:"Pulex irritans",region:"Grimewatch",personality:"Chaotic anxiety,Panic-prone,Deeply affectionate",colour:"#f0abfc",description:"A male flea at 4'6\", Skip. Runs on chaotic anxiety energy."},
   {id:39,name:"Brutus Ledgerthorn",species:"Beetle",scientificName:"Lucanus cervus",region:"The Hive",personality:"Crypto-obsessed,Chaotic,Dramatic,Flirty",colour:"#fca5a5",description:"A male stag beetle at 6'5\", Bullrun. Obsessed with Entomocoin. Chaotic, dramatic, flirty."},
   {id:40,name:"Trevin Sol Varela",species:"Beetle",scientificName:"Epilachna varivestis",region:"The Hive",personality:"Warm,Domestic,Shows love through food,Nurturing",colour:"#fde68a",description:"A male Mexican bean beetle at 5'7\", Beanboy. Shows love through feeding people."},
-  {id:41,name:"Slate Ashveil",species:"Cockroach",scientificName:"Blatta orientalis",region:"Grimewatch",personality:"Quiet,Gentle,Anxious,Brave,Observant,Underestimated",colour:"#475569",description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist who studies communities and social structures from Grimewatch, the best possible place for his work. Has notebooks full of observations. People underestimate him constantly. Doesn't make a big deal of his disability — it's just part of him. When he trusts you he opens up like a whole different person. Starts as a stranger. Becomes someone you'd do anything for. Soren would either love him or feel threatened. probably both."},
+  {id:41,name:"Slate Ashveil",species:"Cockroach",scientificName:"Blatta orientalis",region:"Grimewatch",personality:"Quiet,Gentle,Anxious,Brave,Observant,Underestimated",colour:"#475569",description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist who studies communities and social structures from Grimewatch. Has notebooks full of observations. People underestimate him constantly. When he trusts you he opens up like a whole different person. Soren would either love him or feel threatened. probably both."},
 ];
 
-const DEFAULT_LORES = [
-  {id:1,title:"The Fracture",category:"Geography",content:"A dimensional tear adjacent to The Hive, in a desolate zone of grey grass. Seals completely after use — no re-entry, no exit after crossing. The user arrived through The Fracture and it sealed behind them permanently.",date:"2025-01-01"},
-  {id:2,title:"Honey Culture & Economy",category:"Culture",content:"Honey is industrially and artisanally cultivated from local flora. Bee entoboys can identify a honey's region, season and flower type by taste alone.\n\nRegional varieties:\n- The Hive: classic golden, floral, warm. The benchmark.\n- Desert Nations: dark, rich, almost smoky. Rare and expensive.\n- Nocturnal Lands: pale, almost white, subtle. Highly sought after.\n- Spiderian Province: produces no honey but trades for it aggressively.\n- Ant Territories: industrialised. Technically correct honey. 6.1/10.",date:"2025-01-01"},
-  {id:3,title:"Chitin OS",category:"Technology",content:"Universal operating system of the EntomoVerse — ~150 years, ~40 versions. Biometric resonance (no passwords). Passive health monitoring. Integrated hive mapping. Atmospheric network: ~200 years.\n\nSkins: Hive Edition (gold, warm), Spiderian Build (dark mode, fast, unsettling), Ant Build (grey, zero personality), Nocturna Skin (soft dark blues), Desert Build (high contrast).\n\nE2 phones: Pemm — Hive Edition, seventeen notification sounds, responds to none. Soren — default, no skin. Melion — Hive Edition, tidy.",date:"2025-01-01"},
-  {id:4,title:"Physical Contact Culture",category:"Culture",content:"Head pats and fuzz ruffling are intimate but not uncommon.\n\nBy region:\n- The Hive: warm and affectionate, touch normal between friends.\n- Grimewatch: tactile, loud, physical found family energy.\n- Scorpion/Desert Nations: reserved. Touch carries significant weight.\n- Spiderian Province: calculated. Touch is deliberate and meaningful.\n- Nocturnal Lands: gentle and quiet. Very sincere.\n\nClothing sharing is normalised intimacy everywhere.",date:"2025-01-01"},
-  {id:5,title:"Six-Seat Council",category:"Politics",content:"1. Ant Chancellor — infrastructure, logistics, order.\n2. Nectar Regent — welfare, healthcare, emotional well-being (bee domain).\n3. Silk Sovereign — intelligence, strategy, surveillance (spider domain).\n4. Ironcast Warden — defense, military, protection (beetle domain).\n5. Shadow Delegate — ecological balance, predatory philosophy (mantids).\n6. Luminarch — culture, history, nocturnal societies (moths).",date:"2025-01-01"},
+var DEFAULT_LORES = [
+  {id:1,title:"The Fracture",category:"Geography",content:"A dimensional tear adjacent to The Hive, in a desolate zone of grey grass. Seals completely after use. The user arrived through The Fracture and it sealed behind them permanently.",date:"2025-01-01"},
+  {id:2,title:"Honey Culture & Economy",category:"Culture",content:"Honey is industrially and artisanally cultivated from local flora. Bee entoboys can identify a honey's region, season and flower type by taste alone.\n\nRegional varieties:\n- The Hive: classic golden, floral, warm.\n- Desert Nations: dark, rich, almost smoky.\n- Nocturnal Lands: pale, almost white, subtle.\n- Spiderian Province: produces no honey but trades for it aggressively.\n- Ant Territories: industrialised. Technically correct honey. 6.1/10.",date:"2025-01-01"},
+  {id:3,title:"Chitin OS",category:"Technology",content:"Universal operating system — ~150 years, ~40 versions. Biometric resonance, no passwords. Passive health monitoring. Atmospheric network ~200 years old.\n\nSkins: Hive Edition (gold), Spiderian Build (dark, fast), Ant Build (grey), Nocturna Skin (dark blues), Desert Build (high contrast).\n\nE2 phones: Pemm — Hive Edition, seventeen notification sounds, responds to none. Soren — default, no skin. Melion — Hive Edition, tidy.",date:"2025-01-01"},
+  {id:4,title:"Physical Contact Culture",category:"Culture",content:"Head pats and fuzz ruffling are intimate but not uncommon.\n\n- The Hive: warm and affectionate.\n- Grimewatch: tactile, loud, found family energy.\n- Scorpion/Desert Nations: reserved. Touch carries significant weight.\n- Spiderian Province: calculated. Touch is deliberate.\n- Nocturnal Lands: gentle and quiet.\n\nClothing sharing is normalised intimacy everywhere.",date:"2025-01-01"},
+  {id:5,title:"Six-Seat Council",category:"Politics",content:"1. Ant Chancellor — infrastructure, logistics, order.\n2. Nectar Regent — welfare, healthcare (bee domain).\n3. Silk Sovereign — intelligence, surveillance (spider domain).\n4. Ironcast Warden — defense, military (beetle domain).\n5. Shadow Delegate — ecological balance (mantids).\n6. Luminarch — culture, history (moths).",date:"2025-01-01"},
   {id:6,title:"Economy & Currency",category:"Economy",content:"Currency: Entomocoin. 1 EC is roughly equivalent to 2.50 GBP. Total GDP: approximately 237 billion EC. Total population: approximately 11.235 million.\n\nItem Duplication Machines are fairly common — can duplicate most physical objects.",date:"2025-01-01"},
   {id:7,title:"User Arrival & Status",category:"History",content:"Arrived via The Fracture, which sealed permanently. Gained regenerative immortality. Stopped aging at approximately 21. Retained all Earth memories.\n\nEntoboys had zero prior knowledge of humans. Initial horror at: no chitin, only four limbs, tiny non-compound eyes, expressive face, visibly breathing chest. Warmed up fast because the human is squishy and immediately huggable.",date:"2025-01-01"},
   {id:8,title:"E2 Building Layout",category:"Geography",content:"E2 is in the Central Hive district, close to the market. Complexes labelled A1 through Z3. Main gang (user, Pemm, Melion, Soren) live in E2 Complex 1. User gets the spare room.\n\nDrryx Warmwick: E2 Complex 2. Other known residents: Ferryn, Brix.",date:"2025-01-01"},
   {id:9,title:"Stenotaniapede Island & Cenimedae Isle",category:"Geography",content:"Stenotaniapede Island: pop 3,000, extraordinary infrastructure. Home to a stew running continuously for 200 years. Capital: Vorreth Kaal.\n\nCenimedae Isle: pop 2,000, caddisfly entoboys, chaotic handbuilt but beautiful. One boat to mainland twice a month. Food rating 8.7/10. Capital: Senuvel.",date:"2025-01-01"},
-  {id:10,title:"Lingerie & Comfort Culture",category:"Culture",content:"Reproductive organs do not exist in the EntomoVerse. Lingerie exists purely for comfort, warmth and softness — not sexual expression. Completely culturally neutral.\n\nClothing sharing is an act of care and emotional intimacy.",date:"2025-01-01"},
-  {id:11,title:"Time & Calendar System",category:"Other",content:"Days are roughly equivalent to Earth's 24 hour cycle.\nSpan — roughly 10 days (replaces the week).\nCycle — roughly 30 days / 3 Spans (replaces the month).\nTurn — 12 Cycles (replaces the year).\n\nNamed Cycles (in order):\nBloom Cycle, Amber Cycle, Golden Cycle, Harvest Cycle, Frost Cycle, Deep Cycle, Pale Cycle, Thaw Cycle, Rain Cycle, Hum Cycle, Bright Cycle, Ember Cycle.\n\nCharacter ages in Turns:\nPemm: 19 Turns\nSoren: 31 Turns",date:"2025-01-01"},
+  {id:10,title:"Lingerie & Comfort Culture",category:"Culture",content:"Reproductive organs do not exist in the EntomoVerse. Lingerie exists purely for comfort, warmth and softness. Completely culturally neutral.\n\nClothing sharing is an act of care and emotional intimacy.",date:"2025-01-01"},
+  {id:11,title:"Time & Calendar System",category:"Other",content:"Days are roughly equivalent to Earth's 24 hour cycle.\nSpan — roughly 10 days (replaces the week).\nCycle — roughly 30 days / 3 Spans (replaces the month).\nTurn — 12 Cycles (replaces the year).\n\nNamed Cycles:\nBloom, Amber, Golden, Harvest, Frost, Deep, Pale, Thaw, Rain, Hum, Bright, Ember.\n\nCharacter ages in Turns:\nPemm: 19 Turns\nSoren: 31 Turns",date:"2025-01-01"},
 ];
 
 var bois = [], lores = [], editBoiId = null, editLoreId = null, db = null;
 
 function initFirebase() {
   firebase.initializeApp({
-    apiKey: "AIzaSyAd6HItfMe0IRNLiTMVQ0nQv22DFo722R4",
-    authDomain: "entomoverse-54d6b.firebaseapp.com",
-    projectId: "entomoverse-54d6b",
-    storageBucket: "entomoverse-54d6b.firebasestorage.app",
-    messagingSenderId: "1053064309244",
-    appId: "1:1053064309244:web:5605033e5daa938d3d2a79"
+    apiKey:"AIzaSyAd6HItfMe0IRNLiTMVQ0nQv22DFo722R4",
+    authDomain:"entomoverse-54d6b.firebaseapp.com",
+    projectId:"entomoverse-54d6b",
+    storageBucket:"entomoverse-54d6b.firebasestorage.app",
+    messagingSenderId:"1053064309244",
+    appId:"1:1053064309244:web:5605033e5daa938d3d2a79"
   });
   db = firebase.firestore();
 }
 
 async function loadData() {
   try {
-    var boiSnap = await db.collection("entomoverse").doc("bois").get();
-    bois = boiSnap.exists ? boiSnap.data().value : DEFAULT_BOIS;
-    var loreSnap = await db.collection("entomoverse").doc("lores").get();
-    lores = loreSnap.exists ? loreSnap.data().value : DEFAULT_LORES;
-    if (!boiSnap.exists) await db.collection("entomoverse").doc("bois").set({value: DEFAULT_BOIS});
-    if (!loreSnap.exists) await db.collection("entomoverse").doc("lores").set({value: DEFAULT_LORES});
-  } catch(e) {
-    console.error("Firebase error:", e);
-    bois = DEFAULT_BOIS;
-    lores = DEFAULT_LORES;
-  }
+    var bs = await db.collection("entomoverse").doc("bois").get();
+    bois = bs.exists ? bs.data().value : DEFAULT_BOIS;
+    var ls = await db.collection("entomoverse").doc("lores").get();
+    lores = ls.exists ? ls.data().value : DEFAULT_LORES;
+    if (!bs.exists) await db.collection("entomoverse").doc("bois").set({value:DEFAULT_BOIS});
+    if (!ls.exists) await db.collection("entomoverse").doc("lores").set({value:DEFAULT_LORES});
+  } catch(e) { bois=DEFAULT_BOIS; lores=DEFAULT_LORES; }
 }
 
-async function saveBoisDB() { try { await db.collection("entomoverse").doc("bois").set({value: bois}); } catch(e) { console.error(e); } }
-async function saveLoresDB() { try { await db.collection("entomoverse").doc("lores").set({value: lores}); } catch(e) { console.error(e); } }
+async function saveBoisDB() { try { await db.collection("entomoverse").doc("bois").set({value:bois}); } catch(e){} }
+async function saveLoresDB() { try { await db.collection("entomoverse").doc("lores").set({value:lores}); } catch(e){} }
 
-document.getElementById('pw-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+document.getElementById('pw-input').addEventListener('keydown', function(e){ if(e.key==='Enter') tryLogin(); });
 
 function tryLogin() {
   var v = document.getElementById('pw-input').value;
   if (v === SITE_PW) {
     var btn = document.getElementById('pw-btn');
-    btn.textContent = 'Loading...';
-    btn.disabled = true;
+    btn.textContent = 'Loading...'; btn.disabled = true;
     initFirebase();
     loadData().then(function() {
       document.getElementById('pw-screen').style.display = 'none';
       document.getElementById('main-nav').style.display = 'flex';
+      if (localStorage.getItem('ev_theme')==='light') {
+        document.body.classList.add('light');
+        document.getElementById('theme-btn').textContent = '🌙';
+      }
       init();
     });
   } else {
     document.getElementById('pw-input').classList.add('err');
     document.getElementById('pw-err').style.display = 'block';
     document.getElementById('pw-input').value = '';
-    setTimeout(function() { document.getElementById('pw-input').classList.remove('err'); }, 600);
+    setTimeout(function(){ document.getElementById('pw-input').classList.remove('err'); }, 600);
   }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  var l = document.body.classList.contains('light');
+  document.getElementById('theme-btn').textContent = l ? '🌙' : '☀️';
+  localStorage.setItem('ev_theme', l ? 'light' : 'dark');
+}
+
+function exportData() {
+  var blob = new Blob([JSON.stringify({bois:bois,lores:lores,exported:new Date().toISOString()},null,2)],{type:'application/json'});
+  var a = document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='entomoverse-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+}
+
+function importData(e) {
+  var file=e.target.files[0]; if(!file) return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try {
+      var d=JSON.parse(ev.target.result);
+      if(!d.bois||!d.lores){alert('Invalid file!');return;}
+      if(!confirm('Replace all data with this backup?')) return;
+      bois=d.bois; lores=d.lores;
+      saveBoisDB(); saveLoresDB();
+      renderAll(); alert('Imported!');
+    } catch(err){alert('Could not read file!');}
+  };
+  r.readAsText(file); e.target.value='';
+}
+
+function resetToDefaults() {
+  if(!confirm('Reset ALL data to defaults?')) return;
+  bois=DEFAULT_BOIS; lores=DEFAULT_LORES;
+  saveBoisDB(); saveLoresDB(); renderAll();
+  alert('Reset complete!');
 }
 
 function init() {
-  if(localStorage.getItem('ev_theme')==='light'){
-    document.body.classList.add('light');
-    document.getElementById('theme-btn').textContent='🌙';
-  }
-  populateSelects();
-  renderHome();
-  renderBois();
-  renderLores();
-  renderRegions();
-  updateNavCount();
+  // species dropdown
+  var spHtml = '<option value="All">All species</option><optgroup label="── By group ──"></optgroup>';
+  Object.keys(SPECIES_GROUPS).forEach(function(g){ spHtml+='<option value="'+g+'">'+g+'</option>'; });
+  spHtml += '<optgroup label="── By species ──"></optgroup>';
+  SPECIES.forEach(function(s){ spHtml+='<option>'+s+'</option>'; });
+  document.getElementById('f-sp').innerHTML = spHtml;
+  document.getElementById('f-reg').innerHTML = '<option value="All">All regions</option>'+REGIONS.map(function(r){return '<option>'+r+'</option>';}).join('');
+  document.getElementById('l-cat').innerHTML = '<option value="All">All categories</option>'+CATEGORIES.map(function(c){return '<option>'+c+'</option>';}).join('');
+  renderAll();
 }
 
-function showTab(id, btn) {
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('tab-' + id).classList.add('active');
+function renderAll() {
+  renderHome(); renderBois(); renderLores(); renderRegions(); renderHeights(); updateNavCount();
+}
+
+function showTab(id,btn) {
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
 
 function updateNavCount() {
-  document.getElementById('nav-count').textContent = bois.length + ' bois · ' + lores.length + ' lores';
+  document.getElementById('nav-count').textContent = bois.length+' bois · '+lores.length+' lores';
 }
 
-function populateSelects() {
-  // species dropdown with groups + individual species
-  var spHtml = '<option value="All">All species</option><optgroup label="── By group ──"></optgroup>';
-  Object.keys(SPECIES_GROUPS).forEach(function(g) { spHtml += '<option value="'+g+'">'+g+'</option>'; });
-  spHtml += '<optgroup label="── By species ──"></optgroup>';
-  SPECIES.forEach(function(s) { spHtml += '<option>'+s+'</option>'; });
-  document.getElementById('f-sp').innerHTML = spHtml;
-  document.getElementById('f-reg').innerHTML = '<option value="All">All regions</option>' + REGIONS.map(function(r) { return '<option>' + r + '</option>'; }).join('');
-  document.getElementById('l-cat').innerHTML = '<option value="All">All categories</option>' + CATEGORIES.map(function(c) { return '<option>' + c + '</option>'; }).join('');
-}
-
-function avatar(name, color, size) {
-  size = size || 44;
-  var i = name.split(' ').map(function(w) { return w[0]; }).join('').slice(0,2).toUpperCase();
+function av(name,color,size) {
+  size=size||44;
+  var i=name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
   return '<div class="boi-avatar" style="width:'+size+'px;height:'+size+'px;font-size:'+Math.round(size*.34)+'px;background:'+color+'25;border:2px solid '+color+'60;color:'+color+'">'+i+'</div>';
 }
-function tag(label, color) { return '<span class="tag" style="background:'+color+'20;color:'+color+';border:1px solid '+color+'35">'+label+'</span>'; }
-function catChip(cat) { var c=CAT_COL[cat]||'#94a3b8'; return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:'+c+';display:inline-block;flex-shrink:0"></span>'+cat+'</span>'; }
+function tg(label,color){return '<span class="tag" style="background:'+color+'20;color:'+color+';border:1px solid '+color+'35">'+label+'</span>';}
+function cc(cat){var c=CAT_COL[cat]||'#94a3b8';return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:'+c+';display:inline-block"></span>'+cat+'</span>';}
 
 function renderHome() {
-  var tabs = document.querySelectorAll('.nav-tab');
-  document.getElementById('stat-grid').innerHTML = [
-    {label:'Entobois',val:bois.length,color:'#f7cc30',i:1},
-    {label:'Lore entries',val:lores.length,color:'#a78bfa',i:2},
-    {label:'Regions',val:REGIONS_DATA.length,color:'#34d399',i:3},
-    {label:'Total pop.',val:'11.2M',color:'#3b82f6',i:3},
-  ].map(function(s) {
-    return '<div class="stat-card" onclick="showTab(\''+['','entobois','lore','regions'][s.i]+'\',document.querySelectorAll(\'.nav-tab\')['+s.i+'])"><div class="stat-val" style="color:'+s.color+'">'+s.val+'</div><div class="stat-lbl">'+s.label+'</div></div>';
+  var tabNames=['','entobois','lore','regions'];
+  document.getElementById('stat-grid').innerHTML=[
+    {l:'Entobois',v:bois.length,c:'#f7cc30',i:1},
+    {l:'Lore entries',v:lores.length,c:'#a78bfa',i:2},
+    {l:'Regions',v:REGIONS_DATA.length,c:'#34d399',i:3},
+    {l:'Total pop.',v:'11.2M',c:'#3b82f6',i:3},
+  ].map(function(s){
+    return '<div class="stat-card" onclick="showTab(\''+tabNames[s.i]+'\',document.querySelectorAll(\'.nav-tab\')['+s.i+'])"><div class="stat-val" style="color:'+s.c+'">'+s.v+'</div><div class="stat-lbl">'+s.l+'</div></div>';
   }).join('');
-  document.getElementById('disclaimers-list').innerHTML = DISCLAIMERS.map(function(d) { return '<div class="disclaimer"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>'+d+'</span></div>'; }).join('');
+
+  // boi of the day
+  var botdEl = document.getElementById('botd');
+  if (bois.length) {
+    var seed = Math.floor(Date.now()/86400000);
+    var b = bois[seed % bois.length];
+    var col = b.colour||'#f7cc30';
+    var tags = b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
+    botdEl.innerHTML = '<div class="botd-card" style="border-left:3px solid '+col+'" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi('+b.id+')},150)">'+
+      av(b.name,col,52)+
+      '<div style="min-width:0"><div style="font-weight:800;font-size:17px;color:var(--txt);margin-bottom:3px">'+b.name+'</div>'+
+      '<div style="font-size:12px;color:var(--txt2);margin-bottom:8px">'+b.species+' · '+b.region+'</div>'+
+      '<div style="font-size:13px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+b.description+'</div>'+
+      '<div class="tags">'+tags.slice(0,4).map(function(p){return tg(p,col);}).join('')+'</div></div></div>';
+  } else { botdEl.innerHTML=''; }
+
+  document.getElementById('disclaimers-list').innerHTML=DISCLAIMERS.map(function(d){return '<div class="disclaimer"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>'+d+'</span></div>';}).join('');
 }
 
 function renderBois() {
-  var q=document.getElementById('f-q').value.toLowerCase(), sci=document.getElementById('f-sci').value.toLowerCase(), per=document.getElementById('f-per').value.toLowerCase(), sp=document.getElementById('f-sp').value, reg=document.getElementById('f-reg').value;
-  document.getElementById('clear-btn').style.display = (q||sci||per||sp!=='All'||reg!=='All') ? '' : 'none';
-  var filtered = bois.filter(function(b) {
-    var spMatch = true;
-    if (sp !== 'All') {
-      if (SPECIES_GROUPS[sp]) { spMatch = SPECIES_GROUPS[sp].indexOf(b.species) !== -1; }
-      else { spMatch = b.species === sp; }
-    }
-    return(!q||b.name.toLowerCase().includes(q)||b.species.toLowerCase().includes(q)||b.region.toLowerCase().includes(q))&&(!sci||b.scientificName.toLowerCase().includes(sci))&&(!per||b.personality.toLowerCase().includes(per))&&spMatch&&(reg==='All'||b.region===reg);
+  var q=document.getElementById('f-q').value.toLowerCase(),sci=document.getElementById('f-sci').value.toLowerCase(),per=document.getElementById('f-per').value.toLowerCase(),sp=document.getElementById('f-sp').value,reg=document.getElementById('f-reg').value;
+  document.getElementById('clear-btn').style.display=(q||sci||per||sp!=='All'||reg!=='All')?'':'none';
+  var filtered=bois.filter(function(b){
+    var spOk=sp==='All'||(SPECIES_GROUPS[sp]?SPECIES_GROUPS[sp].indexOf(b.species)!==-1:b.species===sp);
+    return(!q||b.name.toLowerCase().includes(q)||b.species.toLowerCase().includes(q)||b.region.toLowerCase().includes(q))&&(!sci||b.scientificName.toLowerCase().includes(sci))&&(!per||b.personality.toLowerCase().includes(per))&&spOk&&(reg==='All'||b.region===reg);
   });
-  document.getElementById('boi-count').textContent = filtered.length+' of '+bois.length+' characters';
-  var grid=document.getElementById('boi-grid'), empty=document.getElementById('boi-empty');
-  if (!filtered.length) { grid.innerHTML=''; empty.style.display='block'; return; }
+  document.getElementById('boi-count').textContent=filtered.length+' of '+bois.length+' characters';
+  var grid=document.getElementById('boi-grid'),empty=document.getElementById('boi-empty');
+  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  grid.innerHTML = filtered.map(function(b) {
-    var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
-    return '<div class="boi-card" style="border-left:3px solid '+(b.colour||'#a78bfa')+'" onclick="openBoi('+b.id+')">'+
-      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">'+avatar(b.name,b.colour||'#a78bfa',44)+'<div style="min-width:0"><div class="boi-name">'+b.name+'</div><div class="boi-sub">'+b.species+' · '+b.region+'</div><div class="boi-sci">'+b.scientificName+'</div></div></div>'+
-      '<div class="boi-desc">'+b.description+'</div>'+
-      '<div class="tags">'+tags.slice(0,3).map(function(p){return tag(p,b.colour||'#a78bfa');}).join('')+(tags.length>3?'<span style="font-size:11px;color:var(--txt3);align-self:center;font-weight:500">+'+( tags.length-3)+'</span>':'')+'</div></div>';
+  grid.innerHTML=filtered.map(function(b){
+    var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean),col=b.colour||'#a78bfa';
+    return '<div class="boi-card" style="border-left:3px solid '+col+'" onclick="openBoi('+b.id+')">'+
+      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">'+av(b.name,col,44)+
+      '<div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt)">'+b.name+'</div>'+
+      '<div style="font-size:12px;color:var(--txt2);margin-top:1px">'+b.species+' · '+b.region+'</div>'+
+      '<div style="font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+b.scientificName+'</div></div></div>'+
+      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+b.description+'</div>'+
+      '<div class="tags">'+tags.slice(0,3).map(function(p){return tg(p,col);}).join('')+(tags.length>3?'<span style="font-size:11px;color:var(--txt3);align-self:center">+'+( tags.length-3)+'</span>':'')+'</div></div>';
   }).join('');
 }
 
-function clearFilters() { document.getElementById('f-q').value=''; document.getElementById('f-sci').value=''; document.getElementById('f-per').value=''; document.getElementById('f-sp').value='All'; document.getElementById('f-reg').value='All'; renderBois(); }
+function clearFilters(){document.getElementById('f-q').value='';document.getElementById('f-sci').value='';document.getElementById('f-per').value='';document.getElementById('f-sp').value='All';document.getElementById('f-reg').value='All';renderBois();}
 
 function renderLores() {
-  var q=document.getElementById('l-q').value.toLowerCase(), cat=document.getElementById('l-cat').value;
+  var q=document.getElementById('l-q').value.toLowerCase(),cat=document.getElementById('l-cat').value;
   var filtered=lores.filter(function(l){return(!q||l.title.toLowerCase().includes(q)||l.content.toLowerCase().includes(q))&&(cat==='All'||l.category===cat);});
   document.getElementById('lore-count').textContent=filtered.length+' entries';
-  var list=document.getElementById('lore-list'), empty=document.getElementById('lore-empty');
-  if (!filtered.length) { list.innerHTML=''; empty.style.display='block'; return; }
+  var list=document.getElementById('lore-list'),empty=document.getElementById('lore-empty');
+  if(!filtered.length){list.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  list.innerHTML=filtered.map(function(l){return '<div class="lore-card" style="border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+'" onclick="openLore('+l.id+')"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div class="lore-title">'+l.title+'</div><div class="lore-preview">'+l.content.split('\n')[0]+'</div></div>'+catChip(l.category)+'</div></div>';}).join('');
+  list.innerHTML=filtered.map(function(l){return '<div class="lore-card" style="border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+'" onclick="openLore('+l.id+')"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px">'+l.title+'</div><div style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+l.content.split('\n')[0]+'</div></div>'+cc(l.category)+'</div></div>';}).join('');
 }
 
 function renderRegions() {
@@ -441,10 +456,39 @@ function renderRegions() {
   document.getElementById('region-grid').innerHTML=REGIONS_DATA.map(function(r){
     var res=bois.filter(function(b){return b.region===r.name;});
     return '<div class="region-card" style="border-top:3px solid '+r.color+'" onclick="openRegion(\''+r.id+'\')">'+
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:26px">'+r.emoji+'</span><div><div style="font-weight:800;font-size:14px;color:var(--txt)">'+r.name+'</div>'+(r.pop?'<div style="font-size:11px;color:var(--txt2)">Pop. '+r.pop+'</div>':'')+'</div></div>'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:26px">'+r.emoji+'</span>'+
+      '<div><div style="font-weight:800;font-size:14px;color:var(--txt)">'+r.name+'</div>'+(r.pop?'<div style="font-size:11px;color:var(--txt2)">Pop. '+r.pop+'</div>':'')+'</div></div>'+
       '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+r.desc+'</div>'+
       '<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">'+(r.food?'<span class="pill pill-food">🍴 '+r.food+'</span>':'')+(r.hdi?'<span class="pill pill-hdi">HDI '+r.hdi+'</span>':'')+(r.gdp?'<span class="pill pill-gdp">'+r.gdp+'</span>':'')+(res.length?'<span style="font-size:11px;color:var(--txt3);margin-left:auto">'+res.length+' resident'+(res.length!==1?'s':'')+'</span>':'')+'</div></div>';
   }).join('');
+}
+
+function renderHeights() {
+  function parseHeight(b) {
+    var m=b.description.match(/~?(\d+)'(\d+)"/);
+    if(m) return parseInt(m[1])*12+parseInt(m[2]);
+    m=b.description.match(/~?(\d+)'(\d+)/);
+    if(m) return parseInt(m[1])*12+parseInt(m[2]);
+    return null;
+  }
+  var wh=bois.map(function(b){return{b:b,in:parseHeight(b)};}).filter(function(x){return x.in!==null;});
+  wh.sort(function(a,b){return b.in-a.in;});
+  document.getElementById('height-sub').textContent=wh.length+' of '+bois.length+' bois with known heights';
+  if(!wh.length){document.getElementById('height-chart').innerHTML='<div class="empty">No height data found — add heights to descriptions like 5\'10".</div>';return;}
+  var max=wh[0].in, min=Math.max(0,wh[wh.length-1].in-6);
+  function fmtH(i){return Math.floor(i/12)+"'"+( i%12)+'"';}
+  document.getElementById('height-chart').innerHTML=wh.map(function(x){
+    var b=x.b,col=b.colour||'#f7cc30';
+    var pct=Math.max(10,Math.round(((x.in-min)/(max-min))*80)+15);
+    return '<div class="height-bar" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi('+b.id+')},150)">'+
+      '<div style="width:48px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">'+fmtH(x.in)+'</div>'+
+      '<div style="flex:1;display:flex;align-items:center;gap:10px">'+
+        '<div class="height-bar-inner" style="width:'+pct+'%;height:34px;background:'+col+'22;border:1.5px solid '+col+'60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:90px">'+
+          '<span style="font-size:11px;font-weight:700;color:'+col+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.name+'</span>'+
+        '</div>'+
+        '<span style="font-size:11px;color:var(--txt3)">'+b.species+'</span>'+
+      '</div></div>';
+  }).join('')+'<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Heights parsed automatically from descriptions. Click any bar to view profile.</div>';
 }
 
 function showOverlay(html,wide){var box=document.getElementById('overlay-box');box.className='overlay-box'+(wide?' wide':'');box.innerHTML=html;document.getElementById('overlay').style.display='flex';}
@@ -453,34 +497,43 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay
 
 function openBoi(id){
   var b=bois.find(function(x){return x.id===id;}); if(!b)return;
-  var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
-  var linkedLores = b.loreTags ? lores.filter(function(l){ return b.loreTags.indexOf(l.id) !== -1; }) : [];
+  var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean),col=b.colour||'#a78bfa';
   var name=b.name.replace(/'/g,"\\'");
-  showOverlay('<div class="overlay-header"><div style="display:flex;align-items:center;gap:14px">'+avatar(b.name,b.colour||'#a78bfa',62)+'<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">'+b.name+'</h2><div style="font-size:13px;color:var(--txt2);margin-bottom:3px">'+b.species+' · '+b.region+'</div><div style="font-size:12px;color:var(--txt3);font-style:italic">'+b.scientificName+'</div></div></div><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    (tags.length?'<div class="section-label">Personality</div><div class="tags" style="margin-bottom:16px">'+tags.map(function(p){return tag(p,b.colour||'#a78bfa');}).join('')+'</div>':'')+
-    '<div class="divider"></div><div class="section-label">Description</div><div style="font-size:14px;line-height:1.8;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">'+b.description+'</div>'+
-    (linkedLores.length?'<div class="divider"></div><div class="section-label">Linked lore</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">'+linkedLores.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+';border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+catChip(l.category)+'</div>';}).join('')+'</div>':'')+
+  var linked=b.loreTags?lores.filter(function(l){return b.loreTags.indexOf(l.id)!==-1;}) :[];
+  showOverlay(
+    '<div class="overlay-header"><div style="display:flex;align-items:center;gap:14px">'+av(b.name,col,62)+
+    '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">'+b.name+'</h2>'+
+    '<div style="font-size:13px;color:var(--txt2);margin-bottom:3px">'+b.species+' · '+b.region+'</div>'+
+    '<div style="font-size:12px;color:var(--txt3);font-style:italic">'+b.scientificName+'</div></div></div>'+
+    '<button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
+    (tags.length?'<div class="section-label">Personality</div><div class="tags" style="margin-bottom:16px">'+tags.map(function(p){return tg(p,col);}).join('')+'</div>':'')+
+    '<div class="divider"></div><div class="section-label">Description</div>'+
+    '<div style="font-size:14px;line-height:1.8;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">'+b.description+'</div>'+
+    (linked.length?'<div class="divider"></div><div class="section-label">Linked lore</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">'+linked.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+';border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+cc(l.category)+'</div>';}).join('')+'</div>':'')+
     '<div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openBoiForm('+b.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'boi\','+b.id+',\''+name+'\')">Delete</button></div>');
 }
 
 function openLore(id){
   var l=lores.find(function(x){return x.id===id;}); if(!l)return;
   var title=l.title.replace(/'/g,"\\'");
-  showOverlay('<div class="overlay-header"><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">'+l.title+'</h2>'+catChip(l.category)+'</div><button class="btn-icon" onclick="closeOverlay()">✕</button></div><div class="divider"></div><div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">'+l.content+'</div><div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openLoreForm('+l.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'lore\','+l.id+',\''+title+'\')">Delete</button></div>');
+  showOverlay('<div class="overlay-header"><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">'+l.title+'</h2>'+cc(l.category)+'</div><button class="btn-icon" onclick="closeOverlay()">✕</button></div><div class="divider"></div><div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">'+l.content+'</div><div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openLoreForm('+l.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'lore\','+l.id+',\''+title+'\')">Delete</button></div>');
 }
 
 function openRegion(id){
   var r=REGIONS_DATA.find(function(x){return x.id===id;}); if(!r)return;
-  var res=bois.filter(function(b){return b.region===r.name;}), relLores=lores.filter(function(l){return l.content.toLowerCase().includes(r.name.toLowerCase());});
+  var res=bois.filter(function(b){return b.region===r.name;}),relL=lores.filter(function(l){return l.content.toLowerCase().includes(r.name.toLowerCase());});
   showOverlay('<div class="overlay-header"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px">'+r.emoji+'</span><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 3px;color:var(--txt)">'+r.name+'</h2><div style="font-size:13px;color:var(--txt2)">'+r.gov+'</div></div></div><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
     '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">'+(r.pop?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Pop.</b> '+r.pop+'</span>':'')+(r.food?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Food</b> '+r.food+'</span>':'')+(r.hdi?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">HDI</b> '+r.hdi+'</span>':'')+(r.gdp?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">GDP/cap</b> '+r.gdp+'</span>':'')+'</div>'+
-    '<div class="divider"></div><div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:'+(res.length||relLores.length?'20px':'0')+'">'+r.desc+'</div>'+
-    (res.length?'<div class="section-label">Residents</div><div class="resident-grid">'+res.map(function(b){return '<div class="resident-card" style="border-left:2px solid '+(b.colour||'#a78bfa')+'" onclick="closeOverlay();setTimeout(function(){openBoi('+b.id+')},100)">'+avatar(b.name,b.colour||'#a78bfa',30)+'<div><div style="font-size:13px;font-weight:700;color:var(--txt)">'+b.name+'</div><div style="font-size:11px;color:var(--txt3)">'+b.species+'</div></div></div>';}).join('')+'</div>':'')+
-    (relLores.length?'<div class="section-label">Related lore</div><div style="display:flex;flex-direction:column;gap:6px">'+relLores.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+catChip(l.category)+'</div>';}).join('')+'</div>':''),true);
+    '<div class="divider"></div><div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:'+(res.length||relL.length?'20px':'0')+'">'+r.desc+'</div>'+
+    (res.length?'<div class="section-label">Residents</div><div class="resident-grid">'+res.map(function(b){return '<div class="resident-card" style="border-left:2px solid '+(b.colour||'#a78bfa')+'" onclick="closeOverlay();setTimeout(function(){openBoi('+b.id+')},100)">'+av(b.name,b.colour||'#a78bfa',30)+'<div><div style="font-size:13px;font-weight:700;color:var(--txt)">'+b.name+'</div><div style="font-size:11px;color:var(--txt3)">'+b.species+'</div></div></div>';}).join('')+'</div>':'')+
+    (relL.length?'<div class="section-label">Related lore</div><div style="display:flex;flex-direction:column;gap:6px">'+relL.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+cc(l.category)+'</div>';}).join('')+'</div>':''),true);
 }
 
 function openBoiForm(id){
   var b=id?bois.find(function(x){return x.id===id;}):null; editBoiId=id||null;
+  var spOpts='';
+  Object.keys(SPECIES_GROUPS).forEach(function(g){spOpts+='<optgroup label="'+g+'"></optgroup><option value="'+g+'">'+g+' (group)</option>';});
+  spOpts+=SPECIES.map(function(s){return '<option'+(b&&b.species===s?' selected':'')+'>'+s+'</option>';}).join('');
   showOverlay('<div class="overlay-header"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(b?'Edit entoboy':'New entoboy')+'</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">'+
     '<div style="grid-column:1/-1"><div class="section-label">Name</div><input id="bf-name" value="'+(b?b.name:'')+'"/></div>'+
@@ -488,16 +541,16 @@ function openBoiForm(id){
     '<div><div class="section-label">Region</div><select id="bf-reg">'+REGIONS.map(function(r){return '<option'+(b&&b.region===r?' selected':'')+'>'+r+'</option>';}).join('')+'</select></div>'+
     '<div style="grid-column:1/-1"><div class="section-label">Scientific name</div><input id="bf-sci" value="'+(b?b.scientificName:'')+'" placeholder="e.g. Apis mellifera"/></div>'+
     '<div style="grid-column:1/-1"><div class="section-label">Personality (comma-separated)</div><input id="bf-per" value="'+(b?b.personality:'')+'"/></div></div>'+
-    '<div style="margin-bottom:14px"><div class="section-label">Description</div><textarea id="bf-desc" rows="5" style="resize:vertical;line-height:1.65">'+(b?b.description:'')+'</textarea></div>'+
-    '<div style="margin-bottom:14px"><div class="section-label">Lore tags (link lore entry IDs, comma-separated)</div><input id="bf-tags" value="'+(b&&b.loreTags?b.loreTags.join(','):'')+'" placeholder="e.g. 1,3,7"/></div>'+
+    '<div style="margin-bottom:12px"><div class="section-label">Description</div><textarea id="bf-desc" rows="5" style="resize:vertical;line-height:1.65">'+(b?b.description:'')+'</textarea></div>'+
+    '<div style="margin-bottom:12px"><div class="section-label">Linked lore IDs (comma-separated)</div><input id="bf-tags" value="'+(b&&b.loreTags?b.loreTags.join(','):'')+'" placeholder="e.g. 1,3,7"/></div>'+
     '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div class="section-label" style="margin:0">Colour</div><input type="color" id="bf-col" value="'+(b?b.colour:'#a78bfa')+'" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/></div>'+
     '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveBoi()">'+(b?'Save changes':'Add entoboy')+'</button>');
 }
 
-function saveBoi() {
-  var b={id:editBoiId||Date.now(),name:document.getElementById('bf-name').value,species:document.getElementById('bf-sp').value,region:document.getElementById('bf-reg').value,scientificName:document.getElementById('bf-sci').value,personality:document.getElementById('bf-per').value,description:document.getElementById('bf-desc').value,colour:document.getElementById('bf-col').value,loreTags:document.getElementById('bf-tags').value.split(',').map(function(x){return parseInt(x.trim());}).filter(function(x){return!isNaN(x);})};
+function saveBoi(){
+  var b={id:editBoiId||Date.now(),name:document.getElementById('bf-name').value,species:document.getElementById('bf-sp').value,region:document.getElementById('bf-reg').value,scientificName:document.getElementById('bf-sci').value,personality:document.getElementById('bf-per').value,description:document.getElementById('bf-desc').value,colour:document.getElementById('bf-col').value,loreTags:document.getElementById('bf-tags').value.split(',').map(function(x){return parseInt(x.trim());}).filter(function(x){return !isNaN(x);})};
   if(editBoiId){bois=bois.map(function(x){return x.id===editBoiId?b:x;});}else{bois.push(b);}
-  saveBoisDB(); renderBois(); updateNavCount(); renderHome(); closeOverlay();
+  saveBoisDB(); renderAll(); closeOverlay();
 }
 
 function openLoreForm(id){
@@ -509,7 +562,7 @@ function openLoreForm(id){
     '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveLore()">'+(l?'Save changes':'Add lore')+'</button>');
 }
 
-function saveLore() {
+function saveLore(){
   var l={id:editLoreId||Date.now(),title:document.getElementById('lf-title').value,category:document.getElementById('lf-cat').value,content:document.getElementById('lf-content').value,date:new Date().toISOString().slice(0,10)};
   if(editLoreId){lores=lores.map(function(x){return x.id===editLoreId?l:x;});}else{lores.push(l);}
   saveLoresDB(); renderLores(); updateNavCount(); renderHome(); closeOverlay();
@@ -517,7 +570,7 @@ function saveLore() {
 
 function confirmDelete(type,id,name){
   showOverlay('<div class="overlay-header"><h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">You are about to permanently delete <b style="color:var(--txt)">'+name+'</b>. Enter the secret code to confirm.</p>'+
+    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">Permanently delete <b style="color:var(--txt)">'+name+'</b>? Enter the secret code.</p>'+
     '<div class="section-label">Secret code</div><input id="del-code" placeholder="Enter code..." onkeydown="if(event.key===\'Enter\')doDelete(\''+type+'\','+id+')"/>'+
     '<div id="del-err" style="font-size:12px;color:#ef4444;margin-top:6px;display:none">Incorrect code.</div>'+
     '<div style="display:flex;gap:8px;margin-top:16px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button><button class="btn-danger" style="flex:1;padding:10px" onclick="doDelete(\''+type+'\','+id+')">Delete</button></div>');
@@ -527,96 +580,8 @@ function doDelete(type,id){
   if(document.getElementById('del-code').value!==DELETE_CODE){document.getElementById('del-err').style.display='block';return;}
   if(type==='boi'){bois=bois.filter(function(b){return b.id!==id;});saveBoisDB();renderBois();}
   else{lores=lores.filter(function(l){return l.id!==id;});saveLoresDB();renderLores();}
-  updateNavCount();renderHome();closeOverlay();
+  updateNavCount();renderHome();renderHeights();closeOverlay();
 }
-
-function toggleTheme(){
-  document.body.classList.toggle('light');
-  var isLight=document.body.classList.contains('light');
-  document.getElementById('theme-btn').textContent=isLight?'🌙':'☀️';
-  localStorage.setItem('ev_theme',isLight?'light':'dark');
-}
-
-function exportData(){
-  var data={bois:bois,lores:lores,exported:new Date().toISOString()};
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='entomoverse-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
-}
-
-function importData(e){
-  var file=e.target.files[0]; if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data.bois||!data.lores){alert('Invalid backup file!');return;}
-      if(!confirm('This will replace all current data with the imported backup. Are you sure?'))return;
-      bois=data.bois; lores=data.lores;
-      saveBoisDB(); saveLoresDB();
-      renderBois(); renderLores(); renderHome(); updateNavCount();
-      alert('Import successful! '+bois.length+' bois and '+lores.length+' lore entries loaded.');
-    }catch(err){alert('Could not read file — make sure it is a valid EntomoVerse backup JSON!');}
-  };
-  reader.readAsText(file);
-  e.target.value='';
-}
-
-function renderHeights() {
-  // parse height from description e.g. "4'9\"" or "5'10\""
-  function parseHeight(b) {
-    var m = b.description.match(/(\d+)'(\d+)"/);
-    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
-    m = b.description.match(/(\d+)'(\d+)/);
-    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
-    // check for rough height like "~2'6\""
-    m = b.description.match(/~(\d+)'(\d+)/);
-    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
-    return null;
-  }
-  var withHeight = bois.map(function(b) {
-    return {b: b, inches: parseHeight(b)};
-  }).filter(function(x) { return x.inches !== null; });
-  withHeight.sort(function(a,b) { return b.inches - a.inches; });
-
-  document.getElementById('height-sub').textContent = withHeight.length + ' of ' + bois.length + ' bois with known heights';
-
-  if (!withHeight.length) { document.getElementById('height-chart').innerHTML = '<div class="empty">No height data found. Add heights to boi descriptions like 5\'10".</div>'; return; }
-
-  var max = withHeight[0].inches;
-  var min = Math.max(0, withHeight[withHeight.length-1].inches - 6);
-
-  function inchesToStr(inches) {
-    return Math.floor(inches/12) + "'" + (inches%12) + '"';
-  }
-
-  document.getElementById('height-chart').innerHTML = withHeight.map(function(x) {
-    var b = x.b;
-    var col = b.colour || '#f7cc30';
-    var pct = Math.max(8, Math.round(((x.inches - min) / (max - min)) * 85) + 10);
-    return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer" onclick="openBoi('+b.id+')">'+
-      '<div style="width:52px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">'+inchesToStr(x.inches)+'</div>'+
-      '<div style="flex:1;display:flex;align-items:center;gap:10px">'+
-        '<div style="width:'+pct+'%;height:34px;background:'+col+'22;border:1.5px solid '+col+'60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:80px;transition:width .3s">'+
-          '<span style="font-size:11px;font-weight:700;color:'+col+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.name+'</span>'+
-        '</div>'+
-        '<span style="font-size:11px;color:var(--txt3)">'+b.species+'</span>'+
-      '</div>'+
-    '</div>';
-  }).join('') +
-  '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Heights parsed from boi descriptions. Click any bar to open the profile.</div>';
-}
-
-function resetToDefaults(){
-  if(!confirm('This will reset ALL data to defaults including Slate and all canon bois. Are you sure?'))return;
-  bois=DEFAULT_BOIS; lores=DEFAULT_LORES;
-  saveBoisDB(); saveLoresDB();
-  renderBois(); renderLores(); renderHome(); updateNavCount();
-  alert('Reset complete!');
-}
-
 </script>
 </body>
 </html>
