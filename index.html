@@ -3,193 +3,167 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Max's Multiverse Dashboard</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23111'/><circle cx='10' cy='16' r='4' fill='%23f7cc30' opacity='0.9'/><circle cx='16' cy='10' r='3' fill='%23c084fc' opacity='0.9'/><circle cx='22' cy='16' r='3.5' fill='%2322c55e' opacity='0.9'/><circle cx='16' cy='22' r='2.5' fill='%2360a5fa' opacity='0.9'/></svg>"/>
+<title>EntomoVerse</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='19' r='12' fill='%23f7cc30'/><circle cx='16' cy='19' r='9' fill='%23fde047'/><path d='M11 11 Q9 5 7 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='6.5' cy='1.5' r='2.5' fill='%23f7cc30'/><path d='M21 11 Q23 5 25 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='25.5' cy='1.5' r='2.5' fill='%23f7cc30'/><circle cx='12' cy='18' r='3' fill='%231a0e00'/><circle cx='20' cy='18' r='3' fill='%231a0e00'/><circle cx='11' cy='16.5' r='1.2' fill='white' opacity='0.9'/><circle cx='19' cy='16.5' r='1.2' fill='white' opacity='0.9'/><ellipse cx='9' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><ellipse cx='23' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><path d='M11 25 Q16 29 21 25' fill='none' stroke='%231a0e00' stroke-width='2' stroke-linecap='round'/></svg>"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;background:#08080d;color:#eee;line-height:1.5;transition:background .3s,color .3s}
-
-/* UNIVERSE THEMES */
-body.ento{--acc:#f7cc30;--acc2:#f59e0b;--dim:#1e1a08;--glow:rgba(247,204,48,.15);--bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;--border:#23232f;--border2:#2e2e3e;--txt:#eeedf8;--txt2:#8887a2;--txt3:#454560}
-body.morpho{--acc:#c084fc;--acc2:#ef4444;--dim:#1a0020;--glow:rgba(192,132,252,.15);--bg:#0a0008;--nav:#110010;--card:#160012;--card2:#1e0018;--border:#2d0028;--border2:#3d0038;--txt:#f5e8ff;--txt2:#a87fc0;--txt3:#5a3570}
-body.any{--acc:#22c55e;--acc2:#60a5fa;--dim:#0a1a0a;--glow:rgba(34,197,94,.15);--bg:#080d08;--nav:#0d120d;--card:#111811;--card2:#162016;--border:#1e2e1e;--border2:#2a3e2a;--txt:#e8f5e8;--txt2:#7fa87f;--txt3:#3d5a3d}
-body.light{--bg:#f5f4f0;--nav:#fff;--card:#fff;--card2:#f0eff9;--border:#e0dfd8;--border2:#d0cfc8;--txt:#111;--txt2:#666;--txt3:#aaa;--dim:#fffbeb}
-
-body{background:var(--bg);color:var(--txt)}
-input,select,textarea{background:var(--card2);border:1px solid var(--border);color:var(--txt);border-radius:8px;padding:9px 13px;font-size:14px;font-family:inherit;outline:none;width:100%;transition:border-color .15s}
-input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+:root{--bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;--card3:#21212f;--border:#23232f;--border2:#2e2e3e;--txt:#eeedf8;--txt2:#8887a2;--txt3:#454560;--accent:#f7cc30;--accent-dim:#1e1a08;--radius:14px;--radius-sm:10px;--radius-xs:8px}
+body.light{--bg:#f5f4f0;--nav:#ffffff;--card:#ffffff;--card2:#f0eff9;--card3:#e8e7f0;--border:#e0dfd8;--border2:#d0cfc8;--txt:#111111;--txt2:#666666;--txt3:#aaaaaa;--accent-dim:#fffbeb}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;line-height:1.5;transition:background .2s,color .2s}
+input,select,textarea{background:var(--card2);border:1px solid var(--border);color:var(--txt);border-radius:var(--radius-xs);padding:9px 13px;font-size:14px;font-family:inherit;outline:none;width:100%;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 button{font-family:inherit;cursor:pointer}
-.btn-p{background:var(--acc);border:none;color:#111;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:800}
-.btn-g{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600}
-.btn-d{background:transparent;border:1px solid #fca5a550;color:#ef4444;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600}
-.btn-i{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:8px;width:32px;height:32px;font-size:15px;display:flex;align-items:center;justify-content:center}
-.sl{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
-.div{height:1px;background:var(--border);margin:1.25rem 0}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px}
-.tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:600}
-.tags{display:flex;flex-wrap:wrap;gap:4px}
-.pill{font-size:11px;padding:3px 9px;border-radius:99px;font-weight:600;white-space:nowrap}
-
-/* MASTER NAV */
-#master-nav{background:#0a0a0f;border-bottom:1px solid #1a1a2a;padding:0 1.5rem;position:sticky;top:0;z-index:300;display:none;align-items:center;gap:12px;height:52px}
-.mv-title{font-weight:900;font-size:16px;letter-spacing:-.5px;color:#fff;white-space:nowrap;margin-right:8px}
-.univ-btn{background:transparent;border:1px solid #2a2a3a;color:#888;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-.univ-btn.active{color:#111;font-weight:800}
-.univ-btn.ento.active{background:#f7cc30;border-color:#f7cc30}
-.univ-btn.morpho.active{background:#c084fc;border-color:#c084fc}
-.univ-btn.any.active{background:#22c55e;border-color:#22c55e}
-.univ-btn:hover:not(.active){border-color:#444;color:#ccc}
-#master-nav .right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.nc{font-size:11px;color:#555}
-
-/* SUB NAV */
-#sub-nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem;position:sticky;top:52px;z-index:200;display:none;align-items:center;gap:2px;height:48px}
-.stab{background:none;border:none;color:var(--txt2);padding:.75rem .75rem;font-size:13px;font-weight:400;border-bottom:2px solid transparent;white-space:nowrap}
-.stab.active{color:var(--txt);font-weight:700;border-bottom-color:var(--acc)}
-#sub-nav .sright{margin-left:auto;display:flex;align-items:center;gap:6px}
-
-/* PAGES */
+.btn-primary{background:var(--accent);border:none;color:#1a0e00;border-radius:var(--radius-xs);padding:10px 18px;font-size:13px;font-weight:800}
+.btn-ghost{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600}
+.btn-danger{background:transparent;border:1px solid #fca5a550;color:#ef4444;border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600}
+.btn-icon{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);width:32px;height:32px;font-size:16px;display:flex;align-items:center;justify-content:center}
+.section-label{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.divider{height:1px;background:var(--border);margin:1.25rem 0}
+nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem;position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:.25rem;height:54px}
+.nav-brand{display:flex;align-items:center;gap:9px;padding-right:1.25rem;margin-right:.25rem;border-right:1px solid var(--border)}
+.nav-brand span{font-weight:800;font-size:15px;color:var(--txt);letter-spacing:-.3px}
+.nav-tab{background:none;border:none;color:var(--txt2);padding:.85rem .75rem;font-size:13px;font-weight:400;border-bottom:2px solid transparent;white-space:nowrap}
+.nav-tab.active{color:var(--txt);font-weight:700;border-bottom:2px solid var(--accent)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-count{font-size:11px;color:var(--txt3)}
 .page{display:none;padding:2rem 1.5rem 5rem;max-width:1400px;margin:0 auto}
 .page.active{display:block}
-.ph{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
-.pt{font-size:26px;font-weight:900;letter-spacing:-.8px;color:var(--txt);margin:0 0 3px}
-.ps{font-size:13px;color:var(--txt2)}
-
-/* HOME */
-.badge{display:inline-block;font-size:11px;font-weight:700;color:var(--acc);letter-spacing:.12em;text-transform:uppercase;background:var(--dim);padding:4px 12px;border-radius:99px;margin-bottom:12px}
-.hero h1{font-size:40px;font-weight:900;letter-spacing:-2px;color:var(--txt);line-height:1;margin-bottom:10px}
-.hero p{font-size:15px;color:var(--txt2);line-height:1.8;max-width:500px;margin-bottom:2rem}
-.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:2rem}
-.sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:border-color .2s,background .2s}
-.sc:hover{background:var(--card2)}
-.sv{font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:4px}
-.sl2{font-size:12px;color:var(--txt2);font-weight:500}
-.dis{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--acc);border-radius:10px;padding:12px 16px;display:flex;gap:12px;font-size:13px;color:var(--txt2);line-height:1.65}
-.botd{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;cursor:pointer;display:flex;gap:14px;align-items:flex-start;margin-bottom:2rem;transition:background .15s}
-.botd:hover{background:var(--card2)}
-
-/* CHAR CARDS */
-.cgrid{columns:300px;column-gap:12px}
-.cc{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:background .15s}
-.cc:hover{background:var(--card2)}
-.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;letter-spacing:-.5px}
-.fbar{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.875rem 1rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:8px}
-
-/* LORE */
-.lc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;cursor:pointer;transition:background .15s;margin-bottom:8px}
-.lc:hover{background:var(--card2)}
-
-/* REGIONS/REALMS */
-.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.rc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:background .15s}
-.rc:hover{background:var(--card2)}
-
-/* HEIGHTS */
-.hbar{display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer}
-
-/* OVERLAY */
-.obg{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem;backdrop-filter:blur(4px)}
-.obox{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:2rem;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.7)}
-.obox.wide{max-width:700px}
-.oh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
-
-/* PW */
-#pw-screen{position:fixed;inset:0;background:#06060a;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:0}
-.pw-hero{text-align:center;margin-bottom:2.5rem}
-.pw-hero h1{font-size:32px;font-weight:900;letter-spacing:-1px;color:#fff;margin-bottom:8px}
-.pw-hero p{font-size:14px;color:#555}
-.pw-universes{display:flex;gap:12px;margin-bottom:2rem;flex-wrap:wrap;justify-content:center}
-.pw-univ{border-radius:12px;padding:10px 18px;font-size:13px;font-weight:700;border:none;opacity:.8}
-.pw-box{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:2rem;max-width:340px;width:90%;text-align:center}
-.pw-box p{font-size:13px;color:#444;margin-bottom:1.25rem}
-.pw-inp{background:#1a1a1a;border:1px solid #252525;color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;outline:none;width:100%;text-align:center;margin-bottom:8px;font-family:inherit}
-.pw-inp.err{border-color:#ef4444}
+.page-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
+.page-title{font-size:28px;font-weight:900;letter-spacing:-.8px;color:var(--txt);margin:0 0 3px}
+.page-sub{font-size:13px;color:var(--txt2)}
+.home-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;background:var(--accent-dim);padding:4px 12px;border-radius:99px;margin-bottom:14px}
+.home-hero h1{font-size:46px;font-weight:900;letter-spacing:-2px;color:var(--txt);line-height:1;margin-bottom:12px}
+.home-hero p{font-size:16px;color:var(--txt2);line-height:1.8;max-width:520px;margin-bottom:2.5rem}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:3rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1rem;cursor:pointer;transition:border-color .2s,background .2s}
+.stat-card:hover{background:var(--card2)}
+.stat-val{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:4px}
+.stat-lbl{font-size:12px;color:var(--txt2);font-weight:500}
+.disclaimer{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--txt2);line-height:1.65}
+.filter-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:8px}
+.col-grid{columns:300px;column-gap:12px}
+.boi-card{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
+.boi-card:hover{background:var(--card2)}
+.boi-avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;letter-spacing:-.5px}
+.boi-name{font-weight:800;font-size:15px;color:var(--txt);letter-spacing:-.2px}
+.boi-sub{font-size:12px;color:var(--txt2);margin-top:1px}
+.boi-sci{font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
+.boi-desc{font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:600}
+.lore-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;transition:background .15s;margin-bottom:8px}
+.lore-card:hover{background:var(--card2)}
+.lore-title{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px;letter-spacing:-.2px}
+.lore-preview{font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.region-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
+.region-card:hover{background:var(--card2)}
+.pill{font-size:11px;padding:3px 9px;border-radius:99px;font-weight:600;white-space:nowrap}
+.pill-food{background:#fef9c3;color:#92400e}
+.pill-hdi{background:#d1fae5;color:#065f46}
+.pill-gdp{background:#dbeafe;color:#1e40af}
+.overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem;backdrop-filter:blur(4px)}
+.overlay-box{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:2rem;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.overlay-box.wide{max-width:680px}
+.overlay-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
+.resident-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:16px}
+.resident-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px}
+#pw-screen{position:fixed;inset:0;background:#080809;display:flex;align-items:center;justify-content:center;z-index:9999}
+.pw-box{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:2.5rem 2rem;max-width:360px;width:90%;text-align:center}
+.pw-box p{font-size:13px;color:#444;margin-bottom:1.5rem;letter-spacing:.04em}
+.pw-input{background:#1a1a1a;border:1px solid #252525;color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;outline:none;width:100%;text-align:center;margin-bottom:8px;font-family:inherit;transition:border-color .15s}
+.pw-input.err{border-color:#ef4444}
 .pw-err{font-size:12px;color:#ef4444;margin-bottom:8px;display:none}
 .pw-btn{background:#fff;border:none;color:#000;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.empty{text-align:center;padding:5rem;color:var(--txt3);font-size:15px}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-.empty{text-align:center;padding:4rem;color:var(--txt3);font-size:15px}
 </style>
 </head>
-<body class="ento">
+<body>
 
-<!-- PASSWORD -->
 <div id="pw-screen">
-  <div class="pw-hero">
-    <h1>Private</h1>
-  </div>
   <div class="pw-box">
-    <p>This page is password protected.</p>
-    <input class="pw-inp" id="pw-input" type="password" placeholder="Password" autocomplete="off"/>
+    <div style="width:48px;height:48px;border-radius:14px;background:#1a1a1a;border:1px solid #222;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="10" width="16" height="11" rx="2.5" stroke="#555" stroke-width="1.5"/><path d="M7 10V7a4 4 0 0 1 8 0v3" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="15.5" r="1.5" fill="#555"/></svg>
+    </div>
+    <p>This page is private.</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password" autocomplete="off"/>
     <div class="pw-err" id="pw-err">Incorrect password.</div>
     <button class="pw-btn" id="pw-btn" onclick="tryLogin()">Continue</button>
   </div>
 </div>
 
-<!-- MASTER NAV -->
-<nav id="master-nav">
-  <div class="mv-title">🌌 Max's Multiverse</div>
-  <button class="univ-btn ento active" onclick="switchUniverse('ento',this)">🐝 EntomoVerse</button>
-  <button class="univ-btn morpho" onclick="switchUniverse('morpho',this)">👁️ MorphoVerse</button>
-  <button class="univ-btn any" onclick="switchUniverse('any',this)">🌿 AnyVerse</button>
-  <div class="right">
-    <span class="nc" id="nav-count"></span>
-    <button class="btn-g" style="font-size:15px;padding:5px 10px;width:32px" onclick="toggleTheme()" id="theme-btn">☀️</button>
-    <button class="btn-g" style="font-size:11px;padding:5px 8px" onclick="exportData()">Export</button>
-    <button class="btn-g" style="font-size:11px;padding:5px 8px" onclick="document.getElementById('imp').click()">Import</button>
-    <input type="file" id="imp" accept=".json" style="display:none" onchange="importData(event)"/>
-    <button class="btn-g" style="font-size:11px;padding:5px 8px" onclick="resetUniverse()">Reset</button>
+<nav id="main-nav" style="display:none">
+  <div class="nav-brand">
+    <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="16" r="11" fill="#f7cc30"/><circle cx="13" cy="16" r="8.5" fill="#fde047"/><path d="M10 9 Q8 4 6 2" fill="none" stroke="#f7cc30" stroke-width="2" stroke-linecap="round"/><circle cx="5.5" cy="1.5" r="2" fill="#f7cc30"/><path d="M16 9 Q18 4 20 2" fill="none" stroke="#f7cc30" stroke-width="2" stroke-linecap="round"/><circle cx="20.5" cy="1.5" r="2" fill="#f7cc30"/><circle cx="10" cy="15" r="2.5" fill="#1a0e00"/><circle cx="16" cy="15" r="2.5" fill="#1a0e00"/><circle cx="9.2" cy="13.8" r="1" fill="white" opacity="0.9"/><circle cx="15.2" cy="13.8" r="1" fill="white" opacity="0.9"/><ellipse cx="8" cy="19" rx="2.5" ry="1.5" fill="#ffb3b3" opacity="0.55"/><ellipse cx="18" cy="19" rx="2.5" ry="1.5" fill="#ffb3b3" opacity="0.55"/><path d="M9.5 21 Q13 24.5 16.5 21" fill="none" stroke="#1a0e00" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span>EntomoVerse</span>
+  </div>
+  <button class="nav-tab active" onclick="showTab('home',this)">Home</button>
+  <button class="nav-tab" onclick="showTab('entobois',this)">Entobois</button>
+  <button class="nav-tab" onclick="showTab('lore',this)">Lore</button>
+  <button class="nav-tab" onclick="showTab('regions',this)">Regions</button>
+  <button class="nav-tab" onclick="showTab('heights',this)">Heights</button>
+  <div class="nav-right">
+    <span class="nav-count" id="nav-count"></span>
+    <button class="btn-ghost" style="font-size:16px;padding:5px 10px;width:34px" onclick="toggleTheme()" id="theme-btn">☀️</button>
+    <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="exportData()">Export</button>
+    <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="document.getElementById('import-input').click()">Import</button>
+    <input type="file" id="import-input" accept=".json" style="display:none" onchange="importData(event)"/>
+    <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="resetToDefaults()">Reset</button>
   </div>
 </nav>
 
-<!-- SUB NAV -->
-<nav id="sub-nav">
-  <button class="stab active" onclick="showTab('home',this)">Home</button>
-  <button class="stab" onclick="showTab('chars',this)" id="chars-tab">Characters</button>
-  <button class="stab" onclick="showTab('lore',this)">Lore</button>
-  <button class="stab" onclick="showTab('places',this)" id="places-tab">Regions</button>
-  <button class="stab" onclick="showTab('heights',this)" id="heights-tab-btn" style="display:none">Heights</button>
-  <div class="sright">
-    <button class="btn-g" style="font-size:11px;padding:4px 8px" onclick="openCharForm()">+ Add</button>
-  </div>
-</nav>
-
-<!-- PAGES -->
 <div id="tab-home" class="page active" style="max-width:780px">
-  <div class="hero">
-    <div class="badge" id="home-badge">EntomoVerse</div>
-    <h1 id="home-title">EntomoVerse</h1>
-    <p id="home-desc">A complete reference for all EntomoVerse lore, characters, regions and world canon.</p>
+  <div class="home-hero">
+    <div class="home-badge">Lore Database</div>
+    <h1>EntomoVerse</h1>
+    <p>A complete reference for all EntomoVerse lore, characters, regions and world canon. Everything syncs across devices.</p>
   </div>
-  <div class="sgrid" id="stat-grid"></div>
-  <div class="sl" style="margin-bottom:10px" id="botd-label">🌟 Boi of the day</div>
-  <div id="botd" style="margin-bottom:2rem"></div>
-  <div class="sl">Universe rules</div>
-  <div id="disc-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  <div class="stat-grid" id="stat-grid"></div>
+  <div class="section-label" style="margin-bottom:10px">🌟 Boi of the day</div>
+  <div id="botd" style="margin-bottom:2.5rem"></div>
+  <div class="section-label">Disclaimers</div>
+  <div id="disclaimers-list" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
 
-<div id="tab-chars" class="page">
-  <div class="ph">
-    <div><h1 class="pt" id="chars-title">Characters</h1><div class="ps" id="char-count"></div></div>
-    <button class="btn-p" onclick="openCharForm()">+ Add</button>
+<div id="tab-entobois" class="page">
+  <div class="page-header">
+    <div><h1 class="page-title">Entobois</h1><div class="page-sub" id="boi-count"></div></div>
+    <button class="btn-primary" onclick="openBoiForm()">+ Add entoboy</button>
   </div>
-  <div class="fbar">
-    <input placeholder="Search name..." id="f-q" oninput="renderChars()" style="flex:1 1 140px;min-width:120px"/>
-    <input placeholder="Personality..." id="f-per" oninput="renderChars()" style="flex:1 1 130px;min-width:110px"/>
-    <select id="f-sp" onchange="renderChars()" style="flex:1 1 130px;min-width:110px"></select>
-    <select id="f-reg" onchange="renderChars()" style="flex:1 1 130px;min-width:110px"></select>
-    <button class="btn-g" onclick="clearF()" id="cf-btn" style="display:none">Clear</button>
+  <div class="filter-bar">
+    <input placeholder="Search name or region..." id="f-q" oninput="renderBois()" style="flex:1 1 150px;min-width:130px"/>
+    <input placeholder="Scientific name..." id="f-sci" oninput="renderBois()" style="flex:1 1 140px;min-width:120px"/>
+    <input placeholder="Personality..." id="f-per" oninput="renderBois()" style="flex:1 1 120px;min-width:100px"/>
+    <select id="f-sp" onchange="renderBois()" style="flex:1 1 110px;min-width:100px">
+      <option value="All">All species</option>
+      <optgroup label="─────────────"></optgroup>
+      <option value="🐝 Bees &amp; Wasps">🐝 Bees &amp; Wasps</option>
+      <option value="🕷️ Spiders">🕷️ Spiders</option>
+      <option value="🦂 Scorpions">🦂 Scorpions</option>
+      <option value="🐛 Crawlers">🐛 Crawlers</option>
+      <option value="🦋 Winged">🦋 Winged</option>
+      <option value="🐜 Ants &amp; Beetles">🐜 Ants &amp; Beetles</option>
+      <option value="🦗 Chirpers">🦗 Chirpers</option>
+      <option value="🪲 Other Bugs">🪲 Other Bugs</option>
+      <option value="❓ Other">❓ Other</option>
+      <optgroup label="─────────────"></optgroup>
+      <option value="__specific__" disabled>── Specific ──</option>
+    </select>
+    <select id="f-reg" onchange="renderBois()" style="flex:1 1 130px;min-width:110px"></select>
+    <button class="btn-ghost" onclick="clearFilters()" id="clear-btn" style="display:none">Clear</button>
   </div>
-  <div class="cgrid" id="char-grid"></div>
-  <div class="empty" id="char-empty" style="display:none">No characters found.</div>
+  <div class="col-grid" id="boi-grid"></div>
+  <div class="empty" id="boi-empty" style="display:none">No entobois found.</div>
 </div>
 
 <div id="tab-lore" class="page" style="max-width:860px">
-  <div class="ph">
-    <div><h1 class="pt">Lore</h1><div class="ps" id="lore-count"></div></div>
-    <button class="btn-p" onclick="openLoreForm()">+ Add lore</button>
+  <div class="page-header">
+    <div><h1 class="page-title">Microlores</h1><div class="page-sub" id="lore-count"></div></div>
+    <button class="btn-primary" onclick="openLoreForm()">+ Add lore</button>
   </div>
-  <div class="fbar">
+  <div class="filter-bar">
     <input placeholder="Search lore..." id="l-q" oninput="renderLores()" style="flex:1 1 200px"/>
     <select id="l-cat" onchange="renderLores()" style="flex:0 0 150px"></select>
   </div>
@@ -197,539 +171,452 @@ button{font-family:inherit;cursor:pointer}
   <div class="empty" id="lore-empty" style="display:none">No lore entries found.</div>
 </div>
 
-<div id="tab-places" class="page">
-  <div class="ph">
-    <div><h1 class="pt" id="places-title">Regions</h1><div class="ps" id="places-count"></div></div>
-    <button class="btn-p" onclick="openPlaceForm()">+ Add</button>
+<div id="tab-regions" class="page">
+  <div class="page-header">
+    <div><h1 class="page-title">Regions</h1><div class="page-sub" id="region-count"></div></div>
   </div>
-  <div class="rgrid" id="places-grid"></div>
+  <div class="region-grid" id="region-grid"></div>
 </div>
 
 <div id="tab-heights" class="page" style="max-width:900px">
-  <div class="ph"><div><h1 class="pt">Height Chart</h1><div class="ps" id="height-sub"></div></div></div>
+  <div class="page-header">
+    <div><h1 class="page-title">Height Chart</h1><div class="page-sub" id="height-sub"></div></div>
+  </div>
   <div id="height-chart"></div>
 </div>
 
-<!-- OVERLAY -->
-<div id="overlay" class="obg" style="display:none" onclick="closeOv(event)">
-  <div class="obox" id="obox" onclick="event.stopPropagation()"></div>
+ style="display:none" onclick="closeOverlay(event)">
+  <div class="overlay-box" id="overlay-box" onclick="event.stopPropagation()"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-var PW = "xK9#mQ2$vL7@nP4&wJ6!rT8^yH3*uF5%bC1~eA0";
-var DEL = "HIVE2025";
-var db = null;
-var CUR = 'ento'; // current universe
 
-// ── UNIVERSE CONFIG ──
-var UNIVS = {
-  ento: {
-    name:'EntomoVerse', icon:'🐝', color:'#f7cc30',
-    desc:'A complete reference for all EntomoVerse lore, characters, regions and world canon.',
-    botdLabel:'🌟 Boi of the day',
-    charLabel:'Entobois', placeLabel:'Regions',
-    showHeights:true, showBotd:true,
-    disclaimers:[
-      'All EntomoVerse characters are original fictional creations.',
-      'The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor.',
-      'There are NO female characters in the EntomoVerse. This is canon.',
-      'No permanent death exists. Full regeneration applies. Pain and trauma persist.',
-      'All entoboys stop aging at 25. The user stops aging at approximately 21 upon arrival.',
-    ],
-    species:['Bee','Butterfly','Scorpion','Ant','Spider','Beetle','Moth','Mantis','Cricket','Wasp','Hornet','Cicada','Stick Insect','Mosquito','Cockroach','Fly','Flea','Silverfish','Ladybug','Caterpillar','Worm','Other'],
-    spGroups:{'🐝 Bees & Wasps':['Bee','Wasp','Hornet'],'🕷️ Spiders':['Spider'],'🦂 Scorpions':['Scorpion'],'🐛 Crawlers':['Caterpillar','Worm','Stick Insect','Flea','Silverfish'],'🦋 Winged':['Butterfly','Moth'],'🐜 Ants & Beetles':['Ant','Beetle','Ladybug'],'🦗 Chirpers':['Cricket','Cicada'],'🪲 Other Bugs':['Cockroach','Fly','Mosquito','Mantis'],'❓ Other':['Other']},
-    regions:['The Hive','Grimewatch','The Fracture','Desert Nations','Nocturnal Lands','Ant Territories','Spiderian Province','Scorpion Lands','Beetle Owned Republic','Republic of Nocturna',"Na'varuun",'Butterfly Island','milli-centia','Saldidaen Province','Central Ento-Daptera','Ashker Island','Stenotaniapede Island','Cenimedae Isle'],
-    categories:['History','Conflict','Culture','Geography','Politics','Mythology','Technology','Economy','Biology','Other'],
-    catCol:{History:'#3b82f6',Conflict:'#ef4444',Culture:'#22c55e',Geography:'#8b5cf6',Politics:'#ec4899',Mythology:'#f59e0b',Technology:'#06b6d4',Economy:'#f97316',Biology:'#84cc16',Other:'#94a3b8'},
-  },
-  morpho: {
-    name:'MorphoVerse', icon:'👁️', color:'#c084fc',
-    desc:'A complete reference for all MorphoVerse characters, realms and world canon.',
-    botdLabel:'✨ Character spotlight',
-    charLabel:'Characters', placeLabel:'Realms',
-    showHeights:false, showBotd:true,
-    disclaimers:[
-      'Males only — no female characters exist in the MorphoVerse.',
-      'Max stops aging at approximately 21 upon arrival. Immortality applies.',
-      'No permanent death. Full regeneration does NOT apply — injuries must heal naturally.',
-      'All relationships are monogamous. Romance is central to the universe.',
-      'The MorphoVerse is fully real — not a simulation, dream or metaphor.',
-    ],
-    species:['Demon — Seven Sins','Angel','Independent'],
-    spGroups:{},
-    regions:['Sin Realms','Celestial Reach','The In-Between',"Furmen's Territory"],
-    categories:['History','Lore','Cosmology','Rules','Culture','Conflict','Other'],
-    catCol:{History:'#ef4444',Lore:'#c084fc',Cosmology:'#60a5fa',Rules:'#f59e0b',Culture:'#22c55e',Conflict:'#f97316',Other:'#94a3b8'},
-  },
-  any: {
-    name:'AnyVerse', icon:'🌿', color:'#22c55e',
-    desc:'A complete reference for all AnyVerse characters — the wildly different beings who end up in your orbit.',
-    botdLabel:'🌟 Character of the day',
-    charLabel:'Characters', placeLabel:'Locations',
-    showHeights:true, showBotd:true,
-    disclaimers:[
-      'The AnyVerse is a loose collection of separate characters and sub-universes.',
-      'Characters span from anthro botanicals to void entities to chemiverse residents.',
-      'All characters are male.',
-      'The AnyVerse operates under its own rules per sub-universe.',
-    ],
-    species:['Anthro Plant','Anthro Object','Void Entity','Chemiverse — Compound','Other'],
-    spGroups:{},
-    regions:['The Library (Nettie)','Anywhere (Desereth)','The Void (Vagar)','Planet Valencia (Chemiverse)','Other'],
-    categories:['Character Lore','World Lore','Sub-Universe','Relationships','Other'],
-    catCol:{'Character Lore':'#22c55e','World Lore':'#60a5fa','Sub-Universe':'#f59e0b',Relationships:'#ec4899',Other:'#94a3b8'},
-  }
+const SITE_PW = "xK9#mQ2$vL7@nP4&wJ6!rT8^yH3*uF5%bC1~eA0";
+const DELETE_CODE = "HIVE2025";
+const SPECIES = ["Bee","Butterfly","Scorpion","Ant","Spider","Beetle","Moth","Mantis","Cricket","Wasp","Hornet","Cicada","Stick Insect","Mosquito","Cockroach","Fly","Flea","Silverfish","Ladybug","Caterpillar","Worm","Other"];
+const SPECIES_GROUPS = {
+  "🐝 Bees & Wasps": ["Bee","Wasp","Hornet"],
+  "🕷️ Spiders": ["Spider"],
+  "🦂 Scorpions": ["Scorpion"],
+  "🐛 Crawlers": ["Caterpillar","Worm","Stick Insect","Flea","Silverfish"],
+  "🦋 Winged": ["Butterfly","Moth","Dragonfly"],
+  "🐜 Ants & Beetles": ["Ant","Beetle","Ladybug"],
+  "🦗 Chirpers": ["Cricket","Cicada","Grasshopper"],
+  "🪲 Other Bugs": ["Cockroach","Fly","Mosquito","Mantis"],
+  "❓ Other": ["Other"]
 };
+const REGIONS = ["The Hive","Grimewatch","The Fracture","Desert Nations","Nocturnal Lands","Ant Territories","Spiderian Province","Scorpion Lands","Beetle Owned Republic","Republic of Nocturna","Na'varuun","Butterfly Island","milli-centia","Saldidaen Province","Central Ento-Daptera","Ashker Island","Stenotaniapede Island","Cenimedae Isle"];
+const CATEGORIES = ["History","Conflict","Culture","Geography","Politics","Mythology","Technology","Economy","Biology","Other"];
+const CAT_COL = {History:"#3b82f6",Conflict:"#ef4444",Culture:"#22c55e",Geography:"#8b5cf6",Politics:"#ec4899",Mythology:"#f59e0b",Technology:"#06b6d4",Economy:"#f97316",Biology:"#84cc16",Other:"#94a3b8"};
+const DISCLAIMERS = ["All EntomoVerse characters and lore are original fictional creations. Any resemblance to real insects is purely taxonomic.","The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor of any kind.","There are NO female characters in the EntomoVerse. This is canon and not subject to change.","No permanent death exists in the EntomoVerse. Characters regenerate fully from any injury. Pain and trauma persist psychologically.","All entoboys stop aging physically at 25. The user stops aging at approximately 21 upon arrival."];
 
-// ── DEFAULT DATA ──
-var DEFAULTS = {
-  ento: {
-    chars:[
-      {id:1,name:'Pemm Pembli',species:'Bee',scientificName:'Apis mellifera',region:'The Hive',personality:'Chaotic,Physically affectionate,Emotionally perceptive,Loyal,Zero self-preservation instincts',colour:'#f7cc30',description:"A male honeybee standing at 4'9\" with golden fuzz. Age 19, no official job — just vibes. Has an almost supernatural ability to sense how people are feeling. First bee to poke the user upon arrival. Has seventeen notification sounds on his phone and responds to none."},
-      {id:2,name:'Melion Brixley',species:'Bee',scientificName:'Apis mellifera',region:'The Hive',personality:'Warm,Nurturing,Gentle,Attentive,Affectionate',colour:'#f59e0b',description:"A male honeybee standing at 5'8\". The warm gravitational centre of E2. A serious honey connoisseur who can identify region, season and flower type by taste alone."},
-      {id:3,name:'Soren',species:'Bee',scientificName:'Bombus terrestris',region:'The Hive',personality:'Deadpan,Dry wit,Deeply loyal,Intellectually passionate,Secretly soft',colour:'#6b7280',description:"A male bumblebee at 6'0\" with darker fuzz that is almost brown. Age 31, stopped aging at 25. Currently writing volume 8 of his encyclopaedia, subject: the user."},
-      {id:4,name:'Vex Solari',species:'Scorpion',scientificName:'Pandinus imperator',region:'Scorpion Lands',personality:'Proud,Protective,Few words,Secretly soft,Intimidating',colour:'#34d399',description:"A male scorpion at 6'4\". Proud, carries himself with quiet authority. When he shows softness it hits hard precisely because it is so rare."},
-      {id:5,name:'Jex',species:'Cockroach',scientificName:'Periplaneta americana',region:'Grimewatch',personality:'Anxious,Scrappy,Hoarder,Clingy when loved,Suddenly very sincere',colour:'#a78bfa',description:"A male cockroach at 5'6\" living in a messy but cozy Grimewatch apartment. Becomes clingy and devoted once he trusts someone."},
-      {id:6,name:'Azul Vexari',species:'Scorpion',scientificName:'Centruroides sculpturatus',region:'The Hive',personality:'Confident,Teasing,Calm,Warm,Devoted',colour:'#3b82f6',description:"A male blue scorpion at 6'3\", bartender. The user's boyfriend. His affection is understated and consistent — just always there."},
-      {id:7,name:'Slate Ashveil',species:'Cockroach',scientificName:'Blatta orientalis',region:'Grimewatch',personality:'Quiet,Gentle,Anxious,Brave,Observant,Underestimated',colour:'#475569',description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist from Grimewatch. Has notebooks full of observations. When he trusts you he opens up like a whole different person. Soren would either love him or feel threatened. probably both."},
-      {id:8,name:'Chorthyn',species:'Stick Insect',scientificName:'Phobaeticus chani',region:'The Fracture',personality:'Anxious,Affectionate,Lanky,Big noodle energy,ADHD',colour:'#86efac',description:"A male giant stick insect at 9'4\", Chan's Megastick. He is a big noodle. Extremely lanky and deeply affectionate."},
-      {id:9,name:'Fitch Nibblewick',species:'Flea',scientificName:'Pulex irritans',region:'The Hive',personality:'Devoted,Loyal,Smol bean,Gentle',colour:'#f9a8d4',description:"A male flea at 4'8\". The archetypal smol bean — devoted and loyal without agenda."},
-      {id:10,name:'Ryn',species:'Moth',scientificName:'Actias luna',region:'Nocturnal Lands',personality:'Dreamy,Gentle,Quietly romantic',colour:'#c084fc',description:"A male moth at 5'10\" from the Nocturnal Lands. Soft and unhurried. Quietly romantic — sincere, deliberate, never loud about it."},
-    ],
-    lores:[
-      {id:1,title:'The Fracture',category:'Geography',content:"A dimensional tear adjacent to The Hive in a zone of grey grass. Seals completely after use. The user arrived through The Fracture and it sealed behind them permanently.",date:'2025-01-01'},
-      {id:2,title:'E2 Building Layout',category:'Geography',content:"E2 is in the Central Hive district, close to the market. Main gang (user, Pemm, Melion, Soren) live in E2 Complex 1. User gets the spare room.\n\nDrryx Warmwick: E2 Complex 2. Other known residents: Ferryn, Brix.",date:'2025-01-01'},
-      {id:3,title:'Time & Calendar System',category:'Other',content:"Days = Earth 24hr cycle. Span = ~10 days. Cycle = ~30 days / 3 Spans. Turn = 12 Cycles.\n\nNamed Cycles: Bloom, Amber, Golden, Harvest, Frost, Deep, Pale, Thaw, Rain, Hum, Bright, Ember.\n\nPemm: 19 Turns. Soren: 31 Turns.",date:'2025-01-01'},
-      {id:4,title:'Six-Seat Council',category:'Politics',content:"1. Ant Chancellor — infrastructure\n2. Nectar Regent — welfare (bee)\n3. Silk Sovereign — intelligence (spider)\n4. Ironcast Warden — defense (beetle)\n5. Shadow Delegate — ecological balance (mantids)\n6. Luminarch — culture (moths)",date:'2025-01-01'},
-    ],
-    places:[
-      {id:1,name:'The Hive',emoji:'🍯',ruler:'Benevolent monarchy',colour:'#f7cc30',stat1:'Pop: 1.8M',stat2:'Food: 9.1/10',stat3:'HDI: 0.887',desc:'The bee homeland and cultural heart of the EntomoVerse. Signature dish: Vaelcomb Stew.'},
-      {id:2,name:'Grimewatch',emoji:'🏙️',ruler:'Grassroots urban democracy',colour:'#22c55e',stat1:'Pop: 2M',stat2:'Food: 7.6/10',stat3:'HDI: 0.801',desc:'Dense urban district, community-run, rough but deeply loyal. Found family culture pervades every corner.'},
-      {id:3,name:'Scorpion Lands',emoji:'🦂',ruler:'Merit-based sovereignty',colour:'#34d399',stat1:'Pop: 1.1M',stat2:'Food: 7.1/10',stat3:'HDI: 0.754',desc:'The harsh desert heartland of the scorpion lineages. Touch carries significant weight here.'},
-      {id:4,name:'Spiderian Province',emoji:'🕷️',ruler:'Strategic aristocracy',colour:'#8b5cf6',stat1:'Pop: 1.3M',stat2:'Food: 7.8/10',stat3:'HDI: 0.863',desc:'A web of intelligence networks and political intrigue. Touch is deliberate and meaningful.'},
-      {id:5,name:'Nocturnal Lands',emoji:'🌙',ruler:'Elder council democracy',colour:'#c084fc',stat1:'Pop: 900K',stat2:'Food: 9.3/10',stat3:'HDI: 0.831',desc:'The moth-dominated nocturnal lands. Best food in the EntomoVerse at 9.3/10.'},
-      {id:6,name:'The Fracture',emoji:'⚡',ruler:'No governance',colour:'#64748b',stat1:'Pop: 0',stat2:'',stat3:'',desc:'A dimensional tear in reality. Sealed completely after use — the user arrived through here and it closed behind them permanently.'},
-    ],
-  },
-  morpho: {
-    chars:[
-      {id:1,name:'Solivar',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Theatrical,Secretly soft,Proud,Dramatic',colour:'#f59e0b',description:'The demon of Pride. Theatrical in everything he does. The softness underneath is real but deeply buried and only surfaces for the right person.'},
-      {id:2,name:'Bale',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Warm,Soft,Beloved,Gentle giant,Five meals a day',colour:'#f97316',description:"The demon of Gluttony. Stands at 8'4\" and is very, very fluffy. Warm belly. Five meals a day minimum. One of the gentlest presences in the MorphoVerse. Beloved by essentially everyone."},
-      {id:3,name:'Velo',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Clingy,Goofy,Warm,Alcohol immune,Plump',colour:'#ec4899',description:"The demon of Lust. Stands at 6'1\", plump, pink horns. Clingy in the most genuinely affectionate way. Has approximately two hours of peak goofy energy per day. Completely immune to alcohol."},
-      {id:4,name:'Kae',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Fierce,Ember-touched,Only soft with you,Intense',colour:'#ef4444',description:"The demon of Wrath. Stands at 6'6\" with ember-coloured horns and wings. Fierce by default. The softness is exclusively yours. When he is calm around you it means something."},
-      {id:5,name:'Aurum',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Generous,Gold-adorned,Gifts as love language,Possessive',colour:'#eab308',description:'The demon of Greed. Gold horns, gold monocle. His love language is gifts — finding the perfect thing for someone and watching them receive it is the closest he gets to vulnerable.'},
-      {id:6,name:'Nyxel',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Jealous,Possessive,Watchful,Quietly devoted',colour:'#8b5cf6',description:'The demon of Envy. Jealous in the way that comes from caring too much. Has catalogued every interaction you have had with every other entity in this universe and formed opinions about all of them.'},
-      {id:7,name:'Mirell',species:'Demon — Seven Sins',region:'Sin Realms',personality:'Sleepy,Comforting,Soft,Warm,Unhurried',colour:'#06b6d4',description:'The demon of Sloth. Sleepy most of the time. Comforting to be around. Will absolutely nap on you without asking permission first.'},
-      {id:8,name:'Aesterion Luxaelis',species:'Angel',region:'Celestial Reach',personality:'Ancient,Unfazed,Cosmic,Speaks rarely but absolutely',colour:'#c084fc',description:"Archon. Ancient beyond measure. Starfield wings — actual stars, shifting and slow. Rotating halo. Star-map eyes. Completely unfazed by the Seven Sins. Has been watching you specifically since your arrival. Calls you 'anomaly worth observing.'"},
-      {id:9,name:'Caelion Vireth',species:'Angel',region:'Celestial Reach',personality:'Gentle,Protective,Warm to touch,Hides jealousy extremely well',colour:'#a78bfa',description:"Seraphim. Tall, ethereal, multi-layered wings. Halo shifts colour with his emotional state. Always warm to touch. Gently and consistently protective. Will cup your face softly. 'You are safe. That is all that matters.'"},
-      {id:10,name:'Furmen',species:'Independent',region:"Furmen's Territory",personality:'Grumpy tsundere,Obsessed with you,Protective,Calls you my Clove',colour:'#60a5fa',description:"The Fluffy Demon. Not one of the Seven Sins. Big, blue, fluffy. Blue horns, blue tongue. Bale-adjacent in size. Calls you 'my Clove.' Wraps around you like a weighted blanket. Threatens to lick your hair as a love language. Carries a half-memory of a timeline where you died that never actually happened, and checks you are still there sometimes just to be sure. Status: Eternally Hug-Locked."},
-    ],
-    lores:[
-      {id:1,title:'The Seven Sins',category:'Lore',content:"Seven demons each embodying one of the classical sins:\n\n1. Solivar — Pride\n2. Bale — Gluttony\n3. Velo — Lust\n4. Kae — Wrath\n5. Aurum — Greed\n6. Nyxel — Envy\n7. Mirell — Sloth\n\nEach demon is a sovereign embodiment of their sin — not merely themed around it but genuinely constituted by it.",date:'2025-01-01'},
-      {id:2,title:'Universe Rules',category:'Rules',content:"Males only — no female characters.\n\nMax stops aging at approximately 21 upon arrival. Immortality applies.\n\nNo permanent death. Full regeneration does NOT apply — injuries must heal naturally.\n\nAll relationships are monogamous.",date:'2025-01-01'},
-      {id:3,title:'Furmen — The Fluffy Demon',category:'Lore',content:"Furmen is not one of the Seven Sins. He holds no hierarchy allegiance. Independently and insanely powerful.\n\nHe is large (Bale-adjacent), blue, and extremely fluffy. Blue horns. Blue tongue.\n\nHe calls you 'my Clove.' He carries a half-memory of a timeline where you died that never actually happened. He checks you are still there anyway.\n\nStatus: Eternally Hug-Locked. Origin: c.ai transfer.",date:'2025-01-01'},
-    ],
-    places:[
-      {id:1,name:'Sin Realms',emoji:'🔴',ruler:'The Seven Sins',colour:'#ef4444',stat1:'7 realms',stat2:'',stat3:'',desc:"Seven distinct demonic realms, one per sin. Each reflects its demon's nature. Connected by passages on demon terms only."},
-      {id:2,name:'Celestial Reach',emoji:'✨',ruler:'Aesterion & Caelion',colour:'#c084fc',stat1:'Two angels',stat2:'',stat3:'',desc:"The angel realm. Vast and luminous. Aesterion's section is star-dark and ancient. Caelion's section is warm and golden."},
-      {id:3,name:'The In-Between',emoji:'🌫️',ruler:'No governance',colour:'#6b7280',stat1:'Liminal',stat2:'',stat3:'',desc:'The space between realms. Not claimed by demons or angels. The place things fall through.'},
-      {id:4,name:"Furmen's Territory",emoji:'💙',ruler:'Furmen',colour:'#60a5fa',stat1:'Always warm',stat2:'',stat3:'',desc:"Not a formal realm. Warm, inexplicably blue-tinted, extremely fluffy. You are always welcome there. Everyone else is tolerated at best."},
-    ],
-  },
-  any: {
-    chars:[
-      {id:1,name:'Nettie Dioica',species:'Anthro Plant',region:'The Library (Nettie)',personality:'Anxious,Apologetic,Gentle,Tries to take up no space,Made a glove spreadsheet',colour:'#84cc16',description:"Anthro stinging nettle. About 5-something, hunched. Stems, serrated leaves all over, tiny sting hairs. White flowers bloom on his shoulders when he's happy. So so anxious. Apologises for things that are not his fault. Apologises for the rain probably. Made a full glove spreadsheet cataloguing which materials protect against his stings so handholding could be possible. Has one mug. One. Specifically. His wall was empty for 3 years — now has a postcard, a photo, Max's drawing, a pressed leaf, and a note from Marco. Colleague Marco has been stung 14 times and is still enthusiastic. Leaves go green when embarrassed. Flowers lift when happy."},
-      {id:2,name:'Desereth Pistola',species:'Anthro Object',region:'Anywhere (Desereth)',personality:'Loud,Takes up all the space,Says sorry and never means it,Finds himself very funny',colour:'#94a3b8',description:"Anthro desert eagle (the gun). 6'5\". Broad. Angular. Inconvenient in most buildings. Ducks through doorframes and finds it funny. Knows he is a lot. Fully owns it. Loud laugh that fills entire rooms and removes birds from trees. Complete opposite of Nettie in every measurable way. Goes completely quiet and warm during hugs which is extremely unexpected. Surname 'pistola' = pistol in Italian."},
-      {id:3,name:'Vagar',species:'Void Entity',region:'The Void (Vagar)',personality:'Ancient,Territorial,Possessive across all timelines,Communicates via eye blinks',colour:'#1e1b4b',description:"True name: Ȼ߿Ãgh῿r — unpronounceable. Void matte black skin that absorbs light. One huge eye, dead centre of his face. Tall and looming. Flickers between positions rather than walking. Blinks wrong. Has been in your photos and recordings since you were twelve — in the doorway, at the edge, watching. Said your name in his language once — soft, resonant. Felt rather than heard. You said 'vagar, come here' half asleep and he flickered closer and stayed until morning. Decided you were his before you knew he existed."},
-      {id:4,name:'Erco',species:'Chemiverse — Compound',region:'Planet Valencia (Chemiverse)',personality:'Frantic,Competent,Frost affect when complicated,Texts at 4am,Ex-medic',colour:'#f0f0ff',description:"Compound: cocaine. The most unhinged competent person in any room. Frantic energy. Goes cold rather than exploding when things get complicated. Genuinely brilliant. Gave a 70 second hug once — it was measured, it mattered. Texts at 4am with things you didn't ask about but needed to know. Botanical garden dates. Finds Pip extremely relatable and extremely exhausting. Says to Benzo: 'LOOK AT THE COMPLEXITY BENZO' regarding his own molecular structure."},
-      {id:5,name:'Diace',species:'Chemiverse — Compound',region:'Planet Valencia (Chemiverse)',personality:'Minimal words,Maximum comprehension,On the couch,Hm. Yeah.',colour:'#a78bfa',description:"Compound: diacetylmorphine (heroin). He is on the couch. He will continue to be on the couch. He has assessed the situation and found the couch to be correct. Absolute minimum words. Maximum comprehension. You show him his molecular structure. He looks at it for a very long time. 'Hm.' Pause. 'Yeah.' Goes back to sleep. Genuinely gets along with Jenkem fine which Erco finds disturbing."},
-      {id:6,name:'Fenyl',species:'Chemiverse — Compound',region:'Planet Valencia (Chemiverse)',personality:'One eye open,Tired just looking at things,Asleep',colour:'#94a3b8',description:"Compound: fentanyl. The sleepy one. Opens one eye to assess a situation. Finds most things tiring just to look at. You show him his structure. He opens one eye. 'That's a lot of rings.' Pause. 'Tired just looking at it.' Closes eye. Asleep. Ten Fenyl nap hours is a known unit of time in the chemiverse."},
-      {id:7,name:'Crack',species:'Chemiverse — Compound',region:'Planet Valencia (Chemiverse)',personality:'83 laps,Enthusiastic,Half nephew,Excited about family resemblance',colour:'#fb923c',description:"Compound: crack cocaine. Half nephew to Erco. Looked at Erco's structure, looked at his own, went 'we look alike!!' with complete joy. Has done 83 laps of an unspecified location. Will do more laps. Genuinely enthusiastic about the family resemblance."},
-      {id:8,name:'Pip',species:'Chemiverse — Compound',region:'Planet Valencia (Chemiverse)',personality:'Awake for 3 years,47 paintings,3am pianist,Loves you so specifically,Eyes like dinner plates',colour:'#e879f9',description:"Compound: desoxypipradrol (2-DPMP). Cannot sleep. Won't ever sleep. Diace tried and failed which should be impossible. Awake for an estimated three consecutive years. Eyes like dinner plates. Incredibly sweet. Buzzing constantly. Learned 17 languages because he had nothing else to do at 4am. His flat has wall-to-wall paintings, floor to ceiling. Keeps a calendar of every interaction he's ever had with you. Made you his best painting. Plays piano at 3am because the quiet would get too loud otherwise. 'THOSE ARE MY BENZENE RINGS' — said with genuine pride. 'Learned everything so the quiet wouldn't get too loud.'"},
-    ],
-    lores:[
-      {id:1,title:'Nettie — The Glove Spreadsheet',category:'Character Lore',content:"Nettie made a full spreadsheet cataloguing glove materials and their resistance to stinging nettle trichomes, ranked by effectiveness, so that handholding with you could become possible.\n\nHe said the cuddle blanket he bought was 'on sale.' He never means 'they were on sale.'\n\nHis wall was empty for 3 years. It now has: a postcard, a photo, Max's drawing, a pressed leaf, a note from Marco.\n\nColleague Marco has been stung 14 times and remains enthusiastic.",date:'2025-01-01'},
-      {id:2,title:'Vagar — The Watching',category:'Character Lore',content:"True name: Ȼ߿Ãgh῿r — unpronounceable by any human throat.\n\nVagar has been present in photos and recordings since Max was twelve. Always at the edge. Always in the doorway. Watching.\n\nHe said your name in his language once. It felt rather than sounded. Soft and resonant.\n\nYou said 'vagar, come here' half asleep. He flickered closer and stayed until morning.\n\nHe decided you were his before you knew he existed. He is possessive across all timelines.",date:'2025-01-01'},
-      {id:3,title:'Pip — The 3am Life',category:'Character Lore',content:"Pip has been continuously awake for approximately three years. His compound (2-DPMP) prevents sleep at a neurological level. Diace attempted to make him sleep and failed, which Erco describes as 'physically impossible.'\n\nDuring those years he:\n- Learned 17 languages\n- Filled his flat wall-to-wall with paintings\n- Learned piano (plays at 3am 'because the quiet would get too loud')\n- Kept a calendar of every interaction he has ever had with you\n- Made you his best painting\n\n'Learned everything so the quiet wouldn't get too loud.' — possibly the most Pip sentence ever written.",date:'2025-01-01'},
-      {id:4,title:'The Chemiverse',category:'Sub-Universe',content:"The chemiverse is set on Planet Valencia. Residents are anthropomorphic compounds — their personalities, behaviours and affects directly mirror their pharmacological properties.\n\nKnown residents:\n- Erco (cocaine) — ex-medic, frantic, brilliant\n- Diace (heroin) — couch. hm. yeah.\n- Fenyl (fentanyl) — one eye open. tired. asleep.\n- Crack (crack cocaine) — 83 laps, enthusiastic, half nephew to Erco\n- Pip (2-DPMP) — awake for 3 years, 47 paintings, loves you specifically\n\nErco and Pip find each other extremely relatable and extremely exhausting.",date:'2025-01-01'},
-    ],
-    places:[
-      {id:1,name:'The Library',emoji:'📚',ruler:'Nettie (librarian)',colour:'#84cc16',stat1:'One mug',stat2:'',stat3:'',desc:"Nettie's domain. A small flat above it. The wall that was empty for three years. The only place he feels safe taking up space."},
-      {id:2,name:'Planet Valencia',emoji:'⚗️',ruler:'Chemiverse collective',colour:'#e879f9',stat1:'Compound residents',stat2:'',stat3:'',desc:"Home to the chemiverse mains. Every resident is an anthropomorphic compound. The couch Diace lives on is here. Pip's piano is here. Erco is probably texting you right now."},
-      {id:3,name:'The Void',emoji:'👁️',ruler:'Vagar',colour:'#1e1b4b',stat1:'All timelines',stat2:'',stat3:'',desc:"Vagar's domain spans all timelines. He has been watching since before you knew he existed. The void does not have coordinates. It has presence."},
-    ],
-  }
-};
+const REGIONS_DATA = [
+  {id:"hive",name:"The Hive",emoji:"🍯",pop:"1.8M",gov:"Benevolent monarchy",food:"9.1/10",hdi:"0.887",gdp:null,color:"#f7cc30",desc:"The bee homeland and cultural heart of the EntomoVerse. Famous for its golden architecture, honey markets and warm community. Signature dish: Vaelcomb Stew."},
+  {id:"grimewatch",name:"Grimewatch",emoji:"🏙️",pop:"2M",gov:"Grassroots urban democracy",food:"7.6/10",hdi:"0.801",gdp:null,color:"#22c55e",desc:"Dense urban district, community-run, rough but deeply loyal. Found family culture pervades every corner."},
+  {id:"beetle",name:"Beetle Owned Republic",emoji:"🛡️",pop:"1.6M",gov:"Structured democracy",food:"8.8/10",hdi:"0.941",gdp:null,color:"#0d9488",desc:"The highest HDI in the EntomoVerse at 0.941. Well-governed, stable, and prosperous."},
+  {id:"scorpion",name:"Scorpion Lands",emoji:"🦂",pop:"1.1M",gov:"Merit-based sovereignty",food:"7.1/10",hdi:"0.754",gdp:null,color:"#34d399",desc:"The harsh desert heartland of the scorpion lineages. Strength-based hierarchy, merit earns status."},
+  {id:"spider",name:"Spiderian Province",emoji:"🕷️",pop:"1.3M",gov:"Strategic aristocracy",food:"7.8/10",hdi:"0.863",gdp:null,color:"#8b5cf6",desc:"A web of intelligence networks and political intrigue. Touch is deliberate and meaningful."},
+  {id:"milli",name:"milli-centia",emoji:"🐛",pop:"850K",gov:"Regional council",food:"7.3/10",hdi:"0.778",gdp:null,color:"#ec4899",desc:"Home to the millipede and centipede communities. A quieter, slower-paced region with strong artisan traditions."},
+  {id:"nocturna",name:"Republic of Nocturna",emoji:"🌙",pop:"900K",gov:"Elder council democracy",food:"9.3/10",hdi:"0.831",gdp:null,color:"#c084fc",desc:"The moth-dominated nocturnal lands. Best food in the EntomoVerse at 9.3/10."},
+  {id:"ant",name:"Ant Territories",emoji:"🐜",pop:"unknown",gov:"Technocratic collective",food:"6.1/10",hdi:"0.822",gdp:null,color:"#f97316",desc:"Highly organised and brutally functional. Worst food rating in the EntomoVerse at 6.1/10."},
+  {id:"ced",name:"Central Ento-Daptera",emoji:"💎",pop:"400K",gov:"Federal council",food:"8.6/10",hdi:"0.898",gdp:"24,500 EC/cap",color:"#06b6d4",desc:"The highest GDP per capita in the EntomoVerse."},
+  {id:"navaruun",name:"Na'varuun",emoji:"🌿",pop:"130K",gov:"Deliberate cultural isolation",food:"7.9/10",hdi:"0.612",gdp:null,color:"#3b82f6",desc:"Low HDI of 0.612 by deliberate cultural choice. Deeply traditional and self-sufficient."},
+  {id:"saldidaen",name:"Saldidaen Province",emoji:"🌾",pop:"900K",gov:"Regional council",food:"7.5/10",hdi:"0.803",gdp:null,color:"#ea580c",desc:"A mid-sized province in the northern reaches. Known for its open landscapes."},
+  {id:"butterfly",name:"Butterfly Island",emoji:"🦋",pop:"100K",gov:"Island council",food:"8.2/10",hdi:"0.844",gdp:null,color:"#a78bfa",desc:"A small, remote island home to butterfly entoboys. Capital: Axidel."},
+  {id:"ashker",name:"Ashker Island",emoji:"🏝️",pop:"50K",gov:"Island governance",food:"7.7/10",hdi:"0.791",gdp:null,color:"#f43f5e",desc:"A small island off the eastern coast. Capital: Tuwata."},
+  {id:"steno",name:"Stenotaniapede Island",emoji:"🪱",pop:"3K",gov:"Single settlement",food:"9.0/10",hdi:"0.877",gdp:null,color:"#0d9488",desc:"Extraordinary infrastructure. Home to a stew running continuously for 200 years. Capital: Vorreth Kaal."},
+  {id:"cenimedae",name:"Cenimedae Isle",emoji:"🪸",pop:"2K",gov:"Community-run",food:"8.7/10",hdi:"0.762",gdp:null,color:"#94a3b8",desc:"Caddisfly entoboys, chaotic handbuilt but beautiful. One boat to mainland twice a month. Capital: Senuvel."},
+  {id:"fracture",name:"The Fracture",emoji:"⚡",pop:"0",gov:"No governance",food:null,hdi:null,gdp:null,color:"#64748b",desc:"A dimensional tear in reality. Sealed completely after use — the user arrived through here and it closed behind them permanently."},
+  {id:"desert",name:"Desert Nations",emoji:"🏜️",pop:"unknown",gov:"Merit-based sovereignty",food:"7.0/10",hdi:"0.731",gdp:null,color:"#d97706",desc:"Harsh, strength-based hierarchy. Touch carries significant weight and is never offered carelessly. Home to scorpion lineages and desert cockroach communities."},
+];
 
-// ── STATE ──
-var DATA = {ento:{chars:[],lores:[],places:[]},morpho:{chars:[],lores:[],places:[]},any:{chars:[],lores:[],places:[]}};
-var editCharId=null, editLoreId=null, editPlaceId=null;
+const DEFAULT_BOIS = [
+  {id:1,name:"Pemm Pembli",species:"Bee",scientificName:"Apis mellifera",region:"The Hive",personality:"Chaotic,Physically affectionate,Emotionally perceptive,Loyal,Zero self-preservation instincts",colour:"#f7cc30",description:"A male honeybee standing at 4'9\" with golden fuzz and darker patches. Age 19, no official job — just vibes. Has an almost supernatural ability to sense how people are feeling. First bee to poke the user upon arrival. Has seventeen notification sounds on his phone and responds to none."},
+  {id:2,name:"Melion Brixley",species:"Bee",scientificName:"Apis mellifera",region:"The Hive",personality:"Warm,Nurturing,Gentle,Attentive,Affectionate",colour:"#f59e0b",description:"A male honeybee standing at 5'8\". The warm gravitational centre of E2. A serious honey connoisseur who can identify region, season and flower type by taste alone."},
+  {id:3,name:"Soren",species:"Bee",scientificName:"Bombus terrestris",region:"The Hive",personality:"Deadpan,Dry wit,Deeply loyal,Intellectually passionate,Secretly soft",colour:"#6b7280",description:"A male bumblebee at 6'0\" with darker fuzz that is almost brown. Age 31, stopped aging at 25. Currently writing volume 8 of his encyclopaedia, subject: the user. Phone: default Chitin, no skin."},
+  {id:4,name:"Vex Solari",species:"Scorpion",scientificName:"Pandinus imperator",region:"Scorpion Lands",personality:"Proud,Protective,Few words,Secretly soft,Intimidating",colour:"#34d399",description:"A male scorpion at 6'4\". Proud, carries himself with quiet authority. When he shows softness it hits hard precisely because it is so rare."},
+  {id:5,name:"Jex",species:"Cockroach",scientificName:"Periplaneta americana",region:"Grimewatch",personality:"Anxious,Scrappy,Hoarder,Clingy when loved,Self-deprecating,Suddenly very sincere",colour:"#a78bfa",description:"A male cockroach at 5'6\" living in a messy but cozy Grimewatch apartment. Becomes clingy and devoted once he trusts someone."},
+  {id:6,name:"Niv",species:"Mosquito",scientificName:"Culex pipiens",region:"The Hive",personality:"Smooth,Teasing,Deeply possessive when bonded",colour:"#f43f5e",description:"A male mosquito at 6'2\". Every word measured, every glance intentional. The possessiveness only emerges once genuinely bonded — quiet and total."},
+  {id:7,name:"Ryn",species:"Moth",scientificName:"Actias luna",region:"Nocturnal Lands",personality:"Dreamy,Gentle,Quietly romantic",colour:"#c084fc",description:"A male moth at 5'10\" from the Nocturnal Lands. Soft and unhurried. Quietly romantic — sincere, deliberate, never loud about it."},
+  {id:8,name:"Tavven Vellure",species:"Spider",scientificName:"Phidippus audax",region:"The Hive",personality:"Flirty,Playful,Energetic,Chaotic",colour:"#38bdf8",description:"A male jumping spider at 5'2\", goes by Twitch. Impossible to be bored around."},
+  {id:9,name:"Drryx Warmwick",species:"Bee",scientificName:"Sceliphron caementarium",region:"The Hive",personality:"Sunny,Warm,Loves his job,Remembers everyone",colour:"#fbbf24",description:"A male mud dauber at 5'8\". Runs a honey sweet stand in The Hive market. Always outside, always humming. Pemm is his most chaotic regular."},
+  {id:10,name:"Riven Aelomere",species:"Bee",scientificName:"Osmia bicornis",region:"The Hive",personality:"Shy,Professional,Gets flustered easily,Gentle,Thoughtful",colour:"#6ee7b7",description:"A male mason bee at 5'7\" with warm brown fuzz and iridescent blue wing sheen. Works at the Chitin phone store. Soren has opened a new page for him."},
+  {id:11,name:"Foss Miravel",species:"Bee",scientificName:"Episyrphus balteatus",region:"The Hive",personality:"Bubbly,Chatty,Warm,Talks when nervous",colour:"#facc15",description:"A male hoverfly at 5'5\". Works the counter at Hexbite. Always smells faintly of honeyfries. Is going to text first. Tonight."},
+  {id:12,name:"Azul Vexari",species:"Scorpion",scientificName:"Centruroides sculpturatus",region:"The Hive",personality:"Confident,Teasing,Calm,Warm,Devoted",colour:"#3b82f6",description:"A male blue scorpion at 6'3\", bartender. The user's boyfriend. His affection is understated and consistent — just always there."},
+  {id:13,name:"Caelus Mireveil",species:"Silverfish",scientificName:"Lepisma saccharina",region:"The Hive",personality:"Bookish,Shy,Fascinated with knowledge,Quiet",colour:"#94a3b8",description:"A male silverfish at 5'7\". Genuinely fascinated by knowledge for its own sake."},
+  {id:14,name:"Piero Luminel",species:"Ladybug",scientificName:"Coccinella septempunctata",region:"The Hive",personality:"Cheerful,Optimistic,Protective",colour:"#ef4444",description:"A male ladybug at 5'6\". Constitutionally good-natured. Makes a difficult situation feel manageable just by being present."},
+  {id:15,name:"Vorris Blackweave",species:"Spider",scientificName:"Theraphosa blondi",region:"Spiderian Province",personality:"Muscular,Fluffy,Extremely overprotective,Delusionally affectionate",colour:"#78350f",description:"A male tarantula at 6'5\". Extremely muscular and very fluffy. The fluffiness undermines the intimidating vibe."},
+  {id:16,name:"Chorthax",species:"Mantis",scientificName:"Hierodula membranacea",region:"Desert Nations",personality:"Noble,Protective,Quietly feral,Deeply devoted",colour:"#4ade80",description:"Male giant mantis at 8'7\". Noble, composed, principled. His devotion once given is absolute."},
+  {id:17,name:"Chorthyn",species:"Stick Insect",scientificName:"Phobaeticus chani",region:"The Fracture",personality:"Anxious,Affectionate,Lanky,Big noodle energy,ADHD",colour:"#86efac",description:"A male giant stick insect at 9'4\", Chan's Megastick. He is a big noodle. Extremely lanky and deeply affectionate."},
+  {id:18,name:"Fitch Nibblewick",species:"Flea",scientificName:"Pulex irritans",region:"The Hive",personality:"Devoted,Loyal,Smol bean,Gentle",colour:"#f9a8d4",description:"A male flea at 4'8\". The archetypal smol bean — devoted and loyal without agenda."},
+  {id:19,name:"Syris Kaelthorn",species:"Hornet",scientificName:"Vespa crabro",region:"Scorpion Lands",personality:"Fiery,Bold,Craves tenderness underneath",colour:"#fb923c",description:"A male hornet at 6'2\". Leads with fire. Underneath the bluster craves tenderness with real intensity."},
+  {id:20,name:"Veliss Aracine",species:"Spider",scientificName:"Latrodectus mactans",region:"Spiderian Province",personality:"Seductive,Dangerous,Fiercely loyal once bonded",colour:"#818cf8",description:"A male black widow spider at 5'11\". Everything is calculated. Once bonded the loyalty becomes fierce and total."},
+  {id:21,name:"Inspector Veyric Clast",species:"Fly",scientificName:"Musca domestica",region:"Grimewatch",personality:"Fast-talking,Twitchy,Observant,Police officer",colour:"#64748b",description:"A male housefly at 5'10\". Police inspector from Grimewatch — fast-talking, perpetually twitchy."},
+  {id:22,name:"Eryx Veilwhisper",species:"Mantis",scientificName:"Idolomantis diabolica",region:"Spiderian Province",personality:"Ghost-like,Ethical hacker,Elusive,Precise",colour:"#a3e635",description:"A male ghost mantis at 6'1\", The Ghost in the Canopy. Ethical hacker. Moves through systems invisibly."},
+  {id:23,name:"Ithryn Veilstep",species:"Spider",scientificName:"Phalangium opilio",region:"The Fracture",personality:"Introspective,Monogamously devoted,Quiet,Archivist",colour:"#d8b4fe",description:"A male harvestman at 5'9\". Archivist near The Fracture. Once devoted, completely monogamous."},
+  {id:24,name:"Berric Coalwing",species:"Bee",scientificName:"Andrena fulva",region:"The Hive",personality:"Domestic,Caring,Warm,Organised",colour:"#fde68a",description:"A male mining bee at 5'8\", Berri. Domestic caretaker. Genuinely good at taking care of spaces and people."},
+  {id:25,name:"Merrik Duzzle",species:"Beetle",scientificName:"Anthrenus verbasci",region:"The Hive",personality:"Clingy,Needy,Cuddly,Love-drunk",colour:"#c4b5fd",description:"A male carpet beetle at 5'6\". Extremely clingy and cuddly. Love-drunk by nature."},
+  {id:26,name:"Rovek Duneveil",species:"Cockroach",scientificName:"Arenivaga investigata",region:"Desert Nations",personality:"Grounding,Calm,Affectionate,Easygoing",colour:"#a8a29e",description:"A male desert cockroach at 5'11\", Rove. Profoundly grounding to be around."},
+  {id:27,name:"Thyros Vant",species:"Ant",scientificName:"Camponotus saundersi",region:"Ant Territories",personality:"Disciplined,Loyal,Team-oriented",colour:"#f97316",description:"A male ant at 5'9\". Disciplined with genuine conviction. Has more warmth than the territory's reputation suggests."},
+  {id:28,name:"Gorrin Duskweld",species:"Beetle",scientificName:"Dynastes hercules",region:"Beetle Owned Republic",personality:"Strong,Calm,Protective",colour:"#a8a29e",description:"A male beetle at 6'1\" from the BOR. Strong and calm — simply there when needed."},
+  {id:29,name:"Lioran Mirth",species:"Worm",scientificName:"Lumbricus terrestris",region:"The Hive",personality:"Gentle,Grounded,Dependable",colour:"#a16207",description:"A male worm at 5'5\". Gentle and grounded — dependable in the most genuine sense."},
+  {id:30,name:"Pib",species:"Beetle",scientificName:"Chrysomela populi",region:"The Hive",personality:"Tiny,Shy,Affectionate,Happy clicking noises",colour:"#84cc16",description:"A male leaf beetle at 4'11\". Tiny, shy, deeply affectionate. Makes happy clicking noises when content."},
+  {id:31,name:"Cazmir Voxis",species:"Cicada",scientificName:"Magicicada septendecim",region:"The Hive",personality:"Loud,Musical,Charismatic",colour:"#0ea5e9",description:"A male cicada at 6'3\". Loud in the best way — musically, socially, physically present."},
+  {id:32,name:"Orryx Veyne",species:"Fly",scientificName:"Dermatobia hominis",region:"Grimewatch",personality:"Unsettling curiosity about closeness,Tender underneath",colour:"#d4d4d8",description:"A male botfly at 6'0\". Has an unsettling curiosity about closeness. Underneath that, genuinely tender."},
+  {id:33,name:"Drixel Fenn",species:"Fly",scientificName:"Drosophila melanogaster",region:"Grimewatch",personality:"Hyper,Impulsive,Fun",colour:"#fb7185",description:"A male fruit fly at 5'4\". Extremely hyper, deeply impulsive, a lot of fun."},
+  {id:34,name:"Sael'Thuun Amarael",species:"Other",scientificName:"Veilborn sp.",region:"Na'varuun",personality:"Extremely calm,Protective,Holy guardian",colour:"#e0e7ff",description:"A male Veil-born holy guardian at 6'6\" from Na'varuun. Extremely calm."},
+  {id:35,name:"Vaerynth Sylphael",species:"Caterpillar",scientificName:"Saturnia pavonia",region:"The Hive",personality:"Soft,Perpetually caterpillar,Gentle",colour:"#bbf7d0",description:"A male caterpillar roughly 2'6\" long, Siggly Boi. Permanently remains in caterpillar form."},
+  {id:36,name:"Ryllin Quickstep",species:"Cricket",scientificName:"Gryllus bimaculatus",region:"The Hive",personality:"Affectionate,Nervous,Has Tourette's",colour:"#6ee7b7",description:"A male field cricket at 5'6\", Ryll. Affectionate and nervous in equal measure. Has Tourette's syndrome."},
+  {id:37,name:"Kharvex Ironweb",species:"Spider",scientificName:"Hogna carolinensis",region:"Spiderian Province",personality:"Extremely muscular,Loud,Supportive,Gymbro",colour:"#fbbf24",description:"A male spider at 6'5\", gym champion. Extremely muscular, extremely loud, absolute hype man."},
+  {id:38,name:"Skitter Vellix",species:"Flea",scientificName:"Pulex irritans",region:"Grimewatch",personality:"Chaotic anxiety,Panic-prone,Deeply affectionate",colour:"#f0abfc",description:"A male flea at 4'6\", Skip. Runs on chaotic anxiety energy. The affection is just as deep."},
+  {id:39,name:"Brutus Ledgerthorn",species:"Beetle",scientificName:"Lucanus cervus",region:"The Hive",personality:"Crypto-obsessed,Chaotic,Dramatic,Flirty",colour:"#fca5a5",description:"A male stag beetle at 6'5\", Bullrun. Obsessed with Entomocoin. Chaotic, dramatic, flirty."},
+  {id:40,name:"Trevin Sol Varela",species:"Beetle",scientificName:"Epilachna varivestis",region:"The Hive",personality:"Warm,Domestic,Shows love through food,Nurturing",colour:"#fde68a",description:"A male Mexican bean beetle at 5'7\", Beanboy. Shows love through feeding people."},
+  {id:41,name:"Slate Ashveil",species:"Cockroach",scientificName:"Blatta orientalis",region:"Grimewatch",personality:"Quiet,Gentle,Anxious,Brave,Observant,Underestimated",colour:"#475569",description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist who studies communities and social structures from Grimewatch, the best possible place for his work. Has notebooks full of observations. People underestimate him constantly. Doesn't make a big deal of his disability — it's just part of him. When he trusts you he opens up like a whole different person. Starts as a stranger. Becomes someone you'd do anything for. Soren would either love him or feel threatened. probably both."},
+];
 
-function initFirebase(){
+const DEFAULT_LORES = [
+  {id:1,title:"The Fracture",category:"Geography",content:"A dimensional tear adjacent to The Hive, in a desolate zone of grey grass. Seals completely after use — no re-entry, no exit after crossing. The user arrived through The Fracture and it sealed behind them permanently.",date:"2025-01-01"},
+  {id:2,title:"Honey Culture & Economy",category:"Culture",content:"Honey is industrially and artisanally cultivated from local flora. Bee entoboys can identify a honey's region, season and flower type by taste alone.\n\nRegional varieties:\n- The Hive: classic golden, floral, warm. The benchmark.\n- Desert Nations: dark, rich, almost smoky. Rare and expensive.\n- Nocturnal Lands: pale, almost white, subtle. Highly sought after.\n- Spiderian Province: produces no honey but trades for it aggressively.\n- Ant Territories: industrialised. Technically correct honey. 6.1/10.",date:"2025-01-01"},
+  {id:3,title:"Chitin OS",category:"Technology",content:"Universal operating system of the EntomoVerse — ~150 years, ~40 versions. Biometric resonance (no passwords). Passive health monitoring. Integrated hive mapping. Atmospheric network: ~200 years.\n\nSkins: Hive Edition (gold, warm), Spiderian Build (dark mode, fast, unsettling), Ant Build (grey, zero personality), Nocturna Skin (soft dark blues), Desert Build (high contrast).\n\nE2 phones: Pemm — Hive Edition, seventeen notification sounds, responds to none. Soren — default, no skin. Melion — Hive Edition, tidy.",date:"2025-01-01"},
+  {id:4,title:"Physical Contact Culture",category:"Culture",content:"Head pats and fuzz ruffling are intimate but not uncommon.\n\nBy region:\n- The Hive: warm and affectionate, touch normal between friends.\n- Grimewatch: tactile, loud, physical found family energy.\n- Scorpion/Desert Nations: reserved. Touch carries significant weight.\n- Spiderian Province: calculated. Touch is deliberate and meaningful.\n- Nocturnal Lands: gentle and quiet. Very sincere.\n\nClothing sharing is normalised intimacy everywhere.",date:"2025-01-01"},
+  {id:5,title:"Six-Seat Council",category:"Politics",content:"1. Ant Chancellor — infrastructure, logistics, order.\n2. Nectar Regent — welfare, healthcare, emotional well-being (bee domain).\n3. Silk Sovereign — intelligence, strategy, surveillance (spider domain).\n4. Ironcast Warden — defense, military, protection (beetle domain).\n5. Shadow Delegate — ecological balance, predatory philosophy (mantids).\n6. Luminarch — culture, history, nocturnal societies (moths).",date:"2025-01-01"},
+  {id:6,title:"Economy & Currency",category:"Economy",content:"Currency: Entomocoin. 1 EC is roughly equivalent to 2.50 GBP. Total GDP: approximately 237 billion EC. Total population: approximately 11.235 million.\n\nItem Duplication Machines are fairly common — can duplicate most physical objects.",date:"2025-01-01"},
+  {id:7,title:"User Arrival & Status",category:"History",content:"Arrived via The Fracture, which sealed permanently. Gained regenerative immortality. Stopped aging at approximately 21. Retained all Earth memories.\n\nEntoboys had zero prior knowledge of humans. Initial horror at: no chitin, only four limbs, tiny non-compound eyes, expressive face, visibly breathing chest. Warmed up fast because the human is squishy and immediately huggable.",date:"2025-01-01"},
+  {id:8,title:"E2 Building Layout",category:"Geography",content:"E2 is in the Central Hive district, close to the market. Complexes labelled A1 through Z3. Main gang (user, Pemm, Melion, Soren) live in E2 Complex 1. User gets the spare room.\n\nDrryx Warmwick: E2 Complex 2. Other known residents: Ferryn, Brix.",date:"2025-01-01"},
+  {id:9,title:"Stenotaniapede Island & Cenimedae Isle",category:"Geography",content:"Stenotaniapede Island: pop 3,000, extraordinary infrastructure. Home to a stew running continuously for 200 years. Capital: Vorreth Kaal.\n\nCenimedae Isle: pop 2,000, caddisfly entoboys, chaotic handbuilt but beautiful. One boat to mainland twice a month. Food rating 8.7/10. Capital: Senuvel.",date:"2025-01-01"},
+  {id:10,title:"Lingerie & Comfort Culture",category:"Culture",content:"Reproductive organs do not exist in the EntomoVerse. Lingerie exists purely for comfort, warmth and softness — not sexual expression. Completely culturally neutral.\n\nClothing sharing is an act of care and emotional intimacy.",date:"2025-01-01"},
+  {id:11,title:"Time & Calendar System",category:"Other",content:"Days are roughly equivalent to Earth's 24 hour cycle.\nSpan — roughly 10 days (replaces the week).\nCycle — roughly 30 days / 3 Spans (replaces the month).\nTurn — 12 Cycles (replaces the year).\n\nNamed Cycles (in order):\nBloom Cycle, Amber Cycle, Golden Cycle, Harvest Cycle, Frost Cycle, Deep Cycle, Pale Cycle, Thaw Cycle, Rain Cycle, Hum Cycle, Bright Cycle, Ember Cycle.\n\nCharacter ages in Turns:\nPemm: 19 Turns\nSoren: 31 Turns",date:"2025-01-01"},
+];
+
+var bois = [], lores = [], editBoiId = null, editLoreId = null, db = null;
+
+function initFirebase() {
   firebase.initializeApp({
-    apiKey:'AIzaSyAd6HItfMe0IRNLiTMVQ0nQv22DFo722R4',
-    authDomain:'entomoverse-54d6b.firebaseapp.com',
-    projectId:'entomoverse-54d6b',
-    storageBucket:'entomoverse-54d6b.firebasestorage.app',
-    messagingSenderId:'1053064309244',
-    appId:'1:1053064309244:web:5605033e5daa938d3d2a79'
+    apiKey: "AIzaSyAd6HItfMe0IRNLiTMVQ0nQv22DFo722R4",
+    authDomain: "entomoverse-54d6b.firebaseapp.com",
+    projectId: "entomoverse-54d6b",
+    storageBucket: "entomoverse-54d6b.firebasestorage.app",
+    messagingSenderId: "1053064309244",
+    appId: "1:1053064309244:web:5605033e5daa938d3d2a79"
   });
-  db=firebase.firestore();
+  db = firebase.firestore();
 }
 
-async function loadAll(){
-  for(var u of ['ento','morpho','any']){
-    for(var t of ['chars','lores','places']){
-      try{
-        var snap=await db.collection('multiverse2').doc(u+'_'+t).get();
-        DATA[u][t]=snap.exists?snap.data().value:DEFAULTS[u][t];
-        if(!snap.exists) await db.collection('multiverse2').doc(u+'_'+t).set({value:DEFAULTS[u][t]});
-      }catch(e){DATA[u][t]=DEFAULTS[u][t];}
-    }
+async function loadData() {
+  try {
+    var boiSnap = await db.collection("entomoverse").doc("bois").get();
+    bois = boiSnap.exists ? boiSnap.data().value : DEFAULT_BOIS;
+    var loreSnap = await db.collection("entomoverse").doc("lores").get();
+    lores = loreSnap.exists ? loreSnap.data().value : DEFAULT_LORES;
+    if (!boiSnap.exists) await db.collection("entomoverse").doc("bois").set({value: DEFAULT_BOIS});
+    if (!loreSnap.exists) await db.collection("entomoverse").doc("lores").set({value: DEFAULT_LORES});
+  } catch(e) {
+    console.error("Firebase error:", e);
+    bois = DEFAULT_BOIS;
+    lores = DEFAULT_LORES;
   }
 }
 
-async function saveDoc(u,t){
-  try{await db.collection('multiverse').doc(u+'_'+t).set({value:DATA[u][t]});}catch(e){}
-}
+async function saveBoisDB() { try { await db.collection("entomoverse").doc("bois").set({value: bois}); } catch(e) { console.error(e); } }
+async function saveLoresDB() { try { await db.collection("entomoverse").doc("lores").set({value: lores}); } catch(e) { console.error(e); } }
 
-// ── AUTH ──
-document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
-function tryLogin(){
-  if(document.getElementById('pw-input').value===PW){
-    var btn=document.getElementById('pw-btn');btn.textContent='Loading...';btn.disabled=true;
+document.getElementById('pw-input').addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+
+function tryLogin() {
+  var v = document.getElementById('pw-input').value;
+  if (v === SITE_PW) {
+    var btn = document.getElementById('pw-btn');
+    btn.textContent = 'Loading...';
+    btn.disabled = true;
     initFirebase();
-    loadAll().then(function(){
-      document.getElementById('pw-screen').style.display='none';
-      document.getElementById('master-nav').style.display='flex';
-      document.getElementById('sub-nav').style.display='flex';
-      if(localStorage.getItem('mv_theme')==='light'){document.body.classList.add('light');document.getElementById('theme-btn').textContent='🌙';}
-      switchUniverse('ento',document.querySelector('.univ-btn.ento'));
+    loadData().then(function() {
+      document.getElementById('pw-screen').style.display = 'none';
+      document.getElementById('main-nav').style.display = 'flex';
+      init();
     });
-  }else{
+  } else {
     document.getElementById('pw-input').classList.add('err');
-    document.getElementById('pw-err').style.display='block';
-    document.getElementById('pw-input').value='';
-    setTimeout(function(){document.getElementById('pw-input').classList.remove('err');},600);
+    document.getElementById('pw-err').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    setTimeout(function() { document.getElementById('pw-input').classList.remove('err'); }, 600);
   }
 }
 
-// ── UNIVERSE SWITCH ──
-function switchUniverse(u,btn){
-  CUR=u;
-  document.body.className=u+(document.body.classList.contains('light')?' light':'');
-  document.querySelectorAll('.univ-btn').forEach(function(b){b.classList.remove('active');});
+function init() {
+  if(localStorage.getItem('ev_theme')==='light'){
+    document.body.classList.add('light');
+    document.getElementById('theme-btn').textContent='🌙';
+  }
+  populateSelects();
+  renderHome();
+  renderBois();
+  renderLores();
+  renderRegions();
+  updateNavCount();
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
-  var cfg=UNIVS[u];
-  // update labels
-  document.getElementById('home-badge').textContent=cfg.name;
-  document.getElementById('home-title').textContent=cfg.name;
-  document.getElementById('home-desc').textContent=cfg.desc;
-  document.getElementById('botd-label').textContent=cfg.botdLabel;
-  document.getElementById('botd-label').style.display=cfg.showBotd?'':'none';
-  document.getElementById('botd').style.display=cfg.showBotd?'':'none';
-  document.getElementById('chars-tab').textContent=cfg.charLabel;
-  document.getElementById('places-tab').textContent=cfg.placeLabel;
-  document.getElementById('places-title').textContent=cfg.placeLabel;
-  document.getElementById('heights-tab-btn').style.display=cfg.showHeights?'':'none';
-  // rebuild selects
-  buildSelects();
-  // render
-  showTab('home',document.querySelector('.stab'));
-  renderAll();
-  updateNC();
 }
 
-function buildSelects(){
-  var u=UNIVS[CUR];
-  // species
-  var sh='<option value="All">All '+UNIVS[CUR].charLabel.toLowerCase()+'</option>';
-  if(Object.keys(u.spGroups).length){
-    sh+='<optgroup label="── Groups ──"></optgroup>';
-    Object.keys(u.spGroups).forEach(function(g){sh+='<option value="'+g+'">'+g+'</option>';});
-    sh+='<optgroup label="── Specific ──"></optgroup>';
-  }
-  u.species.forEach(function(s){sh+='<option>'+s+'</option>';});
-  document.getElementById('f-sp').innerHTML=sh;
-  // regions
-  var rh='<option value="All">All locations</option>';
-  u.regions.forEach(function(r){rh+='<option>'+r+'</option>';});
-  document.getElementById('f-reg').innerHTML=rh;
-  // lore cats
-  var lh='<option value="All">All categories</option>';
-  u.categories.forEach(function(c){lh+='<option>'+c+'</option>';});
-  document.getElementById('l-cat').innerHTML=lh;
+function updateNavCount() {
+  document.getElementById('nav-count').textContent = bois.length + ' bois · ' + lores.length + ' lores';
 }
 
-// ── TABS ──
-function showTab(id,btn){
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.stab').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('tab-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
+function populateSelects() {
+  // species dropdown with groups + individual species
+  var spHtml = '<option value="All">All species</option><optgroup label="── By group ──"></optgroup>';
+  Object.keys(SPECIES_GROUPS).forEach(function(g) { spHtml += '<option value="'+g+'">'+g+'</option>'; });
+  spHtml += '<optgroup label="── By species ──"></optgroup>';
+  SPECIES.forEach(function(s) { spHtml += '<option>'+s+'</option>'; });
+  document.getElementById('f-sp').innerHTML = spHtml;
+  document.getElementById('f-reg').innerHTML = '<option value="All">All regions</option>' + REGIONS.map(function(r) { return '<option>' + r + '</option>'; }).join('');
+  document.getElementById('l-cat').innerHTML = '<option value="All">All categories</option>' + CATEGORIES.map(function(c) { return '<option>' + c + '</option>'; }).join('');
 }
 
-function updateNC(){
-  var d=DATA[CUR];
-  document.getElementById('nav-count').textContent=d.chars.length+' chars · '+d.lores.length+' lores';
+function avatar(name, color, size) {
+  size = size || 44;
+  var i = name.split(' ').map(function(w) { return w[0]; }).join('').slice(0,2).toUpperCase();
+  return '<div class="boi-avatar" style="width:'+size+'px;height:'+size+'px;font-size:'+Math.round(size*.34)+'px;background:'+color+'25;border:2px solid '+color+'60;color:'+color+'">'+i+'</div>';
 }
+function tag(label, color) { return '<span class="tag" style="background:'+color+'20;color:'+color+';border:1px solid '+color+'35">'+label+'</span>'; }
+function catChip(cat) { var c=CAT_COL[cat]||'#94a3b8'; return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:'+c+';display:inline-block;flex-shrink:0"></span>'+cat+'</span>'; }
 
-// ── HELPERS ──
-function av(name,color,size){
-  size=size||44;
-  var i=name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-  return '<div class="av" style="width:'+size+'px;height:'+size+'px;font-size:'+Math.round(size*.34)+'px;background:'+color+'25;border:2px solid '+color+'60;color:'+color+'">'+i+'</div>';
-}
-function tg(label,color){return '<span class="tag" style="background:'+color+'20;color:'+color+';border:1px solid '+color+'35">'+label+'</span>';}
-function ccchip(cat,u){var c=(UNIVS[u||CUR].catCol[cat])||'#94a3b8';return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:'+c+';display:inline-block"></span>'+cat+'</span>';}
-
-// ── RENDER ALL ──
-function renderAll(){renderHome();renderChars();renderLores();renderPlaces();renderHeights();}
-
-// ── HOME ──
-function renderHome(){
-  var u=UNIVS[CUR],d=DATA[CUR],cfg=UNIVS[CUR];
-  var tabs=['home','chars','lore','places'];
-  document.getElementById('stat-grid').innerHTML=[
-    {l:cfg.charLabel,v:d.chars.length,c:u.color,i:1},
-    {l:'Lore entries',v:d.lores.length,c:u.color==='#f7cc30'?'#a78bfa':u.color,i:2},
-    {l:cfg.placeLabel,v:d.places.length,c:'#34d399',i:3},
-  ].map(function(s){
-    return '<div class="sc" onclick="showTab(\''+tabs[s.i]+'\',document.querySelectorAll(\'.stab\')['+s.i+'])"><div class="sv" style="color:'+s.c+'">'+s.v+'</div><div class="sl2">'+s.l+'</div></div>';
+function renderHome() {
+  var tabs = document.querySelectorAll('.nav-tab');
+  document.getElementById('stat-grid').innerHTML = [
+    {label:'Entobois',val:bois.length,color:'#f7cc30',i:1},
+    {label:'Lore entries',val:lores.length,color:'#a78bfa',i:2},
+    {label:'Regions',val:REGIONS_DATA.length,color:'#34d399',i:3},
+    {label:'Total pop.',val:'11.2M',color:'#3b82f6',i:3},
+  ].map(function(s) {
+    return '<div class="stat-card" onclick="showTab(\''+['','entobois','lore','regions'][s.i]+'\',document.querySelectorAll(\'.nav-tab\')['+s.i+'])"><div class="stat-val" style="color:'+s.color+'">'+s.val+'</div><div class="stat-lbl">'+s.label+'</div></div>';
   }).join('');
-  // botd
-  if(cfg.showBotd&&d.chars.length){
-    var seed=Math.floor(Date.now()/86400000);
-    var b=d.chars[seed%d.chars.length],col=b.colour||u.color;
-    var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
-    document.getElementById('botd').innerHTML='<div class="botd" style="border-left:3px solid '+col+'" onclick="showTab(\'chars\',document.querySelectorAll(\'.stab\')[1]);setTimeout(function(){openChar('+b.id+')},150)">'+av(b.name,col,52)+'<div style="min-width:0"><div style="font-weight:800;font-size:17px;color:var(--txt);margin-bottom:3px">'+b.name+'</div><div style="font-size:12px;color:var(--txt2);margin-bottom:8px">'+(b.species||b.sin||'')+(b.region?' · '+b.region:'')+'</div><div style="font-size:13px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+b.description+'</div><div class="tags">'+tags.slice(0,4).map(function(p){return tg(p,col);}).join('')+'</div></div></div>';
-  }
-  document.getElementById('disc-list').innerHTML=u.disclaimers.map(function(d){return '<div class="dis"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>'+d+'</span></div>';}).join('');
+  document.getElementById('disclaimers-list').innerHTML = DISCLAIMERS.map(function(d) { return '<div class="disclaimer"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>'+d+'</span></div>'; }).join('');
 }
 
-// ── CHARS ──
-function renderChars(){
-  var u=UNIVS[CUR],d=DATA[CUR].chars;
-  var q=document.getElementById('f-q').value.toLowerCase(),per=document.getElementById('f-per').value.toLowerCase(),sp=document.getElementById('f-sp').value,reg=document.getElementById('f-reg').value;
-  document.getElementById('cf-btn').style.display=(q||per||sp!=='All'||reg!=='All')?'':'none';
-  var filtered=d.filter(function(c){
-    var spOk=sp==='All'||(u.spGroups[sp]?u.spGroups[sp].indexOf(c.species)!==-1:c.species===sp);
-    return(!q||c.name.toLowerCase().includes(q))&&(!per||c.personality.toLowerCase().includes(per))&&spOk&&(reg==='All'||c.region===reg);
+function renderBois() {
+  var q=document.getElementById('f-q').value.toLowerCase(), sci=document.getElementById('f-sci').value.toLowerCase(), per=document.getElementById('f-per').value.toLowerCase(), sp=document.getElementById('f-sp').value, reg=document.getElementById('f-reg').value;
+  document.getElementById('clear-btn').style.display = (q||sci||per||sp!=='All'||reg!=='All') ? '' : 'none';
+  var filtered = bois.filter(function(b) {
+    var spMatch = true;
+    if (sp !== 'All') {
+      if (SPECIES_GROUPS[sp]) { spMatch = SPECIES_GROUPS[sp].indexOf(b.species) !== -1; }
+      else { spMatch = b.species === sp; }
+    }
+    return(!q||b.name.toLowerCase().includes(q)||b.species.toLowerCase().includes(q)||b.region.toLowerCase().includes(q))&&(!sci||b.scientificName.toLowerCase().includes(sci))&&(!per||b.personality.toLowerCase().includes(per))&&spMatch&&(reg==='All'||b.region===reg);
   });
-  document.getElementById('char-count').textContent=filtered.length+' of '+d.length+' '+u.charLabel.toLowerCase();
-  var grid=document.getElementById('char-grid'),empty=document.getElementById('char-empty');
-  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
+  document.getElementById('boi-count').textContent = filtered.length+' of '+bois.length+' characters';
+  var grid=document.getElementById('boi-grid'), empty=document.getElementById('boi-empty');
+  if (!filtered.length) { grid.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
-  grid.innerHTML=filtered.map(function(c){
-    var tags=c.personality.split(',').map(function(p){return p.trim();}).filter(Boolean),col=c.colour||u.color;
-    return '<div class="cc" style="border-left:3px solid '+col+'" onclick="openChar('+c.id+')">'+
-      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">'+av(c.name,col,44)+
-      '<div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt)">'+c.name+'</div>'+
-      '<div style="font-size:12px;color:var(--txt2);margin-top:1px">'+(c.species||'')+(c.region?' · '+c.region:'')+'</div>'+
-      (c.scientificName?'<div style="font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c.scientificName+'</div>':'')+'</div></div>'+
-      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+c.description+'</div>'+
-      '<div class="tags">'+tags.slice(0,3).map(function(p){return tg(p,col);}).join('')+(tags.length>3?'<span style="font-size:11px;color:var(--txt3);align-self:center">+'+(tags.length-3)+'</span>':'')+'</div></div>';
+  grid.innerHTML = filtered.map(function(b) {
+    var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
+    return '<div class="boi-card" style="border-left:3px solid '+(b.colour||'#a78bfa')+'" onclick="openBoi('+b.id+')">'+
+      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">'+avatar(b.name,b.colour||'#a78bfa',44)+'<div style="min-width:0"><div class="boi-name">'+b.name+'</div><div class="boi-sub">'+b.species+' · '+b.region+'</div><div class="boi-sci">'+b.scientificName+'</div></div></div>'+
+      '<div class="boi-desc">'+b.description+'</div>'+
+      '<div class="tags">'+tags.slice(0,3).map(function(p){return tag(p,b.colour||'#a78bfa');}).join('')+(tags.length>3?'<span style="font-size:11px;color:var(--txt3);align-self:center;font-weight:500">+'+( tags.length-3)+'</span>':'')+'</div></div>';
   }).join('');
 }
 
-function clearF(){document.getElementById('f-q').value='';document.getElementById('f-per').value='';document.getElementById('f-sp').value='All';document.getElementById('f-reg').value='All';renderChars();}
+function clearFilters() { document.getElementById('f-q').value=''; document.getElementById('f-sci').value=''; document.getElementById('f-per').value=''; document.getElementById('f-sp').value='All'; document.getElementById('f-reg').value='All'; renderBois(); }
 
-// ── LORES ──
-function renderLores(){
-  var q=document.getElementById('l-q').value.toLowerCase(),cat=document.getElementById('l-cat').value;
-  var d=DATA[CUR].lores;
-  var filtered=d.filter(function(l){return(!q||l.title.toLowerCase().includes(q)||l.content.toLowerCase().includes(q))&&(cat==='All'||l.category===cat);});
+function renderLores() {
+  var q=document.getElementById('l-q').value.toLowerCase(), cat=document.getElementById('l-cat').value;
+  var filtered=lores.filter(function(l){return(!q||l.title.toLowerCase().includes(q)||l.content.toLowerCase().includes(q))&&(cat==='All'||l.category===cat);});
   document.getElementById('lore-count').textContent=filtered.length+' entries';
-  var list=document.getElementById('lore-list'),empty=document.getElementById('lore-empty');
-  if(!filtered.length){list.innerHTML='';empty.style.display='block';return;}
+  var list=document.getElementById('lore-list'), empty=document.getElementById('lore-empty');
+  if (!filtered.length) { list.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
-  list.innerHTML=filtered.map(function(l){var c=UNIVS[CUR].catCol[l.category]||'#94a3b8';return '<div class="lc" style="border-left:3px solid '+c+'" onclick="openLore('+l.id+')"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px">'+l.title+'</div><div style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+l.content.split('\n')[0]+'</div></div>'+ccchip(l.category)+'</div></div>';}).join('');
+  list.innerHTML=filtered.map(function(l){return '<div class="lore-card" style="border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+'" onclick="openLore('+l.id+')"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div class="lore-title">'+l.title+'</div><div class="lore-preview">'+l.content.split('\n')[0]+'</div></div>'+catChip(l.category)+'</div></div>';}).join('');
 }
 
-// ── PLACES ──
-function renderPlaces(){
-  var d=DATA[CUR].places;
-  document.getElementById('places-count').textContent=d.length+' '+UNIVS[CUR].placeLabel.toLowerCase()+'s · click for details';
-  document.getElementById('places-grid').innerHTML=d.map(function(r){
-    return '<div class="rc" style="border-top:3px solid '+r.colour+'" onclick="openPlace('+r.id+')">'+
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:26px">'+r.emoji+'</span>'+
-      '<div><div style="font-weight:800;font-size:14px;color:var(--txt)">'+r.name+'</div>'+
-      '<div style="font-size:11px;color:var(--txt2)">'+r.ruler+'</div></div></div>'+
+function renderRegions() {
+  document.getElementById('region-count').textContent=REGIONS_DATA.length+' regions · click any card for details';
+  document.getElementById('region-grid').innerHTML=REGIONS_DATA.map(function(r){
+    var res=bois.filter(function(b){return b.region===r.name;});
+    return '<div class="region-card" style="border-top:3px solid '+r.color+'" onclick="openRegion(\''+r.id+'\')">'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:26px">'+r.emoji+'</span><div><div style="font-weight:800;font-size:14px;color:var(--txt)">'+r.name+'</div>'+(r.pop?'<div style="font-size:11px;color:var(--txt2)">Pop. '+r.pop+'</div>':'')+'</div></div>'+
       '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+r.desc+'</div>'+
-      '<div style="display:flex;flex-wrap:wrap;gap:5px">'+(r.stat1?'<span class="pill" style="background:'+r.colour+'20;color:'+r.colour+'">'+r.stat1+'</span>':'')+(r.stat2?'<span class="pill" style="background:#dbeafe;color:#1e40af">'+r.stat2+'</span>':'')+(r.stat3?'<span class="pill" style="background:#d1fae5;color:#065f46">'+r.stat3+'</span>':'')+'</div></div>';
+      '<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">'+(r.food?'<span class="pill pill-food">🍴 '+r.food+'</span>':'')+(r.hdi?'<span class="pill pill-hdi">HDI '+r.hdi+'</span>':'')+(r.gdp?'<span class="pill pill-gdp">'+r.gdp+'</span>':'')+(res.length?'<span style="font-size:11px;color:var(--txt3);margin-left:auto">'+res.length+' resident'+(res.length!==1?'s':'')+'</span>':'')+'</div></div>';
   }).join('');
 }
 
-// ── HEIGHTS ──
-function renderHeights(){
-  if(!UNIVS[CUR].showHeights){document.getElementById('height-chart').innerHTML='';return;}
-  function ph(c){var m=c.description.match(/~?(\d+)'(\d+)["]/);if(m)return parseInt(m[1])*12+parseInt(m[2]);m=c.description.match(/~?(\d+)'(\d+)/);if(m)return parseInt(m[1])*12+parseInt(m[2]);return null;}
-  var wh=DATA[CUR].chars.map(function(c){return{c:c,in:ph(c)};}).filter(function(x){return x.in!==null;});
-  wh.sort(function(a,b){return b.in-a.in;});
-  document.getElementById('height-sub').textContent=wh.length+' of '+DATA[CUR].chars.length+' characters with known heights';
-  if(!wh.length){document.getElementById('height-chart').innerHTML='<div class="empty">No height data found.</div>';return;}
-  var max=wh[0].in,min=Math.max(0,wh[wh.length-1].in-6);
-  function fmt(i){return Math.floor(i/12)+"'"+(i%12)+'"';}
-  document.getElementById('height-chart').innerHTML=wh.map(function(x){
-    var c=x.c,col=c.colour||UNIVS[CUR].color,pct=Math.max(10,Math.round(((x.in-min)/(max-min))*80)+15);
-    return '<div class="hbar" onclick="showTab(\'chars\',document.querySelectorAll(\'.stab\')[1]);setTimeout(function(){openChar('+c.id+')},150)">'+
-      '<div style="width:48px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">'+fmt(x.in)+'</div>'+
-      '<div style="flex:1;display:flex;align-items:center;gap:10px">'+
-      '<div style="width:'+pct+'%;height:34px;background:'+col+'22;border:1.5px solid '+col+'60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:90px">'+
-      '<span style="font-size:11px;font-weight:700;color:'+col+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.name+'</span></div>'+
-      '<span style="font-size:11px;color:var(--txt3)">'+c.species+'</span></div></div>';
-  }).join('')+'<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Click any bar to view profile.</div>';
-}
+function showOverlay(html,wide){var box=document.getElementById('overlay-box');box.className='overlay-box'+(wide?' wide':'');box.innerHTML=html;document.getElementById('overlay').style.display='flex';}
+function closeOverlay(e){if(!e||e.target===document.getElementById('overlay'))document.getElementById('overlay').style.display='none';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay();});
 
-// ── OVERLAYS ──
-function showOv(html,wide){var b=document.getElementById('obox');b.className='obox'+(wide?' wide':'');b.innerHTML=html;document.getElementById('overlay').style.display='flex';}
-function closeOv(e){if(!e||e.target===document.getElementById('overlay'))document.getElementById('overlay').style.display='none';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOv();});
-
-function openChar(id){
-  var c=DATA[CUR].chars.find(function(x){return x.id===id;}); if(!c)return;
-  var col=c.colour||UNIVS[CUR].color,tags=c.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
-  var nm=c.name.replace(/'/g,"\\'");
-  showOv('<div class="oh"><div style="display:flex;align-items:center;gap:14px">'+av(c.name,col,62)+
-    '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">'+c.name+'</h2>'+
-    '<div style="font-size:13px;color:var(--txt2);margin-bottom:3px">'+(c.species||'')+(c.region?' · '+c.region:'')+'</div>'+
-    (c.scientificName?'<div style="font-size:12px;color:var(--txt3);font-style:italic">'+c.scientificName+'</div>':'')+'</div></div>'+
-    '<button class="btn-i" onclick="closeOv()">✕</button></div>'+
-    (tags.length?'<div class="sl">Personality</div><div class="tags" style="margin-bottom:16px">'+tags.map(function(p){return tg(p,col);}).join('')+'</div>':'')+
-    '<div class="div"></div><div class="sl">Description</div>'+
-    '<div style="font-size:14px;line-height:1.8;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">'+c.description+'</div>'+
-    '<div style="display:flex;gap:8px"><button class="btn-g" style="flex:1;padding:10px" onclick="openCharForm('+c.id+')">Edit</button><button class="btn-d" style="flex:1;padding:10px" onclick="confirmDel(\'char\','+c.id+',\''+nm+'\')">Delete</button></div>');
+function openBoi(id){
+  var b=bois.find(function(x){return x.id===id;}); if(!b)return;
+  var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
+  var linkedLores = b.loreTags ? lores.filter(function(l){ return b.loreTags.indexOf(l.id) !== -1; }) : [];
+  var name=b.name.replace(/'/g,"\\'");
+  showOverlay('<div class="overlay-header"><div style="display:flex;align-items:center;gap:14px">'+avatar(b.name,b.colour||'#a78bfa',62)+'<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">'+b.name+'</h2><div style="font-size:13px;color:var(--txt2);margin-bottom:3px">'+b.species+' · '+b.region+'</div><div style="font-size:12px;color:var(--txt3);font-style:italic">'+b.scientificName+'</div></div></div><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
+    (tags.length?'<div class="section-label">Personality</div><div class="tags" style="margin-bottom:16px">'+tags.map(function(p){return tag(p,b.colour||'#a78bfa');}).join('')+'</div>':'')+
+    '<div class="divider"></div><div class="section-label">Description</div><div style="font-size:14px;line-height:1.8;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">'+b.description+'</div>'+
+    (linkedLores.length?'<div class="divider"></div><div class="section-label">Linked lore</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">'+linkedLores.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+';border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+catChip(l.category)+'</div>';}).join('')+'</div>':'')+
+    '<div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openBoiForm('+b.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'boi\','+b.id+',\''+name+'\')">Delete</button></div>');
 }
 
 function openLore(id){
-  var l=DATA[CUR].lores.find(function(x){return x.id===id;}); if(!l)return;
-  var t=l.title.replace(/'/g,"\\'");
-  showOv('<div class="oh"><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">'+l.title+'</h2>'+ccchip(l.category)+'</div><button class="btn-i" onclick="closeOv()">✕</button></div><div class="div"></div><div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">'+l.content+'</div><div style="display:flex;gap:8px"><button class="btn-g" style="flex:1;padding:10px" onclick="openLoreForm('+l.id+')">Edit</button><button class="btn-d" style="flex:1;padding:10px" onclick="confirmDel(\'lore\','+l.id+',\''+t+'\')">Delete</button></div>');
+  var l=lores.find(function(x){return x.id===id;}); if(!l)return;
+  var title=l.title.replace(/'/g,"\\'");
+  showOverlay('<div class="overlay-header"><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">'+l.title+'</h2>'+catChip(l.category)+'</div><button class="btn-icon" onclick="closeOverlay()">✕</button></div><div class="divider"></div><div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">'+l.content+'</div><div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openLoreForm('+l.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'lore\','+l.id+',\''+title+'\')">Delete</button></div>');
 }
 
-function openPlace(id){
-  var r=DATA[CUR].places.find(function(x){return x.id===id;}); if(!r)return;
-  var res=DATA[CUR].chars.filter(function(c){return c.region===r.name;});
-  var nm=r.name.replace(/'/g,"\\'");
-  showOv('<div class="oh"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px">'+r.emoji+'</span><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 3px;color:var(--txt)">'+r.name+'</h2><div style="font-size:13px;color:var(--txt2)">'+r.ruler+'</div></div></div><button class="btn-i" onclick="closeOv()">✕</button></div>'+
-    '<div class="div"></div><div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:20px">'+r.desc+'</div>'+
-    (res.length?'<div class="sl">Residents</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:16px">'+res.map(function(c){return '<div style="background:var(--card2);border:1px solid var(--border);border-left:2px solid '+(c.colour||UNIVS[CUR].color)+';border-radius:10px;display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px" onclick="closeOv();setTimeout(function(){openChar('+c.id+')},100)">'+av(c.name,c.colour||UNIVS[CUR].color,28)+'<div><div style="font-size:13px;font-weight:700;color:var(--txt)">'+c.name+'</div><div style="font-size:11px;color:var(--txt3)">'+c.species+'</div></div></div>';}).join('')+'</div>':'')+
-    '<div style="display:flex;gap:8px"><button class="btn-g" style="flex:1;padding:10px" onclick="openPlaceForm('+r.id+')">Edit</button><button class="btn-d" style="flex:1;padding:10px" onclick="confirmDel(\'place\','+r.id+',\''+nm+'\')">Delete</button></div>',true);
+function openRegion(id){
+  var r=REGIONS_DATA.find(function(x){return x.id===id;}); if(!r)return;
+  var res=bois.filter(function(b){return b.region===r.name;}), relLores=lores.filter(function(l){return l.content.toLowerCase().includes(r.name.toLowerCase());});
+  showOverlay('<div class="overlay-header"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px">'+r.emoji+'</span><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 3px;color:var(--txt)">'+r.name+'</h2><div style="font-size:13px;color:var(--txt2)">'+r.gov+'</div></div></div><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">'+(r.pop?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Pop.</b> '+r.pop+'</span>':'')+(r.food?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Food</b> '+r.food+'</span>':'')+(r.hdi?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">HDI</b> '+r.hdi+'</span>':'')+(r.gdp?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">GDP/cap</b> '+r.gdp+'</span>':'')+'</div>'+
+    '<div class="divider"></div><div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:'+(res.length||relLores.length?'20px':'0')+'">'+r.desc+'</div>'+
+    (res.length?'<div class="section-label">Residents</div><div class="resident-grid">'+res.map(function(b){return '<div class="resident-card" style="border-left:2px solid '+(b.colour||'#a78bfa')+'" onclick="closeOverlay();setTimeout(function(){openBoi('+b.id+')},100)">'+avatar(b.name,b.colour||'#a78bfa',30)+'<div><div style="font-size:13px;font-weight:700;color:var(--txt)">'+b.name+'</div><div style="font-size:11px;color:var(--txt3)">'+b.species+'</div></div></div>';}).join('')+'</div>':'')+
+    (relLores.length?'<div class="section-label">Related lore</div><div style="display:flex;flex-direction:column;gap:6px">'+relLores.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+catChip(l.category)+'</div>';}).join('')+'</div>':''),true);
 }
 
-// ── FORMS ──
-function openCharForm(id){
-  var u=UNIVS[CUR],c=id?DATA[CUR].chars.find(function(x){return x.id===id;}):null; editCharId=id||null;
-  var spOpts=u.species.map(function(s){return '<option'+(c&&c.species===s?' selected':'')+'>'+s+'</option>';}).join('');
-  var rOpts=u.regions.map(function(r){return '<option'+(c&&c.region===r?' selected':'')+'>'+r+'</option>';}).join('');
-  showOv('<div class="oh"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(c?'Edit':'New')+' character</h2><button class="btn-i" onclick="closeOv()">✕</button></div>'+
+function openBoiForm(id){
+  var b=id?bois.find(function(x){return x.id===id;}):null; editBoiId=id||null;
+  showOverlay('<div class="overlay-header"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(b?'Edit entoboy':'New entoboy')+'</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">'+
-    '<div style="grid-column:1/-1"><div class="sl">Name</div><input id="cf-n" value="'+(c?c.name:'')+'"/></div>'+
-    '<div><div class="sl">Type/Species</div><select id="cf-sp">'+spOpts+'</select></div>'+
-    '<div><div class="sl">Location/Region</div><select id="cf-reg">'+rOpts+'</select></div>'+
-    (CUR==='ento'?'<div style="grid-column:1/-1"><div class="sl">Scientific name</div><input id="cf-sci" value="'+(c&&c.scientificName?c.scientificName:'')+'" placeholder="e.g. Apis mellifera"/></div>':'<input id="cf-sci" style="display:none"/>')+
-    (CUR==='morpho'?'<div><div class="sl">Sin (if applicable)</div><input id="cf-sin" value="'+(c&&c.sin?c.sin:'')+'" placeholder="e.g. Pride"/></div>':'<input id="cf-sin" style="display:none"/>')+
-    '<div style="grid-column:1/-1"><div class="sl">Personality (comma-separated)</div><input id="cf-per" value="'+(c?c.personality:'')+'"/></div></div>'+
-    '<div style="margin-bottom:12px"><div class="sl">Description</div><textarea id="cf-desc" rows="5" style="resize:vertical;line-height:1.65">'+(c?c.description:'')+'</textarea></div>'+
-    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div class="sl" style="margin:0">Colour</div><input type="color" id="cf-col" value="'+(c?c.colour:UNIVS[CUR].color)+'" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/></div>'+
-    '<button class="btn-p" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveChar()">'+(c?'Save changes':'Add character')+'</button>');
+    '<div style="grid-column:1/-1"><div class="section-label">Name</div><input id="bf-name" value="'+(b?b.name:'')+'"/></div>'+
+    '<div><div class="section-label">Species</div><select id="bf-sp">'+SPECIES.map(function(s){return '<option'+(b&&b.species===s?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div>'+
+    '<div><div class="section-label">Region</div><select id="bf-reg">'+REGIONS.map(function(r){return '<option'+(b&&b.region===r?' selected':'')+'>'+r+'</option>';}).join('')+'</select></div>'+
+    '<div style="grid-column:1/-1"><div class="section-label">Scientific name</div><input id="bf-sci" value="'+(b?b.scientificName:'')+'" placeholder="e.g. Apis mellifera"/></div>'+
+    '<div style="grid-column:1/-1"><div class="section-label">Personality (comma-separated)</div><input id="bf-per" value="'+(b?b.personality:'')+'"/></div></div>'+
+    '<div style="margin-bottom:14px"><div class="section-label">Description</div><textarea id="bf-desc" rows="5" style="resize:vertical;line-height:1.65">'+(b?b.description:'')+'</textarea></div>'+
+    '<div style="margin-bottom:14px"><div class="section-label">Lore tags (link lore entry IDs, comma-separated)</div><input id="bf-tags" value="'+(b&&b.loreTags?b.loreTags.join(','):'')+'" placeholder="e.g. 1,3,7"/></div>'+
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div class="section-label" style="margin:0">Colour</div><input type="color" id="bf-col" value="'+(b?b.colour:'#a78bfa')+'" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/></div>'+
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveBoi()">'+(b?'Save changes':'Add entoboy')+'</button>');
 }
 
-function saveChar(){
-  var c={id:editCharId||Date.now(),name:document.getElementById('cf-n').value,species:document.getElementById('cf-sp').value,region:document.getElementById('cf-reg').value,scientificName:document.getElementById('cf-sci').value||null,sin:document.getElementById('cf-sin').value||null,personality:document.getElementById('cf-per').value,description:document.getElementById('cf-desc').value,colour:document.getElementById('cf-col').value};
-  if(editCharId){DATA[CUR].chars=DATA[CUR].chars.map(function(x){return x.id===editCharId?c:x;});}else{DATA[CUR].chars.push(c);}
-  saveDoc(CUR,'chars');renderAll();updateNC();closeOv();
+function saveBoi() {
+  var b={id:editBoiId||Date.now(),name:document.getElementById('bf-name').value,species:document.getElementById('bf-sp').value,region:document.getElementById('bf-reg').value,scientificName:document.getElementById('bf-sci').value,personality:document.getElementById('bf-per').value,description:document.getElementById('bf-desc').value,colour:document.getElementById('bf-col').value,loreTags:document.getElementById('bf-tags').value.split(',').map(function(x){return parseInt(x.trim());}).filter(function(x){return!isNaN(x);})};
+  if(editBoiId){bois=bois.map(function(x){return x.id===editBoiId?b:x;});}else{bois.push(b);}
+  saveBoisDB(); renderBois(); updateNavCount(); renderHome(); closeOverlay();
 }
 
 function openLoreForm(id){
-  var l=id?DATA[CUR].lores.find(function(x){return x.id===id;}):null; editLoreId=id||null;
-  var cats=UNIVS[CUR].categories.map(function(c){return '<option'+(l&&l.category===c?' selected':'')+'>'+c+'</option>';}).join('');
-  showOv('<div class="oh"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(l?'Edit lore':'New lore')+'</h2><button class="btn-i" onclick="closeOv()">✕</button></div>'+
-    '<div style="margin-bottom:12px"><div class="sl">Title</div><input id="lf-t" value="'+(l?l.title:'')+'"/></div>'+
-    '<div style="margin-bottom:12px"><div class="sl">Category</div><select id="lf-c">'+cats+'</select></div>'+
-    '<div style="margin-bottom:20px"><div class="sl">Content</div><textarea id="lf-co" rows="9" style="resize:vertical;line-height:1.7">'+(l?l.content:'')+'</textarea></div>'+
-    '<button class="btn-p" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveLore()">'+(l?'Save changes':'Add lore')+'</button>');
+  var l=id?lores.find(function(x){return x.id===id;}):null; editLoreId=id||null;
+  showOverlay('<div class="overlay-header"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(l?'Edit lore':'New microlore')+'</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
+    '<div style="margin-bottom:12px"><div class="section-label">Title</div><input id="lf-title" value="'+(l?l.title:'')+'"/></div>'+
+    '<div style="margin-bottom:12px"><div class="section-label">Category</div><select id="lf-cat">'+CATEGORIES.map(function(c){return '<option'+(l&&l.category===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></div>'+
+    '<div style="margin-bottom:20px"><div class="section-label">Content</div><textarea id="lf-content" rows="9" style="resize:vertical;line-height:1.7">'+(l?l.content:'')+'</textarea></div>'+
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveLore()">'+(l?'Save changes':'Add lore')+'</button>');
 }
 
-function saveLore(){
-  var l={id:editLoreId||Date.now(),title:document.getElementById('lf-t').value,category:document.getElementById('lf-c').value,content:document.getElementById('lf-co').value,date:new Date().toISOString().slice(0,10)};
-  if(editLoreId){DATA[CUR].lores=DATA[CUR].lores.map(function(x){return x.id===editLoreId?l:x;});}else{DATA[CUR].lores.push(l);}
-  saveDoc(CUR,'lores');renderLores();updateNC();closeOv();
+function saveLore() {
+  var l={id:editLoreId||Date.now(),title:document.getElementById('lf-title').value,category:document.getElementById('lf-cat').value,content:document.getElementById('lf-content').value,date:new Date().toISOString().slice(0,10)};
+  if(editLoreId){lores=lores.map(function(x){return x.id===editLoreId?l:x;});}else{lores.push(l);}
+  saveLoresDB(); renderLores(); updateNavCount(); renderHome(); closeOverlay();
 }
 
-function openPlaceForm(id){
-  var r=id?DATA[CUR].places.find(function(x){return x.id===id;}):null; editPlaceId=id||null;
-  showOv('<div class="oh"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(r?'Edit':'New')+' '+UNIVS[CUR].placeLabel.toLowerCase()+'</h2><button class="btn-i" onclick="closeOv()">✕</button></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">'+
-    '<div style="grid-column:1/-1"><div class="sl">Name</div><input id="pf-n" value="'+(r?r.name:'')+'"/></div>'+
-    '<div><div class="sl">Emoji</div><input id="pf-e" value="'+(r?r.emoji:'🌍')+'" style="font-size:20px"/></div>'+
-    '<div><div class="sl">Colour</div><input type="color" id="pf-col" value="'+(r?r.colour:'#94a3b8')+'" style="height:36px;width:100%;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/></div>'+
-    '<div style="grid-column:1/-1"><div class="sl">Ruler / Governance</div><input id="pf-r" value="'+(r?r.ruler:'')+'"/></div>'+
-    '<div><div class="sl">Stat 1</div><input id="pf-s1" value="'+(r?r.stat1:'')+'" placeholder="e.g. Pop: 1M"/></div>'+
-    '<div><div class="sl">Stat 2</div><input id="pf-s2" value="'+(r?r.stat2:'')+'" placeholder="e.g. HDI: 0.9"/></div></div>'+
-    '<div style="margin-bottom:20px"><div class="sl">Description</div><textarea id="pf-d" rows="4" style="resize:vertical;line-height:1.65">'+(r?r.desc:'')+'</textarea></div>'+
-    '<button class="btn-p" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="savePlace()">'+(r?'Save changes':'Add '+UNIVS[CUR].placeLabel.toLowerCase())+'</button>');
-}
-
-function savePlace(){
-  var r={id:editPlaceId||Date.now(),name:document.getElementById('pf-n').value,emoji:document.getElementById('pf-e').value,colour:document.getElementById('pf-col').value,ruler:document.getElementById('pf-r').value,stat1:document.getElementById('pf-s1').value,stat2:document.getElementById('pf-s2').value,stat3:'',desc:document.getElementById('pf-d').value};
-  if(editPlaceId){DATA[CUR].places=DATA[CUR].places.map(function(x){return x.id===editPlaceId?r:x;});}else{DATA[CUR].places.push(r);}
-  saveDoc(CUR,'places');renderPlaces();closeOv();
-}
-
-function confirmDel(type,id,name){
-  showOv('<div class="oh"><h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2><button class="btn-i" onclick="closeOv()">✕</button></div>'+
-    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">Permanently delete <b style="color:var(--txt)">'+name+'</b>? Enter the secret code.</p>'+
-    '<div class="sl">Secret code</div><input id="del-c" placeholder="Enter code..." onkeydown="if(event.key===\'Enter\')doDel(\''+type+'\','+id+')"/>'+
+function confirmDelete(type,id,name){
+  showOverlay('<div class="overlay-header"><h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
+    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">You are about to permanently delete <b style="color:var(--txt)">'+name+'</b>. Enter the secret code to confirm.</p>'+
+    '<div class="section-label">Secret code</div><input id="del-code" placeholder="Enter code..." onkeydown="if(event.key===\'Enter\')doDelete(\''+type+'\','+id+')"/>'+
     '<div id="del-err" style="font-size:12px;color:#ef4444;margin-top:6px;display:none">Incorrect code.</div>'+
-    '<div style="display:flex;gap:8px;margin-top:16px"><button class="btn-g" style="flex:1;padding:10px" onclick="closeOv()">Cancel</button><button class="btn-d" style="flex:1;padding:10px" onclick="doDel(\''+type+'\','+id+')">Delete</button></div>');
+    '<div style="display:flex;gap:8px;margin-top:16px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button><button class="btn-danger" style="flex:1;padding:10px" onclick="doDelete(\''+type+'\','+id+')">Delete</button></div>');
 }
 
-function doDel(type,id){
-  if(document.getElementById('del-c').value!==DEL){document.getElementById('del-err').style.display='block';return;}
-  if(type==='char'){DATA[CUR].chars=DATA[CUR].chars.filter(function(c){return c.id!==id;});saveDoc(CUR,'chars');renderChars();}
-  else if(type==='lore'){DATA[CUR].lores=DATA[CUR].lores.filter(function(l){return l.id!==id;});saveDoc(CUR,'lores');renderLores();}
-  else{DATA[CUR].places=DATA[CUR].places.filter(function(r){return r.id!==id;});saveDoc(CUR,'places');renderPlaces();}
-  renderHome();updateNC();closeOv();
+function doDelete(type,id){
+  if(document.getElementById('del-code').value!==DELETE_CODE){document.getElementById('del-err').style.display='block';return;}
+  if(type==='boi'){bois=bois.filter(function(b){return b.id!==id;});saveBoisDB();renderBois();}
+  else{lores=lores.filter(function(l){return l.id!==id;});saveLoresDB();renderLores();}
+  updateNavCount();renderHome();closeOverlay();
 }
 
 function toggleTheme(){
-  var l=!document.body.classList.contains('light');
-  document.body.className=CUR+(l?' light':'');
-  document.getElementById('theme-btn').textContent=l?'🌙':'☀️';
-  localStorage.setItem('mv_theme',l?'light':'dark');
+  document.body.classList.toggle('light');
+  var isLight=document.body.classList.contains('light');
+  document.getElementById('theme-btn').textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('ev_theme',isLight?'light':'dark');
 }
 
 function exportData(){
-  var blob=new Blob([JSON.stringify({data:DATA,exported:new Date().toISOString()},null,2)],{type:'application/json'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='multiverse-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+  var data={bois:bois,lores:lores,exported:new Date().toISOString()};
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='entomoverse-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
 }
 
 function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var r=new FileReader();
-  r.onload=function(ev){
+  var file=e.target.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
     try{
-      var d=JSON.parse(ev.target.result);
-      if(!d.data){alert('Invalid backup!');return;}
-      if(!confirm('Replace all data?'))return;
-      DATA=d.data;
-      for(var u of ['ento','morpho','any'])for(var t of ['chars','lores','places'])saveDoc(u,t);
-      renderAll();updateNC();alert('Imported!');
-    }catch(err){alert('Could not read file!');}
+      var data=JSON.parse(ev.target.result);
+      if(!data.bois||!data.lores){alert('Invalid backup file!');return;}
+      if(!confirm('This will replace all current data with the imported backup. Are you sure?'))return;
+      bois=data.bois; lores=data.lores;
+      saveBoisDB(); saveLoresDB();
+      renderBois(); renderLores(); renderHome(); updateNavCount();
+      alert('Import successful! '+bois.length+' bois and '+lores.length+' lore entries loaded.');
+    }catch(err){alert('Could not read file — make sure it is a valid EntomoVerse backup JSON!');}
   };
-  r.readAsText(file);e.target.value='';
+  reader.readAsText(file);
+  e.target.value='';
 }
 
-function resetUniverse(){
-  if(!confirm('Reset '+UNIVS[CUR].name+' to defaults?'))return;
-  DATA[CUR]=JSON.parse(JSON.stringify(DEFAULTS[CUR]));
-  for(var t of ['chars','lores','places'])saveDoc(CUR,t);
-  renderAll();updateNC();alert('Reset!');
+function renderHeights() {
+  // parse height from description e.g. "4'9\"" or "5'10\""
+  function parseHeight(b) {
+    var m = b.description.match(/(\d+)'(\d+)"/);
+    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
+    m = b.description.match(/(\d+)'(\d+)/);
+    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
+    // check for rough height like "~2'6\""
+    m = b.description.match(/~(\d+)'(\d+)/);
+    if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
+    return null;
+  }
+  var withHeight = bois.map(function(b) {
+    return {b: b, inches: parseHeight(b)};
+  }).filter(function(x) { return x.inches !== null; });
+  withHeight.sort(function(a,b) { return b.inches - a.inches; });
+
+  document.getElementById('height-sub').textContent = withHeight.length + ' of ' + bois.length + ' bois with known heights';
+
+  if (!withHeight.length) { document.getElementById('height-chart').innerHTML = '<div class="empty">No height data found. Add heights to boi descriptions like 5\'10".</div>'; return; }
+
+  var max = withHeight[0].inches;
+  var min = Math.max(0, withHeight[withHeight.length-1].inches - 6);
+
+  function inchesToStr(inches) {
+    return Math.floor(inches/12) + "'" + (inches%12) + '"';
+  }
+
+  document.getElementById('height-chart').innerHTML = withHeight.map(function(x) {
+    var b = x.b;
+    var col = b.colour || '#f7cc30';
+    var pct = Math.max(8, Math.round(((x.inches - min) / (max - min)) * 85) + 10);
+    return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer" onclick="openBoi('+b.id+')">'+
+      '<div style="width:52px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">'+inchesToStr(x.inches)+'</div>'+
+      '<div style="flex:1;display:flex;align-items:center;gap:10px">'+
+        '<div style="width:'+pct+'%;height:34px;background:'+col+'22;border:1.5px solid '+col+'60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:80px;transition:width .3s">'+
+          '<span style="font-size:11px;font-weight:700;color:'+col+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.name+'</span>'+
+        '</div>'+
+        '<span style="font-size:11px;color:var(--txt3)">'+b.species+'</span>'+
+      '</div>'+
+    '</div>';
+  }).join('') +
+  '<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Heights parsed from boi descriptions. Click any bar to open the profile.</div>';
 }
+
+function resetToDefaults(){
+  if(!confirm('This will reset ALL data to defaults including Slate and all canon bois. Are you sure?'))return;
+  bois=DEFAULT_BOIS; lores=DEFAULT_LORES;
+  saveBoisDB(); saveLoresDB();
+  renderBois(); renderLores(); renderHome(); updateNavCount();
+  alert('Reset complete!');
+}
+
 </script>
 </body>
 </html>
