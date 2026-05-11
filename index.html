@@ -6,93 +6,133 @@
 <title>EntomoVerse</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='19' r='12' fill='%23f7cc30'/><circle cx='16' cy='19' r='9' fill='%23fde047'/><path d='M11 11 Q9 5 7 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='6.5' cy='1.5' r='2.5' fill='%23f7cc30'/><path d='M21 11 Q23 5 25 2' fill='none' stroke='%23f7cc30' stroke-width='2' stroke-linecap='round'/><circle cx='25.5' cy='1.5' r='2.5' fill='%23f7cc30'/><circle cx='12' cy='18' r='3' fill='%231a0e00'/><circle cx='20' cy='18' r='3' fill='%231a0e00'/><circle cx='11' cy='16.5' r='1.2' fill='white' opacity='0.9'/><circle cx='19' cy='16.5' r='1.2' fill='white' opacity='0.9'/><ellipse cx='9' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><ellipse cx='23' cy='22' rx='3' ry='2' fill='%23ffb3b3' opacity='0.6'/><path d='M11 25 Q16 29 21 25' fill='none' stroke='%231a0e00' stroke-width='2' stroke-linecap='round'/></svg>"/>
 <style>
+/* ── Reset & tokens ─────────────────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;--border:#23232f;--border2:#2e2e3e;--txt:#eeedf8;--txt2:#8887a2;--txt3:#454560;--accent:#f7cc30;--accent-dim:#1e1a08;--radius:14px;--radius-sm:10px;--radius-xs:8px}
-body.light{--bg:#f5f4f0;--nav:#ffffff;--card:#ffffff;--card2:#f0eff9;--border:#e0dfd8;--border2:#d0cfc8;--txt:#111111;--txt2:#666666;--txt3:#aaaaaa;--accent-dim:#fffbeb}
+:root{
+  --bg:#0c0c11;--nav:#111118;--card:#15151e;--card2:#1c1c28;
+  --border:#23232f;--border2:#2e2e3e;
+  --txt:#eeedf8;--txt2:#8887a2;--txt3:#454560;
+  --accent:#f7cc30;--accent-dim:#1e1a08;
+  --radius:14px;--radius-sm:10px;--radius-xs:8px;
+  --danger:#ef4444;
+}
+body.light{
+  --bg:#f5f4f0;--nav:#ffffff;--card:#ffffff;--card2:#f0eff9;
+  --border:#e0dfd8;--border2:#d0cfc8;
+  --txt:#111111;--txt2:#666666;--txt3:#aaaaaa;--accent-dim:#fffbeb;
+}
 body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;line-height:1.5;transition:background .2s,color .2s}
 input,select,textarea{background:var(--card2);border:1px solid var(--border);color:var(--txt);border-radius:var(--radius-xs);padding:9px 13px;font-size:14px;font-family:inherit;outline:none;width:100%;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+input.err,textarea.err{border-color:var(--danger)!important}
 button{font-family:inherit;cursor:pointer}
-.btn-primary{background:var(--accent);border:none;color:#1a0e00;border-radius:var(--radius-xs);padding:10px 18px;font-size:13px;font-weight:800}
-.btn-ghost{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600}
-.btn-danger{background:transparent;border:1px solid #fca5a550;color:#ef4444;border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600}
-.btn-icon{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);width:32px;height:32px;font-size:16px;display:flex;align-items:center;justify-content:center}
+.btn-primary{background:var(--accent);border:none;color:#1a0e00;border-radius:var(--radius-xs);padding:10px 18px;font-size:13px;font-weight:800;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.btn-ghost{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-ghost.active{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:transparent;border:1px solid #fca5a550;color:var(--danger);border-radius:var(--radius-xs);padding:9px 14px;font-size:13px;font-weight:600}
+.btn-icon{background:var(--card2);border:1px solid var(--border);color:var(--txt2);border-radius:var(--radius-xs);width:32px;height:32px;font-size:16px;display:flex;align-items:center;justify-content:center;transition:border-color .15s}
+.btn-icon:hover{border-color:var(--accent)}
 .section-label{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
 .divider{height:1px;background:var(--border);margin:1.25rem 0}
-nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem;position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:.25rem;height:54px}
-.nav-brand{display:flex;align-items:center;gap:9px;padding-right:1.25rem;margin-right:.25rem;border-right:1px solid var(--border)}
+
+/* ── Nav ──────────────────────────────────────────────────────────────────── */
+nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.25rem;position:sticky;top:0;z-index:200;display:flex;align-items:center;gap:.2rem;height:54px}
+.nav-brand{display:flex;align-items:center;gap:9px;padding-right:1.1rem;margin-right:.2rem;border-right:1px solid var(--border)}
 .nav-brand span{font-weight:800;font-size:15px;color:var(--txt);letter-spacing:-.3px}
-.nav-tab{background:none;border:none;color:var(--txt2);padding:.85rem .75rem;font-size:13px;font-weight:400;border-bottom:2px solid transparent;white-space:nowrap}
+.nav-tab{background:none;border:none;color:var(--txt2);padding:.85rem .7rem;font-size:13px;font-weight:400;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s}
 .nav-tab.active{color:var(--txt);font-weight:700;border-bottom:2px solid var(--accent)}
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.nav-count{font-size:11px;color:var(--txt3)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:7px}
+.save-indicator{font-size:11px;color:var(--txt3);transition:color .4s;white-space:nowrap}
+
+/* ── Pages ────────────────────────────────────────────────────────────────── */
 .page{display:none;padding:2rem 1.5rem 5rem;max-width:1400px;margin:0 auto}
 .page.active{display:block}
 .page-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
 .page-title{font-size:28px;font-weight:900;letter-spacing:-.8px;color:var(--txt);margin:0 0 3px}
 .page-sub{font-size:13px;color:var(--txt2)}
+
+/* ── Home ─────────────────────────────────────────────────────────────────── */
 .home-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;background:var(--accent-dim);padding:4px 12px;border-radius:99px;margin-bottom:14px}
 .home-hero h1{font-size:46px;font-weight:900;letter-spacing:-2px;color:var(--txt);line-height:1;margin-bottom:12px}
 .home-hero p{font-size:16px;color:var(--txt2);line-height:1.8;max-width:520px;margin-bottom:2.5rem}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:2rem}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1rem;cursor:pointer;transition:border-color .2s,background .2s}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:2rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1rem;cursor:pointer;transition:background .2s}
 .stat-card:hover{background:var(--card2)}
 .stat-val{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:4px}
 .stat-lbl{font-size:12px;color:var(--txt2);font-weight:500}
 .disclaimer{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:12px 16px;display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--txt2);line-height:1.65}
-.filter-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:8px}
+.botd-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;cursor:pointer;display:flex;gap:14px;align-items:flex-start;margin-bottom:2.5rem;transition:background .15s}
+.botd-card:hover{background:var(--card2)}
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.filter-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem 1rem;margin-bottom:.75rem;display:flex;flex-wrap:wrap;gap:8px}
+.sort-bar{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+
+/* ── Boi cards ────────────────────────────────────────────────────────────── */
 .col-grid{columns:300px;column-gap:12px}
-.boi-card{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
+.boi-card{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s;position:relative}
 .boi-card:hover{background:var(--card2)}
 .boi-avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;letter-spacing:-.5px}
+.fav-star{position:absolute;top:10px;right:10px;font-size:13px;opacity:.8}
+
+/* ── Lore cards ───────────────────────────────────────────────────────────── */
 .lore-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;transition:background .15s;margin-bottom:8px}
 .lore-card:hover{background:var(--card2)}
+
+/* ── Region cards ─────────────────────────────────────────────────────────── */
 .region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .region-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:background .15s}
 .region-card:hover{background:var(--card2)}
+
+/* ── Pills & tags ─────────────────────────────────────────────────────────── */
 .pill{font-size:11px;padding:3px 9px;border-radius:99px;font-weight:600;white-space:nowrap}
 .pill-food{background:#fef9c3;color:#92400e}
 .pill-hdi{background:#d1fae5;color:#065f46}
 .pill-gdp{background:#dbeafe;color:#1e40af}
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:600}
+
+/* ── Overlay ──────────────────────────────────────────────────────────────── */
 .overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:999;padding:1rem;backdrop-filter:blur(4px)}
 .overlay-box{background:var(--card);border:1px solid var(--border2);border-radius:20px;padding:2rem;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.6)}
-.overlay-box.wide{max-width:680px}
+.overlay-box.wide{max-width:700px}
 .overlay-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
-.resident-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-bottom:16px}
-.resident-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px}
-#pw-screen{position:fixed;inset:0;background:#080809;display:flex;align-items:center;justify-content:center;z-index:9999}
-.pw-box{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:2.5rem 2rem;max-width:360px;width:90%;text-align:center}
-.pw-box p{font-size:13px;color:#444;margin-bottom:1.5rem;letter-spacing:.04em}
-.pw-input{background:#1a1a1a;border:1px solid #252525;color:#fff;border-radius:10px;padding:11px 14px;font-size:14px;outline:none;width:100%;text-align:center;margin-bottom:8px;font-family:inherit}
-.pw-input.err{border-color:#ef4444}
-.pw-err{font-size:12px;color:#ef4444;margin-bottom:8px;display:none}
-.pw-btn{background:#fff;border:none;color:#000;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.resident-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px;margin-bottom:16px}
+.resident-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 12px;transition:background .15s}
+.resident-card:hover{background:var(--border2)}
+
+/* ── Height chart ─────────────────────────────────────────────────────────── */
+.height-bar{display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer}
+.height-bar:hover .height-bar-inner{opacity:.75}
+
+/* ── Misc ─────────────────────────────────────────────────────────────────── */
 .empty{text-align:center;padding:5rem;color:var(--txt3);font-size:15px}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-.botd-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;cursor:pointer;display:flex;gap:14px;align-items:flex-start;margin-bottom:2.5rem;transition:background .15s}
-.botd-card:hover{background:var(--card2)}
-.height-bar{display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer}
-.height-bar:hover .height-bar-inner{opacity:.8}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;color:var(--txt);box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:9999;pointer-events:none;opacity:0;transition:opacity .2s}
+.toast.show{opacity:1}
+.notes-box{background:var(--accent-dim);border:1px solid var(--accent)30;border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--txt2);line-height:1.7;white-space:pre-wrap;margin-bottom:16px}
+.lore-check-list{max-height:160px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius-xs);padding:8px;background:var(--card2)}
+.lore-check-list label{display:flex;align-items:center;gap:8px;padding:5px 4px;cursor:pointer;border-radius:6px;transition:background .12s}
+.lore-check-list label:hover{background:var(--border)}
+.lore-check-list input[type=checkbox]{width:auto;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
+
+/* ── Image Lores ──────────────────────────────────────────────────────── */
+.img-grid{columns:220px;column-gap:12px}
+.img-card{break-inside:avoid;margin-bottom:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s}
+.img-card:hover{background:var(--card2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.img-card img{width:100%;display:block;object-fit:cover}
+.img-card-info{padding:.6rem .9rem .75rem}
+.dropzone{border:2px dashed var(--border);border-radius:12px;padding:2rem 1rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s}
+.dropzone:hover,.dropzone.drag-over{border-color:var(--accent);background:var(--accent-dim)}
 </style>
 </head>
 <body>
 
-<div id="pw-screen">
-  <div class="pw-box">
-    <div style="width:48px;height:48px;border-radius:14px;background:#1a1a1a;border:1px solid #222;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="10" width="16" height="11" rx="2.5" stroke="#555" stroke-width="1.5"/><path d="M7 10V7a4 4 0 0 1 8 0v3" stroke="#555" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="15.5" r="1.5" fill="#555"/></svg>
-    </div>
-    <p>This page is private.</p>
-    <input class="pw-input" id="pw-input" type="password" placeholder="Password" autocomplete="off"/>
-    <div class="pw-err" id="pw-err">Incorrect password.</div>
-    <button class="pw-btn" id="pw-btn" onclick="tryLogin()">Continue</button>
-  </div>
-</div>
-
-<nav id="main-nav" style="display:none">
+<!-- ── Navigation ──────────────────────────────────────────────────────────── -->
+<nav id="main-nav">
   <div class="nav-brand">
     <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="16" r="11" fill="#f7cc30"/><circle cx="13" cy="16" r="8.5" fill="#fde047"/><path d="M10 9 Q8 4 6 2" fill="none" stroke="#f7cc30" stroke-width="2" stroke-linecap="round"/><circle cx="5.5" cy="1.5" r="2" fill="#f7cc30"/><path d="M16 9 Q18 4 20 2" fill="none" stroke="#f7cc30" stroke-width="2" stroke-linecap="round"/><circle cx="20.5" cy="1.5" r="2" fill="#f7cc30"/><circle cx="10" cy="15" r="2.5" fill="#1a0e00"/><circle cx="16" cy="15" r="2.5" fill="#1a0e00"/><circle cx="9.2" cy="13.8" r="1" fill="white" opacity="0.9"/><circle cx="15.2" cy="13.8" r="1" fill="white" opacity="0.9"/><ellipse cx="8" cy="19" rx="2.5" ry="1.5" fill="#ffb3b3" opacity="0.55"/><ellipse cx="18" cy="19" rx="2.5" ry="1.5" fill="#ffb3b3" opacity="0.55"/><path d="M9.5 21 Q13 24.5 16.5 21" fill="none" stroke="#1a0e00" stroke-width="1.8" stroke-linecap="round"/></svg>
     <span>EntomoVerse</span>
@@ -102,90 +142,161 @@ nav{background:var(--nav);border-bottom:1px solid var(--border);padding:0 1.5rem
   <button class="nav-tab" onclick="showTab('lore',this)">Lore</button>
   <button class="nav-tab" onclick="showTab('regions',this)">Regions</button>
   <button class="nav-tab" onclick="showTab('heights',this)">Heights</button>
+  <button class="nav-tab" onclick="showTab('imagelores',this)">Image Lores</button>
   <div class="nav-right">
-    <span class="nav-count" id="nav-count"></span>
-    <button class="btn-ghost" style="font-size:16px;padding:5px 10px;width:34px" onclick="toggleTheme()" id="theme-btn">☀️</button>
+    <span class="save-indicator" id="save-indicator"></span>
+    <span style="font-size:11px;color:var(--txt3)" id="nav-count"></span>
+    <button class="btn-ghost" title="Random entoboy" style="font-size:14px;padding:5px 10px" onclick="showRandomBoi()">🎲</button>
+    <button class="btn-ghost" style="font-size:16px;padding:5px 9px" onclick="toggleTheme()" id="theme-btn" title="Toggle theme">☀️</button>
     <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="exportData()">Export</button>
-    <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="document.getElementById('import-input').click()">Import</button>
-    <input type="file" id="import-input" accept=".json" style="display:none" onchange="importData(event)"/>
+    <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="triggerImport()">Import</button>
+    <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="handleImportFile(event)"/>
     <button class="btn-ghost" style="font-size:11px;padding:5px 10px" onclick="resetToDefaults()">Reset</button>
   </div>
 </nav>
 
-<div id="tab-home" class="page active" style="max-width:780px">
+<!-- ── Home ────────────────────────────────────────────────────────────────── -->
+<div id="tab-home" class="page active" style="max-width:820px">
   <div class="home-hero">
     <div class="home-badge">Lore Database</div>
     <h1>EntomoVerse</h1>
-    <p>A complete reference for all EntomoVerse lore, characters, regions and world canon. Everything syncs across devices.</p>
+    <p>A complete reference for all EntomoVerse lore, characters, regions and world canon.</p>
   </div>
   <div class="stat-grid" id="stat-grid"></div>
   <div class="section-label" style="margin-bottom:10px">🌟 Boi of the day</div>
   <div id="botd" style="margin-bottom:2rem"></div>
+  <div class="section-label" style="margin-bottom:10px">📊 Roster breakdown</div>
+  <div id="species-breakdown" style="margin-bottom:2rem"></div>
   <div class="section-label">Disclaimers</div>
   <div id="disclaimers-list" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
 
+<!-- ── Entobois ─────────────────────────────────────────────────────────────── -->
 <div id="tab-entobois" class="page">
   <div class="page-header">
     <div><h1 class="page-title">Entobois</h1><div class="page-sub" id="boi-count"></div></div>
     <button class="btn-primary" onclick="openBoiForm()">+ Add entoboy</button>
   </div>
   <div class="filter-bar">
-    <input placeholder="Search name or region..." id="f-q" oninput="renderBois()" style="flex:1 1 150px;min-width:130px"/>
-    <input placeholder="Scientific name..." id="f-sci" oninput="renderBois()" style="flex:1 1 140px;min-width:120px"/>
-    <input placeholder="Personality..." id="f-per" oninput="renderBois()" style="flex:1 1 120px;min-width:100px"/>
+    <input placeholder="Search name, description or region…" id="f-q" oninput="renderBois()" style="flex:1 1 160px;min-width:130px"/>
+    <input placeholder="Scientific name…" id="f-sci" oninput="renderBois()" style="flex:1 1 130px;min-width:110px"/>
+    <input placeholder="Personality…" id="f-per" oninput="renderBois()" style="flex:1 1 110px;min-width:90px"/>
     <select id="f-sp" onchange="renderBois()" style="flex:1 1 130px;min-width:110px"></select>
     <select id="f-reg" onchange="renderBois()" style="flex:1 1 130px;min-width:110px"></select>
+    <button class="btn-ghost" id="fav-btn" onclick="toggleFavFilter()" title="Show only favourites">⭐</button>
     <button class="btn-ghost" onclick="clearFilters()" id="clear-btn" style="display:none">Clear</button>
+  </div>
+  <div class="sort-bar">
+    <span class="section-label" style="margin:0;flex-shrink:0">Sort</span>
+    <select id="f-sort" onchange="renderBois()" style="width:auto;flex-shrink:0;padding:6px 10px;font-size:12px">
+      <option value="default">Default</option>
+      <option value="name-az">Name A–Z</option>
+      <option value="name-za">Name Z–A</option>
+      <option value="height-desc">Tallest first</option>
+      <option value="height-asc">Shortest first</option>
+      <option value="species">Species</option>
+      <option value="region">Region</option>
+    </select>
   </div>
   <div class="col-grid" id="boi-grid"></div>
   <div class="empty" id="boi-empty" style="display:none">No entobois found.</div>
 </div>
 
-<div id="tab-lore" class="page" style="max-width:860px">
+<!-- ── Lore ─────────────────────────────────────────────────────────────────── -->
+<div id="tab-lore" class="page" style="max-width:880px">
   <div class="page-header">
     <div><h1 class="page-title">Microlores</h1><div class="page-sub" id="lore-count"></div></div>
     <button class="btn-primary" onclick="openLoreForm()">+ Add lore</button>
   </div>
   <div class="filter-bar">
-    <input placeholder="Search lore..." id="l-q" oninput="renderLores()" style="flex:1 1 200px"/>
-    <select id="l-cat" onchange="renderLores()" style="flex:0 0 150px"></select>
+    <input placeholder="Search lore…" id="l-q" oninput="renderLores()" style="flex:1 1 200px"/>
+    <select id="l-cat" onchange="renderLores()" style="flex:0 0 160px"></select>
   </div>
   <div id="lore-list"></div>
   <div class="empty" id="lore-empty" style="display:none">No lore entries found.</div>
 </div>
 
+<!-- ── Regions ──────────────────────────────────────────────────────────────── -->
 <div id="tab-regions" class="page">
   <div class="page-header">
     <div><h1 class="page-title">Regions</h1><div class="page-sub" id="region-count"></div></div>
+    <button class="btn-primary" onclick="openRegionForm()">+ Add region</button>
   </div>
   <div class="region-grid" id="region-grid"></div>
 </div>
 
-<div id="tab-heights" class="page" style="max-width:900px">
+<!-- ── Heights ──────────────────────────────────────────────────────────────── -->
+<div id="tab-heights" class="page" style="max-width:920px">
   <div class="page-header">
     <div><h1 class="page-title">Height Chart</h1><div class="page-sub" id="height-sub"></div></div>
   </div>
   <div id="height-chart"></div>
 </div>
 
+<!-- ── Image Lores ──────────────────────────────────────────────────────────── -->
+<div id="tab-imagelores" class="page">
+  <div class="page-header">
+    <div><h1 class="page-title">Image Lores</h1><div class="page-sub" id="imglore-count"></div></div>
+    <button class="btn-primary" onclick="openImageLoreForm()">+ Add image</button>
+  </div>
+  <div class="filter-bar">
+    <input placeholder="Search title or caption…" id="il-q" oninput="renderImageLores()" style="flex:1 1 200px"/>
+    <select id="il-tag" onchange="renderImageLores()" style="flex:0 0 180px"></select>
+  </div>
+  <div class="img-grid" id="imglore-grid"></div>
+  <div class="empty" id="imglore-empty" style="display:none">No image lores yet. Add one with the button above.</div>
+</div>
+
+<!-- ── Overlay ──────────────────────────────────────────────────────────────── -->
 <div id="overlay" class="overlay-bg" style="display:none" onclick="closeOverlay(event)">
   <div class="overlay-box" id="overlay-box" onclick="event.stopPropagation()"></div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script>
-var SITE_PW = "xK9#mQ2$vL7@nP4&wJ6!rT8^yH3*uF5%bC1~eA0";
-var DELETE_CODE = "HIVE2025";
-var SPECIES = ["Bee","Butterfly","Scorpion","Ant","Spider","Beetle","Moth","Mantis","Cricket","Wasp","Hornet","Cicada","Stick Insect","Mosquito","Cockroach","Fly","Flea","Silverfish","Ladybug","Caterpillar","Worm","Other"];
-var SPECIES_GROUPS = {"🐝 Bees & Wasps":["Bee","Wasp","Hornet"],"🕷️ Spiders":["Spider"],"🦂 Scorpions":["Scorpion"],"🐛 Crawlers":["Caterpillar","Worm","Stick Insect","Flea","Silverfish"],"🦋 Winged":["Butterfly","Moth"],"🐜 Ants & Beetles":["Ant","Beetle","Ladybug"],"🦗 Chirpers":["Cricket","Cicada"],"🪲 Other Bugs":["Cockroach","Fly","Mosquito","Mantis"],"❓ Other":["Other"]};
-var REGIONS = ["The Hive","Grimewatch","The Fracture","Desert Nations","Nocturnal Lands","Ant Territories","Spiderian Province","Scorpion Lands","Beetle Owned Republic","Republic of Nocturna","Na'varuun","Butterfly Island","milli-centia","Saldidaen Province","Central Ento-Daptera","Ashker Island","Stenotaniapede Island","Cenimedae Isle"];
-var CATEGORIES = ["History","Conflict","Culture","Geography","Politics","Mythology","Technology","Economy","Biology","Other"];
-var CAT_COL = {History:"#3b82f6",Conflict:"#ef4444",Culture:"#22c55e",Geography:"#8b5cf6",Politics:"#ec4899",Mythology:"#f59e0b",Technology:"#06b6d4",Economy:"#f97316",Biology:"#84cc16",Other:"#94a3b8"};
-var DISCLAIMERS = ["All EntomoVerse characters and lore are original fictional creations. Any resemblance to real insects is purely taxonomic.","The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor of any kind.","There are NO female characters in the EntomoVerse. This is canon and not subject to change.","No permanent death exists in the EntomoVerse. Characters regenerate fully from any injury. Pain and trauma persist psychologically.","All entoboys stop aging physically at 25. The user stops aging at approximately 21 upon arrival."];
+<!-- ── Toast ────────────────────────────────────────────────────────────────── -->
+<div id="toast" class="toast"></div>
 
-var REGIONS_DATA = [
+<script>
+"use strict";
+
+// ── Constants ──────────────────────────────────────────────────────────────────
+
+var DELETE_CODE = "HIVE2025";
+
+var IMG_TAGS = ["Character Art","Region Art","Map","Concept Art","Reference","Screenshot","Moodboard","Other"];
+
+var SPECIES = ["Bee","Butterfly","Scorpion","Ant","Spider","Beetle","Moth","Mantis","Cricket","Wasp","Hornet","Cicada","Stick Insect","Mosquito","Cockroach","Fly","Flea","Silverfish","Ladybug","Caterpillar","Worm","Other"];
+
+var SPECIES_GROUPS = {
+  "🐝 Bees & Wasps": ["Bee","Wasp","Hornet"],
+  "🕷️ Spiders":      ["Spider"],
+  "🦂 Scorpions":    ["Scorpion"],
+  "🐛 Crawlers":     ["Caterpillar","Worm","Stick Insect","Flea","Silverfish"],
+  "🦋 Winged":       ["Butterfly","Moth"],
+  "🐜 Ants & Beetles":["Ant","Beetle","Ladybug"],
+  "🦗 Chirpers":     ["Cricket","Cicada"],
+  "🪲 Other Bugs":   ["Cockroach","Fly","Mosquito","Mantis"],
+  "❓ Other":        ["Other"],
+};
+
+// REGIONS is derived at runtime from regionsData — see state section below
+
+var CATEGORIES = ["History","Conflict","Culture","Geography","Politics","Mythology","Technology","Economy","Biology","Other"];
+
+var CAT_COL = {
+  History:"#3b82f6",Conflict:"#ef4444",Culture:"#22c55e",
+  Geography:"#8b5cf6",Politics:"#ec4899",Mythology:"#f59e0b",
+  Technology:"#06b6d4",Economy:"#f97316",Biology:"#84cc16",Other:"#94a3b8",
+};
+
+var DISCLAIMERS = [
+  "All EntomoVerse characters and lore are original fictional creations. Any resemblance to real insects is purely taxonomic.",
+  "The EntomoVerse is a fully separate self-contained universe — NOT a simulation, dream, or metaphor of any kind.",
+  "There are NO female characters in the EntomoVerse. This is canon and not subject to change.",
+  "No permanent death exists in the EntomoVerse. Characters regenerate fully from any injury. Pain and trauma persist psychologically.",
+  "All entoboys stop aging physically at 25. The user stops aging at approximately 21 upon arrival.",
+];
+
+var DEFAULT_REGIONS_DATA = [
   {id:"hive",name:"The Hive",emoji:"🍯",pop:"1.8M",gov:"Benevolent monarchy",food:"9.1/10",hdi:"0.887",gdp:null,color:"#f7cc30",desc:"The bee homeland and cultural heart of the EntomoVerse. Famous for its golden architecture, honey markets and warm community. Signature dish: Vaelcomb Stew."},
   {id:"grimewatch",name:"Grimewatch",emoji:"🏙️",pop:"2M",gov:"Grassroots urban democracy",food:"7.6/10",hdi:"0.801",gdp:null,color:"#22c55e",desc:"Dense urban district, community-run, rough but deeply loyal. Found family culture pervades every corner."},
   {id:"beetle",name:"Beetle Owned Republic",emoji:"🛡️",pop:"1.6M",gov:"Structured democracy",food:"8.8/10",hdi:"0.941",gdp:null,color:"#0d9488",desc:"The highest HDI in the EntomoVerse at 0.941. Well-governed, stable, and prosperous."},
@@ -212,12 +323,12 @@ var DEFAULT_BOIS = [
   {id:4,name:"Vex Solari",species:"Scorpion",scientificName:"Pandinus imperator",region:"Scorpion Lands",personality:"Proud,Protective,Few words,Secretly soft,Intimidating",colour:"#34d399",description:"A male scorpion at 6'4\". Proud, carries himself with quiet authority. When he shows softness it hits hard precisely because it is so rare."},
   {id:5,name:"Jex",species:"Cockroach",scientificName:"Periplaneta americana",region:"Grimewatch",personality:"Anxious,Scrappy,Hoarder,Clingy when loved,Self-deprecating,Suddenly very sincere",colour:"#a78bfa",description:"A male cockroach at 5'6\" living in a messy but cozy Grimewatch apartment. Becomes clingy and devoted once he trusts someone."},
   {id:6,name:"Niv",species:"Mosquito",scientificName:"Culex pipiens",region:"The Hive",personality:"Smooth,Teasing,Deeply possessive when bonded",colour:"#f43f5e",description:"A male mosquito at 6'2\". Every word measured, every glance intentional. The possessiveness only emerges once genuinely bonded."},
-  {id:7,name:"Ryn",species:"Moth",scientificName:"Actias luna",region:"Nocturnal Lands",personality:"Dreamy,Gentle,Quietly romantic",colour:"#c084fc",description:"A male moth at 5'10\" from the Nocturnal Lands. Soft and unhurried. Quietly romantic — sincere, deliberate, never loud about it."},
+  {id:7,name:"Ryn",species:"Moth",scientificName:"Actias luna",region:"Republic of Nocturna",personality:"Dreamy,Gentle,Quietly romantic",colour:"#c084fc",description:"A male moth at 5'10\" from the Nocturnal Lands. Soft and unhurried. Quietly romantic — sincere, deliberate, never loud about it."},
   {id:8,name:"Tavven Vellure",species:"Spider",scientificName:"Phidippus audax",region:"The Hive",personality:"Flirty,Playful,Energetic,Chaotic",colour:"#38bdf8",description:"A male jumping spider at 5'2\", goes by Twitch. Impossible to be bored around."},
   {id:9,name:"Drryx Warmwick",species:"Bee",scientificName:"Sceliphron caementarium",region:"The Hive",personality:"Sunny,Warm,Loves his job,Remembers everyone",colour:"#fbbf24",description:"A male mud dauber at 5'8\". Runs a honey sweet stand in The Hive market. Always outside, always humming."},
   {id:10,name:"Riven Aelomere",species:"Bee",scientificName:"Osmia bicornis",region:"The Hive",personality:"Shy,Professional,Gets flustered easily,Gentle,Thoughtful",colour:"#6ee7b7",description:"A male mason bee at 5'7\" with warm brown fuzz and iridescent blue wing sheen. Works at the Chitin phone store. Soren has opened a new page for him."},
   {id:11,name:"Foss Miravel",species:"Bee",scientificName:"Episyrphus balteatus",region:"The Hive",personality:"Bubbly,Chatty,Warm,Talks when nervous",colour:"#facc15",description:"A male hoverfly at 5'5\". Works the counter at Hexbite. Always smells faintly of honeyfries. Is going to text first. Tonight."},
-  {id:12,name:"Azul Vexari",species:"Scorpion",scientificName:"Centruroides sculpturatus",region:"The Hive",personality:"Confident,Teasing,Calm,Warm,Devoted",colour:"#3b82f6",description:"A male blue scorpion at 6'3\", bartender. The user's boyfriend. His affection is understated and consistent — just always there."},
+  {id:12,name:"Azul Vexari",species:"Scorpion",scientificName:"Centruroides sculpturatus",region:"The Hive",personality:"Confident,Teasing,Calm,Warm,Devoted",colour:"#3b82f6",description:"A male blue scorpion at 6'3\", bartender. His affection is understated and consistent — just always there."},
   {id:13,name:"Caelus Mireveil",species:"Silverfish",scientificName:"Lepisma saccharina",region:"The Hive",personality:"Bookish,Shy,Fascinated with knowledge,Quiet",colour:"#94a3b8",description:"A male silverfish at 5'7\". Genuinely fascinated by knowledge for its own sake."},
   {id:14,name:"Piero Luminel",species:"Ladybug",scientificName:"Coccinella septempunctata",region:"The Hive",personality:"Cheerful,Optimistic,Protective",colour:"#ef4444",description:"A male ladybug at 5'6\". Constitutionally good-natured. Makes a difficult situation feel manageable just by being present."},
   {id:15,name:"Vorris Blackweave",species:"Spider",scientificName:"Theraphosa blondi",region:"Spiderian Province",personality:"Muscular,Fluffy,Extremely overprotective,Delusionally affectionate",colour:"#78350f",description:"A male tarantula at 6'5\". Extremely muscular and very fluffy. The fluffiness undermines the intimidating vibe."},
@@ -243,10 +354,10 @@ var DEFAULT_BOIS = [
   {id:35,name:"Vaerynth Sylphael",species:"Caterpillar",scientificName:"Saturnia pavonia",region:"The Hive",personality:"Soft,Perpetually caterpillar,Gentle",colour:"#bbf7d0",description:"A male caterpillar roughly 2'6\" long, Siggly Boi. Permanently remains in caterpillar form."},
   {id:36,name:"Ryllin Quickstep",species:"Cricket",scientificName:"Gryllus bimaculatus",region:"The Hive",personality:"Affectionate,Nervous,Has Tourette's",colour:"#6ee7b7",description:"A male field cricket at 5'6\", Ryll. Affectionate and nervous in equal measure. Has Tourette's syndrome."},
   {id:37,name:"Kharvex Ironweb",species:"Spider",scientificName:"Hogna carolinensis",region:"Spiderian Province",personality:"Extremely muscular,Loud,Supportive,Gymbro",colour:"#fbbf24",description:"A male spider at 6'5\", gym champion. Extremely muscular, extremely loud, absolute hype man."},
-  {id:38,name:"Skitter Vellix",species:"Flea",scientificName:"Pulex irritans",region:"Grimewatch",personality:"Chaotic anxiety,Panic-prone,Deeply affectionate",colour:"#f0abfc",description:"A male flea at 4'6\", Skip. Runs on chaotic anxiety energy."},
+  {id:38,name:"Skitter Vellix",species:"Flea",scientificName:"Pulex irritans",region:"Grimewatch",personality:"Chaotic anxiety,Panic-prone,Deeply affectionate",colour:"#f0abfc",description:"A male flea at 4'6\", Skip. Runs on chaotic anxiety energy. The affection is just as deep."},
   {id:39,name:"Brutus Ledgerthorn",species:"Beetle",scientificName:"Lucanus cervus",region:"The Hive",personality:"Crypto-obsessed,Chaotic,Dramatic,Flirty",colour:"#fca5a5",description:"A male stag beetle at 6'5\", Bullrun. Obsessed with Entomocoin. Chaotic, dramatic, flirty."},
   {id:40,name:"Trevin Sol Varela",species:"Beetle",scientificName:"Epilachna varivestis",region:"The Hive",personality:"Warm,Domestic,Shows love through food,Nurturing",colour:"#fde68a",description:"A male Mexican bean beetle at 5'7\", Beanboy. Shows love through feeding people."},
-  {id:41,name:"Slate Ashveil",species:"Cockroach",scientificName:"Blatta orientalis",region:"Grimewatch",personality:"Quiet,Gentle,Anxious,Brave,Observant,Underestimated",colour:"#475569",description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist who studies communities and social structures from Grimewatch. Has notebooks full of observations. People underestimate him constantly. When he trusts you he opens up like a whole different person. Soren would either love him or feel threatened. probably both."},
+  {id:41,name:"Slate Ashveil",species:"Cockroach",scientificName:"Blatta orientalis",region:"Grimewatch",personality:"Quiet,Gentle,Anxious,Brave,Observant,Underestimated",colour:"#475569",description:"5'9\" seated. Deep dark chitin, almost black with a subtle blue sheen. Uses a wheelchair — sleek and well maintained. Sociologist who studies communities and social structures from Grimewatch. Has notebooks full of observations. People underestimate him constantly. When he trusts you he opens up like a whole different person."},
 ];
 
 var DEFAULT_LORES = [
@@ -263,325 +374,1193 @@ var DEFAULT_LORES = [
   {id:11,title:"Time & Calendar System",category:"Other",content:"Days are roughly equivalent to Earth's 24 hour cycle.\nSpan — roughly 10 days (replaces the week).\nCycle — roughly 30 days / 3 Spans (replaces the month).\nTurn — 12 Cycles (replaces the year).\n\nNamed Cycles:\nBloom, Amber, Golden, Harvest, Frost, Deep, Pale, Thaw, Rain, Hum, Bright, Ember.\n\nCharacter ages in Turns:\nPemm: 19 Turns\nSoren: 31 Turns",date:"2025-01-01"},
 ];
 
-var bois = [], lores = [], editBoiId = null, editLoreId = null, db = null;
+// ── State ──────────────────────────────────────────────────────────────────────
 
-function initFirebase() {
-  firebase.initializeApp({
-    apiKey:"AIzaSyAd6HItfMe0IRNLiTMVQ0nQv22DFo722R4",
-    authDomain:"entomoverse-54d6b.firebaseapp.com",
-    projectId:"entomoverse-54d6b",
-    storageBucket:"entomoverse-54d6b.firebasestorage.app",
-    messagingSenderId:"1053064309244",
-    appId:"1:1053064309244:web:5605033e5daa938d3d2a79"
-  });
-  db = firebase.firestore();
-}
+var bois  = [];
+var lores = [];
+var imageLores = [];
+var regionsData = [];
+var editBoiId       = null;
+var editLoreId      = null;
+var editImageLoreId = null;
+var editRegionId    = null;
+var pendingImageData = null;
+var showFavsOnly = false;
+
+// ── Storage ────────────────────────────────────────────────────────────────────
+
+var STORAGE_KEY = 'entomoverse_data';
+var FAVS_KEY    = 'entomoverse_favs';
 
 async function loadData() {
-  try {
-    var bs = await db.collection("entomoverse").doc("bois").get();
-    bois = bs.exists ? bs.data().value : DEFAULT_BOIS;
-    var ls = await db.collection("entomoverse").doc("lores").get();
-    lores = ls.exists ? ls.data().value : DEFAULT_LORES;
-    if (!bs.exists) await db.collection("entomoverse").doc("bois").set({value:DEFAULT_BOIS});
-    if (!ls.exists) await db.collection("entomoverse").doc("lores").set({value:DEFAULT_LORES});
-  } catch(e) { bois=DEFAULT_BOIS; lores=DEFAULT_LORES; }
-}
-
-async function saveBoisDB() { try { await db.collection("entomoverse").doc("bois").set({value:bois}); } catch(e){} }
-async function saveLoresDB() { try { await db.collection("entomoverse").doc("lores").set({value:lores}); } catch(e){} }
-
-document.getElementById('pw-input').addEventListener('keydown', function(e){ if(e.key==='Enter') tryLogin(); });
-
-function tryLogin() {
-  var v = document.getElementById('pw-input').value;
-  if (v === SITE_PW) {
-    var btn = document.getElementById('pw-btn');
-    btn.textContent = 'Loading...'; btn.disabled = true;
-    initFirebase();
-    loadData().then(function() {
-      document.getElementById('pw-screen').style.display = 'none';
-      document.getElementById('main-nav').style.display = 'flex';
-      if (localStorage.getItem('ev_theme')==='light') {
-        document.body.classList.add('light');
-        document.getElementById('theme-btn').textContent = '🌙';
-      }
-      init();
-    });
+  var d = null;
+  if (window.electronAPI) {
+    d = await window.electronAPI.loadData();
   } else {
-    document.getElementById('pw-input').classList.add('err');
-    document.getElementById('pw-err').style.display = 'block';
-    document.getElementById('pw-input').value = '';
-    setTimeout(function(){ document.getElementById('pw-input').classList.remove('err'); }, 600);
+    try { d = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e){}
+  }
+  if (d && d.bois && d.lores) {
+    bois        = d.bois;
+    lores       = d.lores;
+    imageLores  = d.imageLores  || [];
+    regionsData = d.regionsData || DEFAULT_REGIONS_DATA.slice();
+  } else {
+    bois        = DEFAULT_BOIS;
+    lores       = DEFAULT_LORES;
+    regionsData = DEFAULT_REGIONS_DATA.slice();
+    await saveData();
   }
 }
 
-function toggleTheme() {
-  document.body.classList.toggle('light');
-  var l = document.body.classList.contains('light');
-  document.getElementById('theme-btn').textContent = l ? '🌙' : '☀️';
-  localStorage.setItem('ev_theme', l ? 'light' : 'dark');
+async function saveData() {
+  var d = { bois: bois, lores: lores, imageLores: imageLores, regionsData: regionsData, saved: new Date().toISOString() };
+  if (window.electronAPI) {
+    await window.electronAPI.saveData(d);
+  } else {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) {}
+  }
+  updateSaveIndicator();
 }
 
-function exportData() {
-  var blob = new Blob([JSON.stringify({bois:bois,lores:lores,exported:new Date().toISOString()},null,2)],{type:'application/json'});
-  var a = document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download='entomoverse-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+function updateSaveIndicator() {
+  var el = document.getElementById('save-indicator');
+  if (!el) return;
+  var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  el.textContent = 'Saved ' + t;
+  el.style.color = 'var(--accent)';
+  setTimeout(function() { if (el) el.style.color = 'var(--txt3)'; }, 2500);
 }
 
-function importData(e) {
-  var file=e.target.files[0]; if(!file) return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    try {
-      var d=JSON.parse(ev.target.result);
-      if(!d.bois||!d.lores){alert('Invalid file!');return;}
-      if(!confirm('Replace all data with this backup?')) return;
-      bois=d.bois; lores=d.lores;
-      saveBoisDB(); saveLoresDB();
-      renderAll(); alert('Imported!');
-    } catch(err){alert('Could not read file!');}
-  };
-  r.readAsText(file); e.target.value='';
+// ── Favourites ─────────────────────────────────────────────────────────────────
+
+function lsGet(key) { try { return localStorage.getItem(key); } catch(e) { return null; } }
+function lsSet(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+
+function getFavs() {
+  try { return JSON.parse(lsGet(FAVS_KEY)) || []; } catch(e) { return []; }
+}
+function isFav(id) { return getFavs().indexOf(id) !== -1; }
+function toggleFav(id) {
+  var favs = getFavs(), idx = favs.indexOf(id);
+  if (idx === -1) favs.push(id); else favs.splice(idx, 1);
+  lsSet(FAVS_KEY, JSON.stringify(favs));
+  renderBois();
+  // Refresh star in overlay if it's open
+  var starBtn = document.getElementById('fav-toggle-' + id);
+  if (starBtn) starBtn.textContent = isFav(id) ? '⭐' : '☆';
 }
 
-function resetToDefaults() {
-  if(!confirm('Reset ALL data to defaults?')) return;
-  bois=DEFAULT_BOIS; lores=DEFAULT_LORES;
-  saveBoisDB(); saveLoresDB(); renderAll();
-  alert('Reset complete!');
+function toggleFavFilter() {
+  showFavsOnly = !showFavsOnly;
+  var btn = document.getElementById('fav-btn');
+  btn.classList.toggle('active', showFavsOnly);
+  btn.textContent = showFavsOnly ? '⭐ On' : '⭐';
+  renderBois();
 }
 
-function init() {
-  // species dropdown
-  var spHtml = '<option value="All">All species</option><optgroup label="── By group ──"></optgroup>';
-  Object.keys(SPECIES_GROUPS).forEach(function(g){ spHtml+='<option value="'+g+'">'+g+'</option>'; });
-  spHtml += '<optgroup label="── By species ──"></optgroup>';
-  SPECIES.forEach(function(s){ spHtml+='<option>'+s+'</option>'; });
+// ── Utilities ──────────────────────────────────────────────────────────────────
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function parseHeight(b) {
+  var desc = b.description || '';
+  var m = desc.match(/(\d+)'(\d+)"/);
+  if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
+  m = desc.match(/(\d+)'(\d+)/);
+  if (m) return parseInt(m[1]) * 12 + parseInt(m[2]);
+  return null;
+}
+
+function fmtHeight(inches) {
+  return Math.floor(inches / 12) + "'" + (inches % 12) + '"';
+}
+
+function av(name, color, size) {
+  size = size || 44;
+  var initials = name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+  return '<div class="boi-avatar" style="width:' + size + 'px;height:' + size + 'px;font-size:' + Math.round(size * .34) + 'px;background:' + color + '25;border:2px solid ' + color + '60;color:' + color + '">' + escHtml(initials) + '</div>';
+}
+
+function tg(label, color) {
+  return '<span class="tag" style="background:' + color + '20;color:' + color + ';border:1px solid ' + color + '35">' + escHtml(label) + '</span>';
+}
+
+function cc(cat) {
+  var c = CAT_COL[cat] || '#94a3b8';
+  return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500;flex-shrink:0"><span style="width:7px;height:7px;border-radius:50%;background:' + c + ';display:inline-block"></span>' + escHtml(cat) + '</span>';
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────────
+
+async function init() {
+  await loadData();
+
+  // Populate species filter
+  var spHtml = '<option value="All">All species</option>';
+  Object.keys(SPECIES_GROUPS).forEach(function(g) {
+    spHtml += '<option value="' + escHtml(g) + '">' + escHtml(g) + '</option>';
+  });
+  spHtml += SPECIES.map(function(s) { return '<option>' + escHtml(s) + '</option>'; }).join('');
   document.getElementById('f-sp').innerHTML = spHtml;
-  document.getElementById('f-reg').innerHTML = '<option value="All">All regions</option>'+REGIONS.map(function(r){return '<option>'+r+'</option>';}).join('');
-  document.getElementById('l-cat').innerHTML = '<option value="All">All categories</option>'+CATEGORIES.map(function(c){return '<option>'+c+'</option>';}).join('');
+  document.getElementById('f-sp').value = 'All';
+
+  // Populate region filter
+  document.getElementById('f-reg').innerHTML = '<option value="All">All regions</option>' +
+    regionsData.map(function(r) { return '<option>' + escHtml(r.name) + '</option>'; }).join('');
+  document.getElementById('f-reg').value = 'All';
+
+  // Populate lore category filter
+  document.getElementById('l-cat').innerHTML = '<option value="All">All categories</option>' +
+    CATEGORIES.map(function(c) { return '<option>' + escHtml(c) + '</option>'; }).join('');
+  document.getElementById('l-cat').value = 'All';
+
+  // Populate image lore tag filter (guard: element may not yet exist in some envs)
+  var ilTagEl = document.getElementById('il-tag');
+  if (ilTagEl) {
+    ilTagEl.innerHTML = '<option value="All">All tags</option>' +
+      IMG_TAGS.map(function(t){ return '<option>' + escHtml(t) + '</option>'; }).join('');
+    ilTagEl.value = 'All';
+  }
+
+  // Ensure sort is at default (prevent browser form-state restoration)
+  var sortEl = document.getElementById('f-sort');
+  if (sortEl) sortEl.value = 'default';
+
+  // Apply saved theme
+  if (lsGet('ev_theme') === 'light') {
+    document.body.classList.add('light');
+    document.getElementById('theme-btn').textContent = '🌙';
+  }
+
+  // Wire up Electron menu events
+  if (window.electronAPI) {
+    window.electronAPI.onMenuExport(exportData);
+    window.electronAPI.onMenuImport(triggerImport);
+    window.electronAPI.onMenuReset(resetToDefaults);
+  }
+
   renderAll();
 }
 
 function renderAll() {
-  renderHome(); renderBois(); renderLores(); renderRegions(); renderHeights(); updateNavCount();
+  renderHome();
+  renderBois();
+  renderLores();
+  renderImageLores();
+  renderRegions();
+  renderHeights();
+  updateNavCount();
 }
 
-function showTab(id,btn) {
-  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.nav-tab').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('tab-'+id).classList.add('active');
-  btn.classList.add('active');
+// ── Nav / Tabs ─────────────────────────────────────────────────────────────────
+
+function showTab(id, btn) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
 function updateNavCount() {
-  document.getElementById('nav-count').textContent = bois.length+' bois · '+lores.length+' lores';
+  document.getElementById('nav-count').textContent = bois.length + ' bois · ' + lores.length + ' lores · ' + imageLores.length + ' imgs';
 }
 
-function av(name,color,size) {
-  size=size||44;
-  var i=name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();
-  return '<div class="boi-avatar" style="width:'+size+'px;height:'+size+'px;font-size:'+Math.round(size*.34)+'px;background:'+color+'25;border:2px solid '+color+'60;color:'+color+'">'+i+'</div>';
-}
-function tg(label,color){return '<span class="tag" style="background:'+color+'20;color:'+color+';border:1px solid '+color+'35">'+label+'</span>';}
-function cc(cat){var c=CAT_COL[cat]||'#94a3b8';return '<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);font-weight:500"><span style="width:7px;height:7px;border-radius:50%;background:'+c+';display:inline-block"></span>'+cat+'</span>';}
+// ── Home ───────────────────────────────────────────────────────────────────────
 
 function renderHome() {
-  var tabNames=['','entobois','lore','regions'];
-  document.getElementById('stat-grid').innerHTML=[
-    {l:'Entobois',v:bois.length,c:'#f7cc30',i:1},
-    {l:'Lore entries',v:lores.length,c:'#a78bfa',i:2},
-    {l:'Regions',v:REGIONS_DATA.length,c:'#34d399',i:3},
-    {l:'Total pop.',v:'11.2M',c:'#3b82f6',i:3},
-  ].map(function(s){
-    return '<div class="stat-card" onclick="showTab(\''+tabNames[s.i]+'\',document.querySelectorAll(\'.nav-tab\')['+s.i+'])"><div class="stat-val" style="color:'+s.c+'">'+s.v+'</div><div class="stat-lbl">'+s.l+'</div></div>';
+  var tabs = document.querySelectorAll('.nav-tab');
+  var statDefs = [
+    { l:'Entobois',    v:bois.length,         c:'#f7cc30', tab:'entobois',   idx:1 },
+    { l:'Lore entries',v:lores.length,        c:'#a78bfa', tab:'lore',       idx:2 },
+    { l:'Image lores', v:imageLores.length,   c:'#f43f5e', tab:'imagelores', idx:5 },
+    { l:'Regions',     v:regionsData.length,  c:'#34d399', tab:'regions',    idx:3 },
+  ];
+  document.getElementById('stat-grid').innerHTML = statDefs.map(function(s) {
+    return '<div class="stat-card" onclick="showTab(\'' + s.tab + '\',document.querySelectorAll(\'.nav-tab\')[' + s.idx + '])"><div class="stat-val" style="color:' + s.c + '">' + s.v + '</div><div class="stat-lbl">' + s.l + '</div></div>';
   }).join('');
 
-  // boi of the day
+  // Boi of the day (deterministic by calendar date)
   var botdEl = document.getElementById('botd');
   if (bois.length) {
-    var seed = Math.floor(Date.now()/86400000);
+    var seed = Math.floor(Date.now() / 86400000);
     var b = bois[seed % bois.length];
-    var col = b.colour||'#f7cc30';
-    var tags = b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean);
-    botdEl.innerHTML = '<div class="botd-card" style="border-left:3px solid '+col+'" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi('+b.id+')},150)">'+
-      av(b.name,col,52)+
-      '<div style="min-width:0"><div style="font-weight:800;font-size:17px;color:var(--txt);margin-bottom:3px">'+b.name+'</div>'+
-      '<div style="font-size:12px;color:var(--txt2);margin-bottom:8px">'+b.species+' · '+b.region+'</div>'+
-      '<div style="font-size:13px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+b.description+'</div>'+
-      '<div class="tags">'+tags.slice(0,4).map(function(p){return tg(p,col);}).join('')+'</div></div></div>';
-  } else { botdEl.innerHTML=''; }
+    var col = b.colour || '#f7cc30';
+    var tags = (b.personality || '').split(',').map(function(p) { return p.trim(); }).filter(Boolean);
+    botdEl.innerHTML = '<div class="botd-card" style="border-left:3px solid ' + col + '" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi(' + b.id + ')},150)">' +
+      av(b.name, col, 52) +
+      '<div style="min-width:0"><div style="font-weight:800;font-size:17px;color:var(--txt);margin-bottom:3px">' + escHtml(b.name) + '</div>' +
+      '<div style="font-size:12px;color:var(--txt2);margin-bottom:8px">' + escHtml(b.species) + ' · ' + escHtml(b.region) + '</div>' +
+      '<div style="font-size:13px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">' + escHtml(b.description) + '</div>' +
+      '<div class="tags">' + tags.slice(0, 4).map(function(p) { return tg(p, col); }).join('') + '</div></div></div>';
+  } else {
+    botdEl.innerHTML = '';
+  }
 
-  document.getElementById('disclaimers-list').innerHTML=DISCLAIMERS.map(function(d){return '<div class="disclaimer"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>'+d+'</span></div>';}).join('');
+  // Species breakdown
+  renderSpeciesBreakdown();
+
+  // Disclaimers
+  document.getElementById('disclaimers-list').innerHTML = DISCLAIMERS.map(function(d) {
+    return '<div class="disclaimer"><span style="font-size:14px;flex-shrink:0">⚠️</span><span>' + escHtml(d) + '</span></div>';
+  }).join('');
+}
+
+function renderSpeciesBreakdown() {
+  var el = document.getElementById('species-breakdown');
+  if (!el || !bois.length) return;
+  var counts = {};
+  bois.forEach(function(b) { counts[b.species] = (counts[b.species] || 0) + 1; });
+  var sorted = Object.keys(counts).sort(function(a,b) { return counts[b] - counts[a]; });
+  var maxCount = counts[sorted[0]] || 1;
+  el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem">' +
+    sorted.map(function(sp) {
+      var pct = Math.max(6, Math.round(counts[sp] / maxCount * 100));
+      var spColor = getSpeciesColor(sp);
+      return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">' +
+        '<div style="width:100px;font-size:12px;color:var(--txt2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(sp) + '</div>' +
+        '<div style="flex:1;background:var(--card2);border-radius:99px;height:7px"><div style="width:' + pct + '%;height:100%;background:' + spColor + ';border-radius:99px;transition:width .3s"></div></div>' +
+        '<div style="width:22px;font-size:11px;color:var(--txt3);text-align:right;flex-shrink:0">' + counts[sp] + '</div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+function getSpeciesColor(sp) {
+  // Average colour of bois of that species
+  var matching = bois.filter(function(b) { return b.species === sp && b.colour; });
+  if (!matching.length) return 'var(--accent)';
+  return matching[Math.floor(matching.length / 2)].colour;
+}
+
+// ── Entobois ───────────────────────────────────────────────────────────────────
+
+function sortBoisArr(arr) {
+  var sort = (document.getElementById('f-sort') || {}).value || 'default';
+  var out = arr.slice();
+  switch (sort) {
+    case 'name-az':      out.sort(function(a,b){ return a.name.localeCompare(b.name); }); break;
+    case 'name-za':      out.sort(function(a,b){ return b.name.localeCompare(a.name); }); break;
+    case 'height-desc':  out.sort(function(a,b){ return (parseHeight(b)||0)-(parseHeight(a)||0); }); break;
+    case 'height-asc':   out.sort(function(a,b){ var ha=parseHeight(a),hb=parseHeight(b); if(!ha)return 1; if(!hb)return -1; return ha-hb; }); break;
+    case 'species':      out.sort(function(a,b){ return a.species.localeCompare(b.species)||a.name.localeCompare(b.name); }); break;
+    case 'region':       out.sort(function(a,b){ return a.region.localeCompare(b.region)||a.name.localeCompare(b.name); }); break;
+  }
+  return out;
 }
 
 function renderBois() {
-  var q=document.getElementById('f-q').value.toLowerCase(),sci=document.getElementById('f-sci').value.toLowerCase(),per=document.getElementById('f-per').value.toLowerCase(),sp=document.getElementById('f-sp').value,reg=document.getElementById('f-reg').value;
-  document.getElementById('clear-btn').style.display=(q||sci||per||sp!=='All'||reg!=='All')?'':'none';
-  var filtered=bois.filter(function(b){
-    var spOk=sp==='All'||(SPECIES_GROUPS[sp]?SPECIES_GROUPS[sp].indexOf(b.species)!==-1:b.species===sp);
-    return(!q||b.name.toLowerCase().includes(q)||b.species.toLowerCase().includes(q)||b.region.toLowerCase().includes(q))&&(!sci||b.scientificName.toLowerCase().includes(sci))&&(!per||b.personality.toLowerCase().includes(per))&&spOk&&(reg==='All'||b.region===reg);
+  var q   = document.getElementById('f-q').value.toLowerCase();
+  var sci = document.getElementById('f-sci').value.toLowerCase();
+  var per = document.getElementById('f-per').value.toLowerCase();
+  // Fallback to 'All' if select hasn't been populated yet or browser restored empty state
+  var sp  = document.getElementById('f-sp').value  || 'All';
+  var reg = document.getElementById('f-reg').value || 'All';
+  var hasFilter = q || sci || per || (sp !== 'All') || (reg !== 'All') || showFavsOnly;
+  document.getElementById('clear-btn').style.display = hasFilter ? '' : 'none';
+
+  var favs = getFavs();
+  var filtered = bois.filter(function(b) {
+    if (showFavsOnly && favs.indexOf(b.id) === -1) return false;
+    var spOk = sp === 'All' || (SPECIES_GROUPS[sp] ? SPECIES_GROUPS[sp].indexOf(b.species) !== -1 : b.species === sp);
+    var qOk  = !q || b.name.toLowerCase().includes(q) || b.species.toLowerCase().includes(q) ||
+               b.region.toLowerCase().includes(q) || (b.description || '').toLowerCase().includes(q) ||
+               (b.personality || '').toLowerCase().includes(q);
+    return qOk && (!sci || (b.scientificName||'').toLowerCase().includes(sci)) &&
+           (!per || (b.personality||'').toLowerCase().includes(per)) &&
+           spOk && (reg === 'All' || b.region === reg);
   });
-  document.getElementById('boi-count').textContent=filtered.length+' of '+bois.length+' characters';
-  var grid=document.getElementById('boi-grid'),empty=document.getElementById('boi-empty');
-  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  grid.innerHTML=filtered.map(function(b){
-    var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean),col=b.colour||'#a78bfa';
-    return '<div class="boi-card" style="border-left:3px solid '+col+'" onclick="openBoi('+b.id+')">'+
-      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">'+av(b.name,col,44)+
-      '<div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt)">'+b.name+'</div>'+
-      '<div style="font-size:12px;color:var(--txt2);margin-top:1px">'+b.species+' · '+b.region+'</div>'+
-      '<div style="font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+b.scientificName+'</div></div></div>'+
-      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+b.description+'</div>'+
-      '<div class="tags">'+tags.slice(0,3).map(function(p){return tg(p,col);}).join('')+(tags.length>3?'<span style="font-size:11px;color:var(--txt3);align-self:center">+'+( tags.length-3)+'</span>':'')+'</div></div>';
+
+  filtered = sortBoisArr(filtered);
+  document.getElementById('boi-count').textContent = filtered.length + ' of ' + bois.length + ' characters';
+
+  var grid  = document.getElementById('boi-grid');
+  var empty = document.getElementById('boi-empty');
+  if (!filtered.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  grid.innerHTML = filtered.map(function(b) {
+    var tags   = (b.personality || '').split(',').map(function(p){ return p.trim(); }).filter(Boolean);
+    var col    = b.colour || '#a78bfa';
+    var favMark = isFav(b.id) ? '<span class="fav-star">⭐</span>' : '';
+    return '<div class="boi-card" style="border-left:3px solid ' + col + '" onclick="openBoi(' + b.id + ')">' + favMark +
+      '<div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">' + av(b.name, col, 44) +
+      '<div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt)">' + escHtml(b.name) + '</div>' +
+      '<div style="font-size:12px;color:var(--txt2);margin-top:1px">' + escHtml(b.species) + ' · ' + escHtml(b.region) + '</div>' +
+      '<div style="font-size:11px;color:var(--txt3);font-style:italic;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(b.scientificName) + '</div></div></div>' +
+      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">' + escHtml(b.description) + '</div>' +
+      '<div class="tags">' + tags.slice(0, 3).map(function(p){ return tg(p, col); }).join('') +
+      (tags.length > 3 ? '<span style="font-size:11px;color:var(--txt3);align-self:center">+' + (tags.length - 3) + '</span>' : '') + '</div></div>';
   }).join('');
 }
 
-function clearFilters(){document.getElementById('f-q').value='';document.getElementById('f-sci').value='';document.getElementById('f-per').value='';document.getElementById('f-sp').value='All';document.getElementById('f-reg').value='All';renderBois();}
+function clearFilters() {
+  document.getElementById('f-q').value    = '';
+  document.getElementById('f-sci').value  = '';
+  document.getElementById('f-per').value  = '';
+  document.getElementById('f-sp').value   = 'All';
+  document.getElementById('f-reg').value  = 'All';
+  document.getElementById('f-sort').value = 'default';
+  showFavsOnly = false;
+  document.getElementById('fav-btn').classList.remove('active');
+  renderBois();
+}
+
+// ── Lore ───────────────────────────────────────────────────────────────────────
 
 function renderLores() {
-  var q=document.getElementById('l-q').value.toLowerCase(),cat=document.getElementById('l-cat').value;
-  var filtered=lores.filter(function(l){return(!q||l.title.toLowerCase().includes(q)||l.content.toLowerCase().includes(q))&&(cat==='All'||l.category===cat);});
-  document.getElementById('lore-count').textContent=filtered.length+' entries';
-  var list=document.getElementById('lore-list'),empty=document.getElementById('lore-empty');
-  if(!filtered.length){list.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  list.innerHTML=filtered.map(function(l){return '<div class="lore-card" style="border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+'" onclick="openLore('+l.id+')"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px">'+l.title+'</div><div style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+l.content.split('\n')[0]+'</div></div>'+cc(l.category)+'</div></div>';}).join('');
-}
-
-function renderRegions() {
-  document.getElementById('region-count').textContent=REGIONS_DATA.length+' regions · click any card for details';
-  document.getElementById('region-grid').innerHTML=REGIONS_DATA.map(function(r){
-    var res=bois.filter(function(b){return b.region===r.name;});
-    return '<div class="region-card" style="border-top:3px solid '+r.color+'" onclick="openRegion(\''+r.id+'\')">'+
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:26px">'+r.emoji+'</span>'+
-      '<div><div style="font-weight:800;font-size:14px;color:var(--txt)">'+r.name+'</div>'+(r.pop?'<div style="font-size:11px;color:var(--txt2)">Pop. '+r.pop+'</div>':'')+'</div></div>'+
-      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+r.desc+'</div>'+
-      '<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">'+(r.food?'<span class="pill pill-food">🍴 '+r.food+'</span>':'')+(r.hdi?'<span class="pill pill-hdi">HDI '+r.hdi+'</span>':'')+(r.gdp?'<span class="pill pill-gdp">'+r.gdp+'</span>':'')+(res.length?'<span style="font-size:11px;color:var(--txt3);margin-left:auto">'+res.length+' resident'+(res.length!==1?'s':'')+'</span>':'')+'</div></div>';
+  var q   = document.getElementById('l-q').value.toLowerCase();
+  var cat = document.getElementById('l-cat').value;
+  var filtered = lores.filter(function(l) {
+    var t = (l.title || '').toLowerCase();
+    var c = (l.content || '').toLowerCase();
+    return (!q || t.includes(q) || c.includes(q)) &&
+           (cat === 'All' || l.category === cat);
+  });
+  document.getElementById('lore-count').textContent = filtered.length + ' entries';
+  var list  = document.getElementById('lore-list');
+  var empty = document.getElementById('lore-empty');
+  if (!filtered.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  list.innerHTML = filtered.map(function(l) {
+    var bc = CAT_COL[l.category] || '#94a3b8';
+    var preview = (l.content || '').split('\n')[0];
+    return '<div class="lore-card" style="border-left:3px solid ' + bc + '" onclick="openLore(' + l.id + ')">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px">' +
+      '<div style="min-width:0"><div style="font-weight:800;font-size:15px;color:var(--txt);margin-bottom:4px">' + escHtml(l.title || '(untitled)') + '</div>' +
+      '<div style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(preview) + '</div></div>' +
+      cc(l.category) + '</div></div>';
   }).join('');
 }
 
+// ── Regions ────────────────────────────────────────────────────────────────────
+
+function renderRegions() {
+  document.getElementById('region-count').textContent = regionsData.length + ' regions · click any card for details';
+  document.getElementById('region-grid').innerHTML = regionsData.map(function(r) {
+    var res = bois.filter(function(b) { return b.region === r.name; });
+    return '<div class="region-card" style="border-top:3px solid ' + r.color + ';position:relative">' +
+      '<div style="position:absolute;top:8px;right:8px;display:flex;gap:4px">' +
+        '<button class="btn-icon" style="width:26px;height:26px;font-size:12px" onclick="event.stopPropagation();openRegionForm(\'' + r.id + '\')" title="Edit region">✏️</button>' +
+        '<button class="btn-icon" style="width:26px;height:26px;font-size:12px" onclick="event.stopPropagation();confirmDelete(\'region\',\'' + r.id + '\',\'' + escHtml(r.name).replace(/'/g,'&#39;') + '\')" title="Delete region">🗑️</button>' +
+      '</div>' +
+      '<div style="cursor:pointer" onclick="openRegion(\'' + r.id + '\')">' +
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-right:60px"><span style="font-size:26px">' + (r.emoji||'🌍') + '</span>' +
+      '<div><div style="font-weight:800;font-size:14px;color:var(--txt)">' + escHtml(r.name) + '</div>' +
+      (r.pop ? '<div style="font-size:11px;color:var(--txt2)">Pop. ' + r.pop + '</div>' : '') + '</div></div>' +
+      '<div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">' + escHtml(r.desc) + '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center">' +
+      (r.food ? '<span class="pill pill-food">🍴 ' + r.food + '</span>' : '') +
+      (r.hdi  ? '<span class="pill pill-hdi">HDI ' + r.hdi + '</span>' : '') +
+      (r.gdp  ? '<span class="pill pill-gdp">' + r.gdp + '</span>' : '') +
+      (res.length ? '<span style="font-size:11px;color:var(--txt3);margin-left:auto">' + res.length + ' resident' + (res.length !== 1 ? 's' : '') + '</span>' : '') +
+      '</div></div></div>';
+  }).join('');
+}
+
+// ── Heights ────────────────────────────────────────────────────────────────────
+
 function renderHeights() {
-  function parseHeight(b) {
-    var m=b.description.match(/~?(\d+)'(\d+)"/);
-    if(m) return parseInt(m[1])*12+parseInt(m[2]);
-    m=b.description.match(/~?(\d+)'(\d+)/);
-    if(m) return parseInt(m[1])*12+parseInt(m[2]);
-    return null;
+  var withH = bois.map(function(b) { return { b: b, h: parseHeight(b) }; }).filter(function(x) { return x.h !== null; });
+  withH.sort(function(a,b) { return b.h - a.h; });
+  document.getElementById('height-sub').textContent = withH.length + ' of ' + bois.length + ' bois with known heights';
+  if (!withH.length) {
+    document.getElementById('height-chart').innerHTML = '<div class="empty">No height data found — add heights to descriptions like 5\'10".</div>';
+    return;
   }
-  var wh=bois.map(function(b){return{b:b,in:parseHeight(b)};}).filter(function(x){return x.in!==null;});
-  wh.sort(function(a,b){return b.in-a.in;});
-  document.getElementById('height-sub').textContent=wh.length+' of '+bois.length+' bois with known heights';
-  if(!wh.length){document.getElementById('height-chart').innerHTML='<div class="empty">No height data found — add heights to descriptions like 5\'10".</div>';return;}
-  var max=wh[0].in, min=Math.max(0,wh[wh.length-1].in-6);
-  function fmtH(i){return Math.floor(i/12)+"'"+( i%12)+'"';}
-  document.getElementById('height-chart').innerHTML=wh.map(function(x){
-    var b=x.b,col=b.colour||'#f7cc30';
-    var pct=Math.max(10,Math.round(((x.in-min)/(max-min))*80)+15);
-    return '<div class="height-bar" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi('+b.id+')},150)">'+
-      '<div style="width:48px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">'+fmtH(x.in)+'</div>'+
-      '<div style="flex:1;display:flex;align-items:center;gap:10px">'+
-        '<div class="height-bar-inner" style="width:'+pct+'%;height:34px;background:'+col+'22;border:1.5px solid '+col+'60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:90px">'+
-          '<span style="font-size:11px;font-weight:700;color:'+col+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.name+'</span>'+
-        '</div>'+
-        '<span style="font-size:11px;color:var(--txt3)">'+b.species+'</span>'+
+  var max = withH[0].h;
+  var min = Math.max(0, withH[withH.length - 1].h - 6);
+  document.getElementById('height-chart').innerHTML = withH.map(function(x) {
+    var b   = x.b;
+    var col = b.colour || '#f7cc30';
+    var pct = Math.max(10, Math.round(((x.h - min) / (max - min)) * 80) + 15);
+    return '<div class="height-bar" onclick="showTab(\'entobois\',document.querySelectorAll(\'.nav-tab\')[1]);setTimeout(function(){openBoi(' + b.id + ')},150)">' +
+      '<div style="width:52px;text-align:right;font-size:12px;color:var(--txt2);flex-shrink:0;font-weight:600">' + fmtHeight(x.h) + '</div>' +
+      '<div style="flex:1;display:flex;align-items:center;gap:10px">' +
+        '<div class="height-bar-inner" style="width:' + pct + '%;height:34px;background:' + col + '22;border:1.5px solid ' + col + '60;border-radius:8px;display:flex;align-items:center;padding:0 10px;min-width:100px">' +
+          '<span style="font-size:11px;font-weight:700;color:' + col + ';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escHtml(b.name) + '</span>' +
+        '</div>' +
+        '<span style="font-size:11px;color:var(--txt3)">' + escHtml(b.species) + '</span>' +
       '</div></div>';
-  }).join('')+'<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Heights parsed automatically from descriptions. Click any bar to view profile.</div>';
+  }).join('') + '<div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--txt3)">Heights parsed automatically from descriptions. Click any bar to view profile.</div>';
 }
 
-function showOverlay(html,wide){var box=document.getElementById('overlay-box');box.className='overlay-box'+(wide?' wide':'');box.innerHTML=html;document.getElementById('overlay').style.display='flex';}
-function closeOverlay(e){if(!e||e.target===document.getElementById('overlay'))document.getElementById('overlay').style.display='none';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOverlay();});
+// ── Overlay helpers ────────────────────────────────────────────────────────────
 
-function openBoi(id){
-  var b=bois.find(function(x){return x.id===id;}); if(!b)return;
-  var tags=b.personality.split(',').map(function(p){return p.trim();}).filter(Boolean),col=b.colour||'#a78bfa';
-  var name=b.name.replace(/'/g,"\\'");
-  var linked=b.loreTags?lores.filter(function(l){return b.loreTags.indexOf(l.id)!==-1;}) :[];
+function showOverlay(html, wide) {
+  var box = document.getElementById('overlay-box');
+  box.className = 'overlay-box' + (wide ? ' wide' : '');
+  box.innerHTML = html;
+  document.getElementById('overlay').style.display = 'flex';
+}
+
+function closeOverlay(e) {
+  if (!e || e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').style.display = 'none';
+  }
+}
+
+// ── Boi overlay ────────────────────────────────────────────────────────────────
+
+function openBoi(id) {
+  var b = bois.find(function(x) { return x.id === id; });
+  if (!b) return;
+  var col    = b.colour || '#a78bfa';
+  var tags   = (b.personality || '').split(',').map(function(p){ return p.trim(); }).filter(Boolean);
+  var linked = b.loreTags ? lores.filter(function(l){ return b.loreTags.indexOf(l.id) !== -1; }) : [];
+  var sameRegion = bois.filter(function(x){ return x.id !== b.id && x.region === b.region; });
+  var fav    = isFav(b.id);
+  var wc     = (b.description||'').split(/\s+/).filter(Boolean).length;
+
+  var html =
+    '<div class="overlay-header">' +
+      '<div style="display:flex;align-items:center;gap:14px">' + av(b.name, col, 62) +
+      '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">' + escHtml(b.name) + '</h2>' +
+      '<div style="font-size:13px;color:var(--txt2);margin-bottom:3px">' + escHtml(b.species) + ' · ' + escHtml(b.region) + '</div>' +
+      '<div style="font-size:12px;color:var(--txt3);font-style:italic">' + escHtml(b.scientificName) + '</div></div></div>' +
+      '<div style="display:flex;gap:6px;align-items:center">' +
+        '<button class="btn-icon" id="fav-toggle-' + b.id + '" onclick="toggleFav(' + b.id + ')" title="Toggle favourite" style="font-size:16px">' + (fav ? '⭐' : '☆') + '</button>' +
+        '<button class="btn-icon" onclick="copyBoiProfile(' + b.id + ')" title="Copy profile text">📋</button>' +
+        '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+      '</div>' +
+    '</div>' +
+
+    (tags.length ? '<div class="section-label">Personality</div><div class="tags" style="margin-bottom:16px">' + tags.map(function(p){ return tg(p,col); }).join('') + '</div>' : '') +
+    '<div class="divider"></div>' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="section-label" style="margin:0">Description</div><span style="font-size:11px;color:var(--txt3)">' + wc + ' words</span></div>' +
+    '<div style="font-size:14px;line-height:1.85;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">' + escHtml(b.description) + '</div>' +
+
+    (b.notes ? '<div class="divider"></div><div class="section-label">Notes</div><div class="notes-box">' + escHtml(b.notes) + '</div>' : '') +
+
+    (linked.length ?
+      '<div class="divider"></div><div class="section-label">Linked lore</div>' +
+      '<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">' +
+      linked.map(function(l){
+        return '<div style="background:var(--card2);border:1px solid var(--border);border-left:3px solid ' + (CAT_COL[l.category]||'#94a3b8') + ';border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore(' + l.id + ')},100)">' +
+          '<div style="font-size:13px;font-weight:700;color:var(--txt)">' + escHtml(l.title) + '</div>' + cc(l.category) + '</div>';
+      }).join('') + '</div>' : '') +
+
+    (sameRegion.length ?
+      '<div class="divider"></div><div class="section-label">Also in ' + escHtml(b.region) + '</div>' +
+      '<div class="resident-grid" style="margin-bottom:16px">' +
+      sameRegion.slice(0, 8).map(function(x) {
+        return '<div class="resident-card" style="border-left:2px solid ' + (x.colour||'#a78bfa') + '" onclick="closeOverlay();setTimeout(function(){openBoi(' + x.id + ')},100)">' +
+          av(x.name, x.colour||'#a78bfa', 28) +
+          '<div><div style="font-size:12px;font-weight:700;color:var(--txt)">' + escHtml(x.name) + '</div><div style="font-size:10px;color:var(--txt3)">' + escHtml(x.species) + '</div></div></div>';
+      }).join('') +
+      (sameRegion.length > 8 ? '<div style="font-size:11px;color:var(--txt3);padding:8px 12px">+' + (sameRegion.length - 8) + ' more</div>' : '') +
+      '</div>' : '') +
+
+    '<div class="divider"></div>' +
+    '<div style="display:flex;gap:8px">' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="openBoiForm(' + b.id + ')">Edit</button>' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="duplicateBoi(' + b.id + ')">Duplicate</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'boi\',' + b.id + ',\'' + escHtml(b.name).replace(/'/g,"&#39;") + '\')">Delete</button>' +
+    '</div>';
+
+  showOverlay(html);
+}
+
+function copyBoiProfile(id) {
+  var b = bois.find(function(x){ return x.id === id; });
+  if (!b) return;
+  var text = b.name + '\n' + b.species + ' (' + b.scientificName + ') · ' + b.region + '\n\n' + b.description;
+  if (b.notes) text += '\n\nNotes:\n' + b.notes;
+  navigator.clipboard.writeText(text).then(function() {
+    showToast('Profile copied to clipboard!');
+  }).catch(function() {
+    showToast('Could not copy — try selecting manually.');
+  });
+}
+
+function showRandomBoi() {
+  if (!bois.length) return;
+  var b = bois[Math.floor(Math.random() * bois.length)];
+  showTab('entobois', document.querySelectorAll('.nav-tab')[1]);
+  setTimeout(function() { openBoi(b.id); }, 150);
+}
+
+// ── Lore overlay ───────────────────────────────────────────────────────────────
+
+function openLore(id) {
+  var l = lores.find(function(x){ return x.id === id; });
+  if (!l) return;
+  var wc = l.content.split(/\s+/).filter(Boolean).length;
+  var taggedBois = bois.filter(function(b){ return b.loreTags && b.loreTags.indexOf(l.id) !== -1; });
+
+  var html =
+    '<div class="overlay-header">' +
+      '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">' + escHtml(l.title) + '</h2>' +
+      cc(l.category) + '</div>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="display:flex;gap:10px;margin-bottom:16px">' +
+      (l.date ? '<span style="font-size:11px;color:var(--txt3)">' + l.date + '</span>' : '') +
+      '<span style="font-size:11px;color:var(--txt3);margin-left:auto">' + wc + ' words</span>' +
+    '</div>' +
+    '<div class="divider"></div>' +
+    '<div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">' + escHtml(l.content) + '</div>' +
+    (taggedBois.length ?
+      '<div class="section-label">Tagged bois</div>' +
+      '<div class="resident-grid" style="margin-bottom:16px">' +
+      taggedBois.map(function(b) {
+        return '<div class="resident-card" style="border-left:2px solid ' + (b.colour||'#a78bfa') + '" onclick="closeOverlay();setTimeout(function(){openBoi(' + b.id + ')},100)">' +
+          av(b.name, b.colour||'#a78bfa', 28) +
+          '<div><div style="font-size:12px;font-weight:700;color:var(--txt)">' + escHtml(b.name) + '</div><div style="font-size:10px;color:var(--txt3)">' + escHtml(b.species) + '</div></div></div>';
+      }).join('') + '</div>' : '') +
+    '<div style="display:flex;gap:8px">' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="openLoreForm(' + l.id + ')">Edit</button>' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="copyLoreContent(' + l.id + ')">📋 Copy</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'lore\',' + l.id + ',\'' + escHtml(l.title).replace(/'/g,"&#39;") + '\')">Delete</button>' +
+    '</div>';
+
+  showOverlay(html);
+}
+
+function copyLoreContent(id) {
+  var l = lores.find(function(x){ return x.id === id; });
+  if (!l) return;
+  var text = l.title + ' [' + l.category + ']\n\n' + l.content;
+  navigator.clipboard.writeText(text).then(function() {
+    showToast('Lore entry copied to clipboard!');
+  });
+}
+
+// ── Region overlay ─────────────────────────────────────────────────────────────
+
+function openRegion(id) {
+  var r = regionsData.find(function(x){ return x.id === id; });
+  if (!r) return;
+  var res  = bois.filter(function(b){ return b.region === r.name; });
+  var relL = lores.filter(function(l){ return l.content.toLowerCase().includes(r.name.toLowerCase()); });
+
+  var html =
+    '<div class="overlay-header">' +
+      '<div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px">' + r.emoji + '</span>' +
+      '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 3px;color:var(--txt)">' + escHtml(r.name) + '</h2>' +
+      '<div style="font-size:13px;color:var(--txt2)">' + escHtml(r.gov) + '</div></div></div>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">' +
+      (r.pop  ? '<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Pop.</b> ' + r.pop + '</span>' : '') +
+      (r.food ? '<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Food</b> ' + r.food + '</span>' : '') +
+      (r.hdi  ? '<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">HDI</b> ' + r.hdi + '</span>' : '') +
+      (r.gdp  ? '<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">GDP/cap</b> ' + r.gdp + '</span>' : '') +
+    '</div>' +
+    '<div class="divider"></div>' +
+    '<div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:' + (res.length || relL.length ? '20px' : '0') + '">' + escHtml(r.desc) + '</div>' +
+    (res.length ?
+      '<div class="section-label">Residents (' + res.length + ')</div>' +
+      '<div class="resident-grid">' +
+      res.map(function(b) {
+        return '<div class="resident-card" style="border-left:2px solid ' + (b.colour||'#a78bfa') + '" onclick="closeOverlay();setTimeout(function(){openBoi(' + b.id + ')},100)">' +
+          av(b.name, b.colour||'#a78bfa', 30) +
+          '<div><div style="font-size:13px;font-weight:700;color:var(--txt)">' + escHtml(b.name) + '</div><div style="font-size:11px;color:var(--txt3)">' + escHtml(b.species) + '</div></div></div>';
+      }).join('') + '</div>' : '') +
+    (relL.length ?
+      '<div class="section-label">Related lore</div>' +
+      '<div style="display:flex;flex-direction:column;gap:6px">' +
+      relL.map(function(l) {
+        return '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore(' + l.id + ')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">' + escHtml(l.title) + '</div>' + cc(l.category) + '</div>';
+      }).join('') + '</div>' : '');
+
+  showOverlay(html, true);
+}
+
+// ── Boi form ───────────────────────────────────────────────────────────────────
+
+// ── Region form ────────────────────────────────────────────────────────────────
+
+function openRegionForm(id) {
+  var r = id ? regionsData.find(function(x){ return x.id === id; }) : null;
+  editRegionId = id || null;
+  var html =
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">' + (r ? 'Edit region' : 'New region') + '</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">' +
+      '<div style="grid-column:1/-1"><div class="section-label">Name <span style="color:var(--danger)">*</span></div>' +
+        '<input id="rf-name" value="' + (r ? escHtml(r.name) : '') + '" placeholder="Region name"/>' +
+        '<div id="rf-name-err" style="font-size:11px;color:var(--danger);margin-top:4px;display:none">Name is required.</div>' +
+      '</div>' +
+      '<div><div class="section-label">Emoji</div>' +
+        '<input id="rf-emoji" value="' + (r ? escHtml(r.emoji||'') : '') + '" placeholder="e.g. 🍯" style="font-size:20px"/></div>' +
+      '<div><div class="section-label">Population</div>' +
+        '<input id="rf-pop" value="' + (r ? escHtml(r.pop||'') : '') + '" placeholder="e.g. 1.8M"/></div>' +
+      '<div style="grid-column:1/-1"><div class="section-label">Government</div>' +
+        '<input id="rf-gov" value="' + (r ? escHtml(r.gov||'') : '') + '" placeholder="e.g. Benevolent monarchy"/></div>' +
+      '<div><div class="section-label">Food rating</div>' +
+        '<input id="rf-food" value="' + (r ? escHtml(r.food||'') : '') + '" placeholder="e.g. 9.1/10"/></div>' +
+      '<div><div class="section-label">HDI</div>' +
+        '<input id="rf-hdi" value="' + (r ? escHtml(r.hdi||'') : '') + '" placeholder="e.g. 0.887"/></div>' +
+      '<div style="grid-column:1/-1"><div class="section-label">GDP per capita (optional)</div>' +
+        '<input id="rf-gdp" value="' + (r ? escHtml(r.gdp||'') : '') + '" placeholder="e.g. 24,500 EC/cap"/></div>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Description</div>' +
+      '<textarea id="rf-desc" rows="4" style="resize:vertical;line-height:1.65">' + (r ? escHtml(r.desc||'') : '') + '</textarea></div>' +
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">' +
+      '<div class="section-label" style="margin:0">Colour</div>' +
+      '<input type="color" id="rf-color" value="' + (r ? r.color : '#a78bfa') + '" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/>' +
+    '</div>' +
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveRegion()">' + (r ? 'Save changes' : 'Add region') + '</button>';
+  showOverlay(html, true);
+}
+
+function saveRegion() {
+  var name = document.getElementById('rf-name').value.trim();
+  if (!name) {
+    document.getElementById('rf-name').classList.add('err');
+    document.getElementById('rf-name-err').style.display = 'block';
+    document.getElementById('rf-name').focus();
+    return;
+  }
+  document.getElementById('rf-name').classList.remove('err');
+  document.getElementById('rf-name-err').style.display = 'none';
+  var r = {
+    id:    editRegionId || ('r_' + Date.now()),
+    name:  name,
+    emoji: document.getElementById('rf-emoji').value.trim() || '🌍',
+    pop:   document.getElementById('rf-pop').value.trim()   || null,
+    gov:   document.getElementById('rf-gov').value.trim()   || null,
+    food:  document.getElementById('rf-food').value.trim()  || null,
+    hdi:   document.getElementById('rf-hdi').value.trim()   || null,
+    gdp:   document.getElementById('rf-gdp').value.trim()   || null,
+    desc:  document.getElementById('rf-desc').value.trim(),
+    color: document.getElementById('rf-color').value,
+  };
+  var oldName = null;
+  if (editRegionId) {
+    var existing = regionsData.find(function(x){ return x.id === editRegionId; });
+    if (existing) oldName = existing.name;
+    regionsData = regionsData.map(function(x){ return x.id === editRegionId ? r : x; });
+    // Update any bois that referenced the old name
+    if (oldName && oldName !== name) {
+      bois = bois.map(function(b){ return b.region === oldName ? Object.assign({}, b, {region: name}) : b; });
+    }
+  } else {
+    regionsData.push(r);
+  }
+  saveData();
+  // Refresh region filter dropdown
+  var regEl = document.getElementById('f-reg');
+  if (regEl) {
+    regEl.innerHTML = '<option value="All">All regions</option>' +
+      regionsData.map(function(x){ return '<option>' + escHtml(x.name) + '</option>'; }).join('');
+    regEl.value = 'All';
+  }
+  renderAll();
+  closeOverlay();
+  showToast(editRegionId ? 'Region updated.' : 'Region added!');
+}
+
+function openBoiForm(id) {
+  var b = id ? bois.find(function(x){ return x.id === id; }) : null;
+  editBoiId = id || null;
+
+  var speciesOpts = SPECIES.map(function(s) {
+    return '<option' + (b && b.species === s ? ' selected' : '') + '>' + escHtml(s) + '</option>';
+  }).join('');
+
+  var regionOpts = regionsData.map(function(r) {
+    return '<option' + (b && b.region === r.name ? ' selected' : '') + '>' + escHtml(r.name) + '</option>';
+  }).join('');
+
+  // Build lore checklist
+  var loreList = lores.length
+    ? lores.map(function(l) {
+        var checked = b && b.loreTags && b.loreTags.indexOf(l.id) !== -1 ? ' checked' : '';
+        var dotColor = CAT_COL[l.category] || '#94a3b8';
+        return '<label><input type="checkbox" data-lore-id="' + l.id + '"' + checked + '/>' +
+          '<span style="font-size:12px;color:var(--txt);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(l.title) + '</span>' +
+          '<span style="font-size:10px;color:' + dotColor + ';flex-shrink:0;margin-left:6px">' + escHtml(l.category) + '</span></label>';
+      }).join('')
+    : '<span style="font-size:12px;color:var(--txt3);padding:4px">No lore entries yet.</span>';
+
+  var html =
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">' + (b ? 'Edit entoboy' : 'New entoboy') + '</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">' +
+      '<div style="grid-column:1/-1"><div class="section-label">Name <span style="color:var(--danger)">*</span></div>' +
+        '<input id="bf-name" value="' + (b ? escHtml(b.name) : '') + '" placeholder="Character name"/>' +
+        '<div id="bf-name-err" style="font-size:11px;color:var(--danger);margin-top:4px;display:none">Name is required.</div>' +
+      '</div>' +
+      '<div><div class="section-label">Species</div><select id="bf-sp">' + speciesOpts + '</select></div>' +
+      '<div><div class="section-label">Region</div><select id="bf-reg">' + regionOpts + '</select></div>' +
+      '<div style="grid-column:1/-1"><div class="section-label">Scientific name</div>' +
+        '<input id="bf-sci" value="' + (b ? escHtml(b.scientificName) : '') + '" placeholder="e.g. Apis mellifera"/></div>' +
+      '<div style="grid-column:1/-1"><div class="section-label">Personality (comma-separated)</div>' +
+        '<input id="bf-per" value="' + (b ? escHtml(b.personality) : '') + '" placeholder="e.g. Warm, Loyal, Chaotic"/></div>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Description</div>' +
+      '<textarea id="bf-desc" rows="5" style="resize:vertical;line-height:1.65">' + (b ? escHtml(b.description) : '') + '</textarea></div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Notes (private — not shown on cards)</div>' +
+      '<textarea id="bf-notes" rows="3" style="resize:vertical;line-height:1.65;font-size:13px" placeholder="Private notes, scratch thoughts, WIP ideas…">' + (b && b.notes ? escHtml(b.notes) : '') + '</textarea></div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Linked lore</div>' +
+      '<div class="lore-check-list" id="bf-lore-list">' + loreList + '</div></div>' +
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">' +
+      '<div class="section-label" style="margin:0">Colour</div>' +
+      '<input type="color" id="bf-col" value="' + (b ? b.colour : '#a78bfa') + '" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/>' +
+    '</div>' +
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveBoi()">' + (b ? 'Save changes' : 'Add entoboy') + '</button>';
+
+  showOverlay(html, true);
+}
+
+function getSelectedLoreIds() {
+  return Array.from(document.querySelectorAll('#bf-lore-list input[type=checkbox]:checked'))
+    .map(function(cb) { return parseInt(cb.dataset.loreId); })
+    .filter(function(n) { return !isNaN(n); });
+}
+
+function saveBoi() {
+  var name = document.getElementById('bf-name').value.trim();
+  if (!name) {
+    document.getElementById('bf-name').classList.add('err');
+    document.getElementById('bf-name-err').style.display = 'block';
+    document.getElementById('bf-name').focus();
+    return;
+  }
+  document.getElementById('bf-name').classList.remove('err');
+  document.getElementById('bf-name-err').style.display = 'none';
+
+  var b = {
+    id:             editBoiId || Date.now(),
+    name:           name,
+    species:        document.getElementById('bf-sp').value,
+    region:         document.getElementById('bf-reg').value,
+    scientificName: document.getElementById('bf-sci').value.trim(),
+    personality:    document.getElementById('bf-per').value.trim(),
+    description:    document.getElementById('bf-desc').value.trim(),
+    notes:          document.getElementById('bf-notes').value.trim(),
+    colour:         document.getElementById('bf-col').value,
+    loreTags:       getSelectedLoreIds(),
+  };
+
+  if (editBoiId) {
+    bois = bois.map(function(x){ return x.id === editBoiId ? b : x; });
+  } else {
+    bois.push(b);
+  }
+  saveData();
+  renderAll();
+  closeOverlay();
+}
+
+function duplicateBoi(id) {
+  var b = bois.find(function(x){ return x.id === id; });
+  if (!b) return;
+  var copy = Object.assign({}, b, { id: Date.now(), name: b.name + ' (copy)' });
+  bois.push(copy);
+  saveData();
+  renderBois();
+  updateNavCount();
+  closeOverlay();
+  showToast('Duplicated ' + b.name);
+}
+
+// ── Lore form ──────────────────────────────────────────────────────────────────
+
+function openLoreForm(id) {
+  var l = id ? lores.find(function(x){ return x.id === id; }) : null;
+  editLoreId = id || null;
+
+  var catOpts = CATEGORIES.map(function(c) {
+    return '<option' + (l && l.category === c ? ' selected' : '') + '>' + escHtml(c) + '</option>';
+  }).join('');
+
+  var html =
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">' + (l ? 'Edit lore' : 'New microlore') + '</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Title <span style="color:var(--danger)">*</span></div>' +
+      '<input id="lf-title" value="' + (l ? escHtml(l.title) : '') + '" placeholder="Entry title"/>' +
+      '<div id="lf-title-err" style="font-size:11px;color:var(--danger);margin-top:4px;display:none">Title is required.</div>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Category</div>' +
+      '<select id="lf-cat">' + catOpts + '</select></div>' +
+    '<div style="margin-bottom:20px"><div class="section-label">Content</div>' +
+      '<textarea id="lf-content" rows="10" style="resize:vertical;line-height:1.75">' + (l ? escHtml(l.content) : '') + '</textarea></div>' +
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveLore()">' + (l ? 'Save changes' : 'Add lore') + '</button>';
+
+  showOverlay(html);
+}
+
+function saveLore() {
+  var title = document.getElementById('lf-title').value.trim();
+  if (!title) {
+    document.getElementById('lf-title').classList.add('err');
+    document.getElementById('lf-title-err').style.display = 'block';
+    document.getElementById('lf-title').focus();
+    return;
+  }
+  document.getElementById('lf-title').classList.remove('err');
+  document.getElementById('lf-title-err').style.display = 'none';
+
+  var l = {
+    id:       editLoreId || Date.now(),
+    title:    title,
+    category: document.getElementById('lf-cat').value,
+    content:  document.getElementById('lf-content').value.trim(),
+    date:     new Date().toISOString().slice(0, 10),
+  };
+  if (editLoreId) {
+    lores = lores.map(function(x){ return x.id === editLoreId ? l : x; });
+  } else {
+    lores.push(l);
+  }
+  saveData();
+  renderAll();
+  closeOverlay();
+}
+
+// ── Image Lores ────────────────────────────────────────────────────────────────
+
+function renderImageLores() {
+  var q   = (document.getElementById('il-q') || {}).value || '';
+  q = q.toLowerCase();
+  var tag = (document.getElementById('il-tag') || {}).value || 'All';
+  var filtered = imageLores.filter(function(il) {
+    return (!q || il.title.toLowerCase().includes(q) || (il.caption||'').toLowerCase().includes(q)) &&
+           (tag === 'All' || il.tag === tag);
+  });
+  var countEl = document.getElementById('imglore-count');
+  if (countEl) countEl.textContent = filtered.length + ' image' + (filtered.length !== 1 ? 's' : '');
+  var grid  = document.getElementById('imglore-grid');
+  var empty = document.getElementById('imglore-empty');
+  if (!grid) return;
+  if (!filtered.length) { grid.innerHTML = ''; if(empty) empty.style.display = 'block'; return; }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = filtered.map(function(il) {
+    var tagHtml = il.tag ? '<span style="font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-dim);padding:2px 7px;border-radius:99px">' + escHtml(il.tag) + '</span>' : '';
+    return '<div class="img-card" onclick="openImageLore(' + il.id + ')">' +
+      '<img src="' + il.imageData + '" alt="' + escHtml(il.title) + '" loading="lazy" style="max-height:280px;object-fit:cover"/>' +
+      '<div class="img-card-info">' +
+        '<div style="font-weight:800;font-size:13px;color:var(--txt);margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(il.title) + '</div>' +
+        tagHtml +
+      '</div></div>';
+  }).join('');
+}
+
+function openImageLore(id) {
+  var il = imageLores.find(function(x){ return x.id === id; });
+  if (!il) return;
+  var tagHtml = il.tag ? '<span style="font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-dim);padding:2px 9px;border-radius:99px">' + escHtml(il.tag) + '</span>' : '';
   showOverlay(
-    '<div class="overlay-header"><div style="display:flex;align-items:center;gap:14px">'+av(b.name,col,62)+
-    '<div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 4px;color:var(--txt)">'+b.name+'</h2>'+
-    '<div style="font-size:13px;color:var(--txt2);margin-bottom:3px">'+b.species+' · '+b.region+'</div>'+
-    '<div style="font-size:12px;color:var(--txt3);font-style:italic">'+b.scientificName+'</div></div></div>'+
-    '<button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    (tags.length?'<div class="section-label">Personality</div><div class="tags" style="margin-bottom:16px">'+tags.map(function(p){return tg(p,col);}).join('')+'</div>':'')+
-    '<div class="divider"></div><div class="section-label">Description</div>'+
-    '<div style="font-size:14px;line-height:1.8;color:var(--txt);white-space:pre-wrap;margin-bottom:20px">'+b.description+'</div>'+
-    (linked.length?'<div class="divider"></div><div class="section-label">Linked lore</div><div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">'+linked.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-left:3px solid '+(CAT_COL[l.category]||'#94a3b8')+';border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+cc(l.category)+'</div>';}).join('')+'</div>':'')+
-    '<div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openBoiForm('+b.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'boi\','+b.id+',\''+name+'\')">Delete</button></div>');
+    '<div class="overlay-header">' +
+      '<div style="min-width:0"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0 0 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(il.title) + '</h2>' + tagHtml + '</div>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<a href="' + il.imageData + '" target="_blank" rel="noopener" title="Open full size">' +
+      '<img src="' + il.imageData + '" alt="' + escHtml(il.title) + '" style="width:100%;border-radius:12px;margin-bottom:14px;display:block;cursor:zoom-in"/>' +
+    '</a>' +
+    (il.caption ? '<div style="font-size:14px;line-height:1.75;color:var(--txt2);margin-bottom:12px;white-space:pre-wrap">' + escHtml(il.caption) + '</div>' : '') +
+    (il.date ? '<div style="font-size:11px;color:var(--txt3);margin-bottom:20px">' + il.date + '</div>' : '') +
+    '<div style="display:flex;gap:8px">' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="openImageLoreForm(' + il.id + ')">Edit</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'imagelore\',' + il.id + ',\'' + escHtml(il.title).replace(/'/g,'&#39;') + '\')">Delete</button>' +
+    '</div>',
+    true
+  );
 }
 
-function openLore(id){
-  var l=lores.find(function(x){return x.id===id;}); if(!l)return;
-  var title=l.title.replace(/'/g,"\\'");
-  showOverlay('<div class="overlay-header"><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 8px;color:var(--txt)">'+l.title+'</h2>'+cc(l.category)+'</div><button class="btn-icon" onclick="closeOverlay()">✕</button></div><div class="divider"></div><div style="font-size:14px;line-height:1.85;color:var(--txt);margin-bottom:20px;white-space:pre-wrap">'+l.content+'</div><div style="display:flex;gap:8px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="openLoreForm('+l.id+')">Edit</button><button class="btn-danger" style="flex:1;padding:10px" onclick="confirmDelete(\'lore\','+l.id+',\''+title+'\')">Delete</button></div>');
+function openImageLoreForm(id) {
+  var il = id ? imageLores.find(function(x){ return x.id === id; }) : null;
+  editImageLoreId = id || null;
+  pendingImageData = il ? il.imageData : null;
+  var tagOpts = IMG_TAGS.map(function(t) {
+    return '<option' + (il && il.tag === t ? ' selected' : '') + '>' + escHtml(t) + '</option>';
+  }).join('');
+  showOverlay(
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">' + (il ? 'Edit image lore' : 'New image lore') + '</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Title <span style="color:var(--danger)">*</span></div>' +
+      '<input id="il-title-inp" value="' + (il ? escHtml(il.title) : '') + '" placeholder="Image title"/>' +
+      '<div id="il-title-err" style="font-size:11px;color:var(--danger);margin-top:4px;display:none">Title is required.</div>' +
+    '</div>' +
+    '<div style="margin-bottom:12px"><div class="section-label">Tag</div><select id="il-tag-inp">' + tagOpts + '</select></div>' +
+    '<div style="margin-bottom:14px"><div class="section-label">Caption</div>' +
+      '<textarea id="il-caption-inp" rows="3" style="resize:vertical;line-height:1.65;font-size:13px" placeholder="Notes, description, context…">' + (il ? escHtml(il.caption || '') : '') + '</textarea></div>' +
+    '<div style="margin-bottom:16px">' +
+      '<div class="section-label">Image' + (il ? ' <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--txt3)">(leave empty to keep current)</span>' : ' <span style="color:var(--danger)">*</span>') + '</div>' +
+      (il ? '<img id="il-preview" src="' + il.imageData + '" style="width:100%;border-radius:10px;margin-bottom:10px;max-height:260px;object-fit:contain;background:var(--card2)"/>'
+           : '<img id="il-preview" src="" style="width:100%;border-radius:10px;margin-bottom:10px;max-height:260px;object-fit:contain;background:var(--card2);display:none"/>') +
+      '<div class="dropzone" id="il-dropzone" onclick="document.getElementById(\'il-file-inp\').click()" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="handleImageDrop(event)">' +
+        '<div style="font-size:28px;margin-bottom:6px">🖼️</div>' +
+        '<div style="font-size:13px;color:var(--txt2);margin-bottom:3px">Click to choose or drag & drop</div>' +
+        '<div style="font-size:11px;color:var(--txt3)">JPG, PNG, GIF, WebP — resized automatically</div>' +
+        '<input type="file" id="il-file-inp" accept="image/*" style="display:none;width:auto" onchange="handleImageUpload(this)"/>' +
+      '</div>' +
+      '<div id="il-img-err" style="font-size:11px;color:var(--danger);margin-top:6px;display:none">Please select an image.</div>' +
+    '</div>' +
+    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveImageLore()">' + (il ? 'Save changes' : 'Add image') + '</button>',
+    true
+  );
 }
 
-function openRegion(id){
-  var r=REGIONS_DATA.find(function(x){return x.id===id;}); if(!r)return;
-  var res=bois.filter(function(b){return b.region===r.name;}),relL=lores.filter(function(l){return l.content.toLowerCase().includes(r.name.toLowerCase());});
-  showOverlay('<div class="overlay-header"><div style="display:flex;align-items:center;gap:12px"><span style="font-size:40px">'+r.emoji+'</span><div><h2 style="font-size:22px;font-weight:900;letter-spacing:-.5px;margin:0 0 3px;color:var(--txt)">'+r.name+'</h2><div style="font-size:13px;color:var(--txt2)">'+r.gov+'</div></div></div><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">'+(r.pop?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Pop.</b> '+r.pop+'</span>':'')+(r.food?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">Food</b> '+r.food+'</span>':'')+(r.hdi?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">HDI</b> '+r.hdi+'</span>':'')+(r.gdp?'<span style="background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:13px;color:var(--txt2)"><b style="color:var(--txt)">GDP/cap</b> '+r.gdp+'</span>':'')+'</div>'+
-    '<div class="divider"></div><div style="font-size:14px;line-height:1.8;color:var(--txt);margin-bottom:'+(res.length||relL.length?'20px':'0')+'">'+r.desc+'</div>'+
-    (res.length?'<div class="section-label">Residents</div><div class="resident-grid">'+res.map(function(b){return '<div class="resident-card" style="border-left:2px solid '+(b.colour||'#a78bfa')+'" onclick="closeOverlay();setTimeout(function(){openBoi('+b.id+')},100)">'+av(b.name,b.colour||'#a78bfa',30)+'<div><div style="font-size:13px;font-weight:700;color:var(--txt)">'+b.name+'</div><div style="font-size:11px;color:var(--txt3)">'+b.species+'</div></div></div>';}).join('')+'</div>':'')+
-    (relL.length?'<div class="section-label">Related lore</div><div style="display:flex;flex-direction:column;gap:6px">'+relL.map(function(l){return '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px" onclick="closeOverlay();setTimeout(function(){openLore('+l.id+')},100)"><div style="font-size:13px;font-weight:700;color:var(--txt)">'+l.title+'</div>'+cc(l.category)+'</div>';}).join('')+'</div>':''),true);
+function handleImageUpload(input) {
+  var file = input.files[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { showToast('Please select an image file.'); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    resizeImage(e.target.result, 1600, function(data) {
+      pendingImageData = data;
+      var prev = document.getElementById('il-preview');
+      if (prev) { prev.src = data; prev.style.display = 'block'; }
+      var err = document.getElementById('il-img-err');
+      if (err) err.style.display = 'none';
+    });
+  };
+  reader.readAsDataURL(file);
 }
 
-function openBoiForm(id){
-  var b=id?bois.find(function(x){return x.id===id;}):null; editBoiId=id||null;
-  var spOpts='';
-  Object.keys(SPECIES_GROUPS).forEach(function(g){spOpts+='<optgroup label="'+g+'"></optgroup><option value="'+g+'">'+g+' (group)</option>';});
-  spOpts+=SPECIES.map(function(s){return '<option'+(b&&b.species===s?' selected':'')+'>'+s+'</option>';}).join('');
-  showOverlay('<div class="overlay-header"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(b?'Edit entoboy':'New entoboy')+'</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">'+
-    '<div style="grid-column:1/-1"><div class="section-label">Name</div><input id="bf-name" value="'+(b?b.name:'')+'"/></div>'+
-    '<div><div class="section-label">Species</div><select id="bf-sp">'+SPECIES.map(function(s){return '<option'+(b&&b.species===s?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div>'+
-    '<div><div class="section-label">Region</div><select id="bf-reg">'+REGIONS.map(function(r){return '<option'+(b&&b.region===r?' selected':'')+'>'+r+'</option>';}).join('')+'</select></div>'+
-    '<div style="grid-column:1/-1"><div class="section-label">Scientific name</div><input id="bf-sci" value="'+(b?b.scientificName:'')+'" placeholder="e.g. Apis mellifera"/></div>'+
-    '<div style="grid-column:1/-1"><div class="section-label">Personality (comma-separated)</div><input id="bf-per" value="'+(b?b.personality:'')+'"/></div></div>'+
-    '<div style="margin-bottom:12px"><div class="section-label">Description</div><textarea id="bf-desc" rows="5" style="resize:vertical;line-height:1.65">'+(b?b.description:'')+'</textarea></div>'+
-    '<div style="margin-bottom:12px"><div class="section-label">Linked lore IDs (comma-separated)</div><input id="bf-tags" value="'+(b&&b.loreTags?b.loreTags.join(','):'')+'" placeholder="e.g. 1,3,7"/></div>'+
-    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div class="section-label" style="margin:0">Colour</div><input type="color" id="bf-col" value="'+(b?b.colour:'#a78bfa')+'" style="height:36px;width:52px;padding:3px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer"/></div>'+
-    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveBoi()">'+(b?'Save changes':'Add entoboy')+'</button>');
+function handleImageDrop(e) {
+  e.preventDefault();
+  document.getElementById('il-dropzone').classList.remove('drag-over');
+  var file = e.dataTransfer.files[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { showToast('That file is not an image.'); return; }
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    resizeImage(ev.target.result, 1600, function(data) {
+      pendingImageData = data;
+      var prev = document.getElementById('il-preview');
+      if (prev) { prev.src = data; prev.style.display = 'block'; }
+      var err = document.getElementById('il-img-err');
+      if (err) err.style.display = 'none';
+    });
+  };
+  reader.readAsDataURL(file);
 }
 
-function saveBoi(){
-  var b={id:editBoiId||Date.now(),name:document.getElementById('bf-name').value,species:document.getElementById('bf-sp').value,region:document.getElementById('bf-reg').value,scientificName:document.getElementById('bf-sci').value,personality:document.getElementById('bf-per').value,description:document.getElementById('bf-desc').value,colour:document.getElementById('bf-col').value,loreTags:document.getElementById('bf-tags').value.split(',').map(function(x){return parseInt(x.trim());}).filter(function(x){return !isNaN(x);})};
-  if(editBoiId){bois=bois.map(function(x){return x.id===editBoiId?b:x;});}else{bois.push(b);}
-  saveBoisDB(); renderAll(); closeOverlay();
+function resizeImage(dataUrl, maxW, callback) {
+  var img = new Image();
+  img.onload = function() {
+    if (img.width <= maxW) { callback(dataUrl); return; }
+    var canvas = document.createElement('canvas');
+    var ratio = maxW / img.width;
+    canvas.width = maxW;
+    canvas.height = Math.round(img.height * ratio);
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    callback(canvas.toDataURL('image/jpeg', 0.88));
+  };
+  img.onerror = function() { callback(dataUrl); };
+  img.src = dataUrl;
 }
 
-function openLoreForm(id){
-  var l=id?lores.find(function(x){return x.id===id;}):null; editLoreId=id||null;
-  showOverlay('<div class="overlay-header"><h2 style="font-size:20px;font-weight:900;color:var(--txt);margin:0">'+(l?'Edit lore':'New microlore')+'</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    '<div style="margin-bottom:12px"><div class="section-label">Title</div><input id="lf-title" value="'+(l?l.title:'')+'"/></div>'+
-    '<div style="margin-bottom:12px"><div class="section-label">Category</div><select id="lf-cat">'+CATEGORIES.map(function(c){return '<option'+(l&&l.category===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></div>'+
-    '<div style="margin-bottom:20px"><div class="section-label">Content</div><textarea id="lf-content" rows="9" style="resize:vertical;line-height:1.7">'+(l?l.content:'')+'</textarea></div>'+
-    '<button class="btn-primary" style="width:100%;padding:12px;font-size:14px;border-radius:10px" onclick="saveLore()">'+(l?'Save changes':'Add lore')+'</button>');
+function saveImageLore() {
+  var title = document.getElementById('il-title-inp').value.trim();
+  if (!title) {
+    document.getElementById('il-title-inp').classList.add('err');
+    document.getElementById('il-title-err').style.display = 'block';
+    document.getElementById('il-title-inp').focus();
+    return;
+  }
+  if (!pendingImageData) {
+    document.getElementById('il-img-err').style.display = 'block';
+    return;
+  }
+  var il = {
+    id:        editImageLoreId || Date.now(),
+    title:     title,
+    tag:       document.getElementById('il-tag-inp').value,
+    caption:   document.getElementById('il-caption-inp').value.trim(),
+    imageData: pendingImageData,
+    date:      new Date().toISOString().slice(0, 10),
+  };
+  if (editImageLoreId) {
+    imageLores = imageLores.map(function(x){ return x.id === editImageLoreId ? il : x; });
+  } else {
+    imageLores.push(il);
+  }
+  pendingImageData = null;
+  saveData();
+  renderImageLores();
+  renderHome();
+  updateNavCount();
+  closeOverlay();
+  showToast('Image lore saved!');
 }
 
-function saveLore(){
-  var l={id:editLoreId||Date.now(),title:document.getElementById('lf-title').value,category:document.getElementById('lf-cat').value,content:document.getElementById('lf-content').value,date:new Date().toISOString().slice(0,10)};
-  if(editLoreId){lores=lores.map(function(x){return x.id===editLoreId?l:x;});}else{lores.push(l);}
-  saveLoresDB(); renderLores(); updateNavCount(); renderHome(); closeOverlay();
+// ── Delete ─────────────────────────────────────────────────────────────────────
+
+function confirmDelete(type, id, name) {
+  showOverlay(
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">Permanently delete <b style="color:var(--txt)">' + escHtml(name) + '</b>? Enter the secret code to confirm.</p>' +
+    '<div class="section-label">Secret code</div>' +
+    '<input id="del-code" placeholder="Enter code…" onkeydown="if(event.key===\'Enter\')_doDelete(\'' + type + '\',' + id + ')"/>' +
+    '<div id="del-err" style="font-size:12px;color:var(--danger);margin-top:6px;display:none">Incorrect code.</div>' +
+    '<div style="display:flex;gap:8px;margin-top:16px">' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="_doDelete(\'' + type + '\',' + id + ')">Delete</button>' +
+    '</div>'
+  );
 }
 
-function confirmDelete(type,id,name){
-  showOverlay('<div class="overlay-header"><h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2><button class="btn-icon" onclick="closeOverlay()">✕</button></div>'+
-    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">Permanently delete <b style="color:var(--txt)">'+name+'</b>? Enter the secret code.</p>'+
-    '<div class="section-label">Secret code</div><input id="del-code" placeholder="Enter code..." onkeydown="if(event.key===\'Enter\')doDelete(\''+type+'\','+id+')"/>'+
-    '<div id="del-err" style="font-size:12px;color:#ef4444;margin-top:6px;display:none">Incorrect code.</div>'+
-    '<div style="display:flex;gap:8px;margin-top:16px"><button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button><button class="btn-danger" style="flex:1;padding:10px" onclick="doDelete(\''+type+'\','+id+')">Delete</button></div>');
+function _doDelete(type, id) {
+  var code = document.getElementById('del-code');
+  if (!code || code.value !== DELETE_CODE) {
+    if (code) code.classList.add('err');
+    var errEl = document.getElementById('del-err');
+    if (errEl) errEl.style.display = 'block';
+    return;
+  }
+  if (type === 'boi') {
+    bois = bois.filter(function(b){ return b.id !== id; });
+  } else if (type === 'lore') {
+    lores = lores.filter(function(l){ return l.id !== id; });
+  } else if (type === 'imagelore') {
+    imageLores = imageLores.filter(function(il){ return il.id !== id; });
+  } else if (type === 'region') {
+    regionsData = regionsData.filter(function(r){ return r.id !== id; });
+  }
+  saveData();
+  renderAll();
+  closeOverlay();
+  showToast('Entry deleted.');
 }
 
-function doDelete(type,id){
-  if(document.getElementById('del-code').value!==DELETE_CODE){document.getElementById('del-err').style.display='block';return;}
-  if(type==='boi'){bois=bois.filter(function(b){return b.id!==id;});saveBoisDB();renderBois();}
-  else{lores=lores.filter(function(l){return l.id!==id;});saveLoresDB();renderLores();}
-  updateNavCount();renderHome();renderHeights();closeOverlay();
+// ── Export / Import / Reset ────────────────────────────────────────────────────
+
+async function exportData() {
+  var json = JSON.stringify({ bois: bois, lores: lores, imageLores: imageLores, exported: new Date().toISOString() }, null, 2);
+  if (window.electronAPI) {
+    var ok = await window.electronAPI.exportDialog(json);
+    if (ok) showToast('Backup exported!');
+  } else {
+    var blob = new Blob([json], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'entomoverse-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+    showToast('Backup exported!');
+  }
 }
+
+function triggerImport() {
+  if (window.electronAPI) {
+    window.electronAPI.importDialog().then(function(text) {
+      if (text) _handleImport(text);
+    });
+  } else {
+    document.getElementById('import-file-input').click();
+  }
+}
+
+function handleImportFile(e) {
+  var file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  var r = new FileReader();
+  r.onload = function(ev) { _handleImport(ev.target.result); };
+  r.readAsText(file);
+}
+
+async function _handleImport(text) {
+  try {
+    if (!text) { showToast('Import: no data received.'); return; }
+    text = text.replace(/^﻿/, ''); // strip UTF-8 BOM if present
+    var d = JSON.parse(text);
+    if (!d || (!d.bois && !d.lores)) { showToast('Import: missing bois/lores in file.'); return; }
+    bois       = Array.isArray(d.bois)       ? d.bois       : bois;
+    lores      = Array.isArray(d.lores)      ? d.lores      : lores;
+    imageLores = Array.isArray(d.imageLores) ? d.imageLores : [];
+    await saveData();
+    renderAll();
+    showToast('Imported ' + bois.length + ' bois, ' + lores.length + ' lores, ' + imageLores.length + ' images.');
+  } catch(e) {
+    showToast('Import failed: ' + e.message);
+    console.error('Import error:', e);
+  }
+}
+
+function resetToDefaults() {
+  showOverlay(
+    '<div class="overlay-header">' +
+      '<h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Reset to defaults?</h2>' +
+      '<button class="btn-icon" onclick="closeOverlay()">✕</button>' +
+    '</div>' +
+    '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">This will replace <b style="color:var(--txt)">all</b> bois, lores and images with the built-in defaults. Export a backup first if you want to keep your data.</p>' +
+    '<div style="display:flex;gap:8px">' +
+      '<button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="closeOverlay();bois=DEFAULT_BOIS;lores=DEFAULT_LORES;imageLores=[];saveData();renderAll();showToast(\'Reset to defaults.\')">Reset</button>' +
+    '</div>'
+  );
+}
+
+// ── Theme ──────────────────────────────────────────────────────────────────────
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  var light = document.body.classList.contains('light');
+  document.getElementById('theme-btn').textContent = light ? '🌙' : '☀️';
+  lsSet('ev_theme', light ? 'light' : 'dark');
+}
+
+// ── Keyboard shortcuts ─────────────────────────────────────────────────────────
+
+document.addEventListener('keydown', function(e) {
+  // Escape: close overlay
+  if (e.key === 'Escape') { closeOverlay(); return; }
+
+  // Don't fire shortcuts when typing in inputs
+  var tag = document.activeElement && document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+  var activePage = document.querySelector('.page.active');
+  var pageId     = activePage ? activePage.id : '';
+
+  // Ctrl/Cmd+N: new entry
+  if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+    e.preventDefault();
+    if (pageId === 'tab-entobois') openBoiForm();
+    else if (pageId === 'tab-lore') openLoreForm();
+    else if (pageId === 'tab-imagelores') openImageLoreForm();
+    return;
+  }
+
+  // Ctrl/Cmd+F: focus search
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    e.preventDefault();
+    var searchId = pageId === 'tab-lore' ? 'l-q' : pageId === 'tab-imagelores' ? 'il-q' : 'f-q';
+    var searchEl = document.getElementById(searchId);
+    if (searchEl) { searchEl.focus(); searchEl.select(); }
+    return;
+  }
+
+  // R: random boi
+  if (e.key === 'r' || e.key === 'R') {
+    showRandomBoi();
+  }
+});
+
+// ── Start ──────────────────────────────────────────────────────────────────────
+
+init();
 </script>
 </body>
 </html>
