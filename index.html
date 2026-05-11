@@ -1405,6 +1405,8 @@ function saveImageLore() {
 // ── Delete ─────────────────────────────────────────────────────────────────────
 
 function confirmDelete(type, id, name) {
+  // Serialize id correctly — numbers go bare, strings get quoted
+  var idJs = (typeof id === 'string') ? "'" + id + "'" : id;
   showOverlay(
     '<div class="overlay-header">' +
       '<h2 style="font-size:18px;font-weight:800;color:var(--txt);margin:0">Delete this entry?</h2>' +
@@ -1412,11 +1414,11 @@ function confirmDelete(type, id, name) {
     '</div>' +
     '<p style="font-size:14px;color:var(--txt2);margin:0 0 1.25rem;line-height:1.65">Permanently delete <b style="color:var(--txt)">' + escHtml(name) + '</b>? Enter the secret code to confirm.</p>' +
     '<div class="section-label">Secret code</div>' +
-    '<input id="del-code" placeholder="Enter code…" onkeydown="if(event.key===\'Enter\')_doDelete(\'' + type + '\',' + id + ')"/>' +
+    '<input id="del-code" placeholder="Enter code…" onkeydown="if(event.key===\'Enter\')_doDelete(\'' + type + '\',' + idJs + ')"/>' +
     '<div id="del-err" style="font-size:12px;color:var(--danger);margin-top:6px;display:none">Incorrect code.</div>' +
     '<div style="display:flex;gap:8px;margin-top:16px">' +
       '<button class="btn-ghost" style="flex:1;padding:10px" onclick="closeOverlay()">Cancel</button>' +
-      '<button class="btn-danger" style="flex:1;padding:10px" onclick="_doDelete(\'' + type + '\',' + id + ')">Delete</button>' +
+      '<button class="btn-danger" style="flex:1;padding:10px" onclick="_doDelete(\'' + type + '\',' + idJs + ')">Delete</button>' +
     '</div>'
   );
 }
